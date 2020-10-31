@@ -1,0 +1,120 @@
+<div class="panel-header">
+</div>
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+               <h5 class="title t-a-c form-heading">
+                 Canteen Time
+               </h5>
+              <br/> 
+            </div>
+             <!--Table start-->
+              <table>
+                <thead>
+                  <tr>
+                    <td>No.</td>
+                    <td>Category</td>
+                    <td>From</td>
+                    <td>To</td>
+                    <td>Actions <br/>
+                      (Edit & Save)</td>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let canteentime of canteentime;let i = index">
+                  <tr>
+                    <td>{{i+1 }}</td>
+                    <td>{{ canteentime.menu_name }}</td>
+                    <td>
+                      <p *ngIf="view">{{ canteentime.start_time }}</p>
+                      <input *ngIf="edit" type="time" value=""/>
+                    </td>
+                    <td>
+                      <p *ngIf="view">{{ canteentime.end_time }}</p>
+                      <input *ngIf="edit" type="time" value=""/>
+                    </td>
+                    <td>
+                      <div class="row action-align">
+                        <div class="img-div" (click)="timeEdit()">
+                          <img src="assets/images/edit_icon.png" /> 
+                        </div>
+                        <div class="img-div" (click)="editSave()">
+                          <img src="assets/images/tick_icon.png" /> 
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <!-- <tr>
+                    <td>2.</td>
+                    <td>Lunch</td>
+                    <td>
+                      <p *ngIf="view">12.00 AM</p>
+                      <input *ngIf="edit" type="time" value="09.00 AM"/>
+                    </td>
+                    <td>
+                      <p *ngIf="view">12.30 AM</p>
+                      <input *ngIf="edit" type="time" value="09.30 AM"/>
+                    </td>
+                    <td>
+                      <div class="row action-align">
+                        <div class="img-div" (click)="timeEdit()">
+                          <img src="assets/images/edit_icon.png" /> 
+                        </div>
+                        <div class="img-div" (click)="enableUserView()">
+                          <img src="assets/images/tick_icon.png" /> 
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3.</td>
+                    <td>Tea Time-2</td>
+                    <td>
+                      <p *ngIf="view">04.00 AM</p>
+                      <input *ngIf="edit" type="time" value="09.00 AM"/>
+                    </td>
+                    <td>
+                      <p *ngIf="view">04.30 AM</p>
+                      <input *ngIf="edit" type="time" value="09.30 AM"/>
+                    </td>
+                    <td>
+                      <div class="row action-align">
+                        <div class="img-div" (click)="timeEdit()">
+                          <img src="assets/images/edit_icon.png" /> 
+                        </div>
+                        <div class="img-div" (click)="enableUserView()">
+                          <img src="assets/images/tick_icon.png" /> 
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4.</td>
+                    <td>Dinner</td>
+                    <td>
+                      <p *ngIf="view">08.00 PM</p>
+                      <input *ngIf="edit" type="time" value="09.00 AM"/>
+                    </td>
+                    <td>
+                      <p *ngIf="view">08.30 PM</p>
+                      <input *ngIf="edit" type="time" value="09.30 AM"/>
+                    </td>
+                    <td>
+                      <div class="row action-align">
+                        <div class="img-div" (click)="timeEdit()">
+                          <img src="assets/images/edit_icon.png" /> 
+                        </div>
+                        <div class="img-div" (click)="enableUserView()">
+                          <img src="assets/images/tick_icon.png" /> 
+                        </div>
+                      </div>
+                    </td>
+                  </tr> -->
+                </tbody>
+              </table>
+            <!--Table End-->
+                </div>
+            </div>
+        </div>
+      </div>

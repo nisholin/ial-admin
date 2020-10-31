@@ -1,0 +1,76 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title t-a-c form-heading">Add New SPL Lunch</h5>
+          <hr>
+        </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6 col-lg-10 col-md-6"></div>
+          <div class="col-4 col-lg-2 col-md-4">
+            <!--   <img src="assets/images/edit_icon.png" class="cursor-poiter" (click)="newUserRegister()" /> -->
+            <!-- <button class="edit-btn" >Edit</button> -->
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-2 col-lg-3 col-d-2"></div>
+            <div class="col-5 col-lg-6 col-d-5">
+              <div class="row">
+                <div class="col-3 col-lg-4 col-md-3">
+                  <p>Special Lunch Name</p>
+                </div>
+                <div class="col-6 col-lg-6 col-md-6">
+                  <input type="text" placeholder="&nbsp; Special Lunch Name"/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3 col-lg-4 col-md-3">
+                  <p>Amount</p>
+                </div>
+                <div class="col-6 col-lg-6 col-md-6">
+                  <input type="text" placeholder="&nbsp; Amount"/>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-5 col-lg-3 col-d-5">
+              <div class="row" *ngIf="edit">
+                <div class="special-lunch-box">
+                  <div class="special-container">
+                  <input type="checkbox">&nbsp;&nbsp; 
+                  <lable>Fish</lable><br/>
+
+                  <input type="checkbox">&nbsp;&nbsp; 
+                  <lable>Mutton</lable><br/>
+
+                  <input type="checkbox">&nbsp;&nbsp;
+                  <lable>Chicken Biriyani</lable><br/>
+
+                  <input type="checkbox">&nbsp;&nbsp;
+                  <lable>Mutton Biriyani</lable><br/>
+
+                  <input type="checkbox">&nbsp;&nbsp;
+                  <lable>Fish Biriyani</lable>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-3 col-lg-5 col-md-3"></div>
+          <div class="col-3 col-lg-3 col-md-3 row">
+            <button class="save-form-btn" style="width: 50%;" type="submit">Save</button>
+            <!-- <button class="cancel-form-btn" (click)="close()">Cancel</button> -->
+          </div>
+          <div class="col-3 col-lg-4 col-md-3"></div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

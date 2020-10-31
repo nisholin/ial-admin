@@ -1,0 +1,9 @@
+.c-white {
+    color: #ffffff;
+}
+.c-black {
+    color: black;
+}
+.c-white :active {
+    color: red;
+}

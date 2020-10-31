@@ -1,0 +1,95 @@
+
+.header-margin-adjust {
+  height: calc(100vh - 65px);
+  position: absolute;
+  top: 65px;
+}
+
+.side-navi{
+  width: 200px;
+}
+
+.side-navi ul,
+.side-navi ul li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.side-navi div.active ul{
+  border: 1px solid red;
+}
+
+.side-navi > ul li a {
+  color: white;
+  display: block;
+  padding: 0.5rem 1rem;
+  padding-right: 2.5rem;
+}
+
+.side-navi > ul li a.active,
+.side-navi > ul li a:hover {
+    background: #ffffff;
+    color: black;
+    width: 90%;
+    margin: 0px 10px;
+    border-radius: 25px;
+    border: none !important;
+}
+
+.side-navi > ul li{
+  margin-bottom: 0.5rem;
+}
+
+.side-navi > ul li a p{
+  font-size: 22px;
+  /* color: #ffffff; */
+}
+
+.side-navi > ul li div{
+  position: relative;
+}
+
+.side-navi > ul li div span {
+  position: absolute;
+  top: 50%; right: 10%;
+  padding: 5px;
+  background: url(/assets/images/menu-right-arrow.svg) no-repeat center;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.side-navi > ul li div span.open {
+  background: url(/assets/images/menu-down-arrow.svg) no-repeat center;
+}
+
+
+.side-navi ul li ul{
+  margin-left: 14%;
+  background: #0336a9;
+  width: 80%;
+  border-radius: 10px;
+}
+
+.side-navi ul li ul a.active,
+.side-navi ul li ul a:hover{
+  background-color: #ffffff;
+  color: black;
+}
+.side-navi ul li ul a {
+  /* background: #ffffff;
+  color: black; */
+  font-size: 14px;
+  padding: 0.3rem 0.5rem;
+  margin-top: 10px;
+}
+
+
+.mat-list-base .mat-list-item .mat-list-item-content {
+  padding: 0 !important;
+}
+
+.mat-list-item a {
+  background-color:#2C4655;
+  width: 100%;
+}

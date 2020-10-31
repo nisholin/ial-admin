@@ -1,0 +1,10 @@
+label{
+    padding: 10px;
+    background: #d02918; 
+    display: table;
+    color: #fff;
+    width: 65%;
+}
+input[type="file"] {
+    display: none;
+}

@@ -1,0 +1,58 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title t-a-c form-heading">MenuManagement</h5>
+          <hr>
+        </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-2 col-lg-3 col-d-2"></div>
+          <div class="col-4 col-lg-5 col-d-4">
+            <div class="canteen-box">
+              <div class="canteentime-container p-t-20 p-b-20 m-l-auto m-r-auto">
+                <h3>Select Category :</h3>
+                <select [(ngModel)]="selectedValue" (change)="menusShow(selectedValue)" aria-placeholder="bob">
+                  <option>--select--</option>
+                  <option>Tea_Time-1</option>
+                  <option>BreakFast</option>
+                  <option>TeaTime-2</option>
+                  <option>Dinner</option>
+                </select>
+              </div>
+              <h3 class="menu_title">Menu List :</h3>
+              <div class="special-lunch-box">
+                <div class="special-container" *ngIf="menusView"><br/>
+                  <input type="checkbox">&nbsp;&nbsp; 
+                  <lable>Fish</lable><br/>
+
+                  <input type="checkbox">&nbsp;&nbsp; 
+                  <lable>Mutton</lable><br/>
+
+                  <input type="checkbox">&nbsp;&nbsp;
+                  <lable>Chicken Biriyani</lable><br/>
+
+                  <input type="checkbox">&nbsp;&nbsp;
+                  <lable>Mutton Biriyani</lable><br/>
+
+                  <input type="checkbox">&nbsp;&nbsp;
+                  <lable>Fish Biriyani</lable>
+                </div>
+              </div>
+              <br/>
+              <div *ngIf="menusView">
+                <button class="save-form-btn" style="width: 35% !important;">Save</button>
+              </div>
+              <br/>
+            </div>
+          </div>
+        </div>
+        <div class="col-3 col-lg-4 col-d-3"></div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
