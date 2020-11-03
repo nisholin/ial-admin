@@ -2,6 +2,7 @@ import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { MenuManagementComponent } from '../../canteen_menu/menu-management/menumanagement.component';
@@ -60,6 +61,7 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(AdminLayoutRoutes),
+    HttpClientModule,
     NgbModule,
     ToastrModule.forRoot(),
     //MatSort,

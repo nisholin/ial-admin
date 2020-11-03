@@ -54,7 +54,7 @@
                 <ng-container matColumnDef="category">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
                   <td mat-cell *matCellDef="let row">
-                    {{ row.category_id }}
+                    {{ row.category }}
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="rfid">
@@ -104,7 +104,7 @@
                             </select>
                           </div>
                         </div> 
-                        <div class="row">
+                         <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
                             <p>Employee Code</p>
                           </div>
@@ -114,7 +114,7 @@
                             />
                           </div>
                         </div> 
-                        <div class="row">
+                         <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
                             <p>Employee Name</p>
                           </div>
@@ -123,8 +123,8 @@
                             #emp_name="ngModel" name="emp_name"  [(ngModel)]="model.emp_name"
                             />
                           </div>
-                        </div>
-                        <div class="row">
+                        </div> 
+                         <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
                             <p>Department</p>
                           </div>
@@ -138,7 +138,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="row">
+                         <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
                             <p>Veg/Non-veg</p>
                           </div>
@@ -150,8 +150,8 @@
                               <option>Non-Veg</option>
                             </select>
                           </div>
-                        </div>
-                        <div class="row">
+                        </div> 
+                         <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
                             <p>Guest</p>
                           </div>
@@ -169,7 +169,7 @@
                               &nbsp;
                               <lable>No</lable>
                           </div>
-                        </div> 
+                        </div>  
                         <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
                             <p>Access</p>
@@ -183,7 +183,7 @@
                               <option>No</option>
                             </select>
                           </div>
-                        </div> 
+                        </div>  
                     </div>
 
                     <div class="col-6 col-lg-6 col-d-6">
@@ -200,7 +200,7 @@
                             <option>HCL</option>
                           </select>
                         </div>
-                      </div>
+                      </div> 
 
                      <!--  <div class="row">
                         <div class="col-6 col-lg-4 col-md-6">
@@ -224,19 +224,19 @@
                           [(ngModel)]="model.rfid_card"
                           />
                         </div>
-                      </div>
+                      </div> 
 
                       <div class="row">
                         <div class="col-6 col-lg-4 col-md-6">
                           <p>Temporary RFID</p>
                         </div>
                         <div class="col-6 col-lg-6 col-md-6">
-                          <input type="text" placeholder="&nbsp; Temporary RFID" jhb
+                          <input type="text" placeholder="&nbsp; Temporary RFID"
                           #a_rfid_card="ngModel" name="a_rfid_card"  
                           [(ngModel)]="model.a_rfid_card"
                           />
                         </div>
-                      </div>
+                      </div> 
 
                       <!-- <div class="row">
                         <div class="col-6 col-lg-4 col-md-6">
@@ -291,7 +291,7 @@
 
             <!--User View Start-->
             <div *ngIf="userView">
-              <div class="col-md-12">
+              <div class="col-md-12"> 
                 <div class="row">
                   <div class="col-6 col-lg-10 col-md-6 fs-20">
                     <i class="fa fa-arrow-left" aria-hidden="true" (click)="close()"></i>
@@ -300,13 +300,16 @@
                     <button class="add-btn" (click)="userEditOpen()">Edit</button>
                   </div>
                 </div>
+                 
                 <div class="card">
+                  
                   <div class="card-header">
                     <h5 class="title t-a-c form-heading" *ngIf="view">User View</h5>
                     <h5 class="title t-a-c form-heading" *ngIf="edit">Users Edit</h5>
                     <hr>
                   </div>
                   <div class="card-body">
+                    <form #empEdit="ngForm" (ngSubmit)="employeeEditSave(empEdit)">
                     <div class="row">
                       <div class="col-6 col-lg-6 col-d-6">
                         <div class="row">
@@ -318,7 +321,8 @@
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
                             <p class="text-black" *ngIf="view">Manager</p>
-                            <select *ngIf="edit">
+                            <select *ngIf="edit" #category="ngModel" name="category" 
+                            [(ngModel)]="model.category">
                               <option>--manager--</option>
                               <option>Employee</option>
                               <option>Cleaner</option>
@@ -335,7 +339,7 @@
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
                             <p class="text-black" *ngIf="view">{{ userview.emp_code }}</p>
-                            <p class="text-black" *ngIf="edit">{{ userview.emp_code }}</p>
+                            <p class="text-black" *ngIf="edit" >{{ userview.emp_code }}</p>
                           </div>
                         </div>
 
@@ -348,7 +352,9 @@
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
                             <p class="text-black" *ngIf="view">{{ userview.emp_name }}</p>
-                            <input type="text" *ngIf="edit" value="Jai Kumar"/>
+                            <input type="text" *ngIf="edit" 
+                            #emp_name="ngModel" name="emp_name"  [(ngModel)]="model.emp_name"
+                            placeholder="{{ userview.emp_name }}"/>
                           </div>
                         </div>
 
@@ -361,7 +367,10 @@
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
                             <p class="text-black" *ngIf="view">{{ userview.department }}</p>
-                            <select *ngIf="edit">
+                            <select *ngIf="edit" 
+                            #department="ngModel" name="department"  
+                            [(ngModel)]="model.department"
+                            >
                               <option>--Select--</option>
                               <option>MD</option>
                               <option>AL</option>
@@ -372,17 +381,20 @@
 
                         <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
-                            <p>Category</p>
+                            <p>veg_nonveg</p>
                           </div>
                           <div class="col-1 col-lg-1 col-md-1">
                             <p>:</p>
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">Worker</p>
-                            <select *ngIf="edit">
+                            <p class="text-black" *ngIf="view">{{userview.veg_nonveg}}</p>
+                            <select *ngIf="edit"
+                            #veg_nonveg="ngModel" name="veg_nonveg"  
+                            [(ngModel)]="model.veg_nonveg"
+                            >
                               <option>--Select--</option>
-                              <option>Manager</option>
-                              <option>Cleaner</option>
+                              <option>veg</option>
+                              <option>non-veg</option>
                             </select>
                           </div>
                         </div>
@@ -396,12 +408,18 @@
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
                             <p class="text-black" *ngIf="view">{{ userview.guest_permit }}</p>
-                            <div *ngIf="edit">
-                              <input type="checkbox"> 
+                            <div *ngIf="edit" >
+                              <input type="radio" value="1"
+                              #guest_permit="ngModel" name="guest_permit"  
+                              [(ngModel)]="model.guest_permit"
+                              > 
                               &nbsp;
                               <lable>yes</lable>
                               &nbsp;&nbsp;
-                              <input type="checkbox"> 
+                              <input type="radio"value="0"
+                              #guest_permit="ngModel" name="guest_permit"  
+                              [(ngModel)]="model.guest_permit"
+                              > 
                               &nbsp;
                               <lable>No</lable>
                             </div>
@@ -417,7 +435,10 @@
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
                             <p class="text-black" *ngIf="view">{{ userview.access }}</p>
-                            <select *ngIf="edit">
+                            <select *ngIf="edit"
+                            #access="ngModel" name="access"  
+                            [(ngModel)]="model.access"
+                            >
                               <option>--Select--</option>
                               <option>Yes</option>
                               <option>No</option>
@@ -436,7 +457,10 @@
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
                             <p class="text-black" *ngIf="view">{{ userview.company }}</p>
-                            <select *ngIf="edit">
+                            <select *ngIf="edit"
+                            #company="ngModel" name="company"  
+                            [(ngModel)]="model.company"
+                            >
                               <option>--select--</option>
                               <option>Manager</option>
                               <option>Cleaner</option>
@@ -453,7 +477,11 @@
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
                             <p class="text-black" *ngIf="view">{{ userview.rfid_card }}</p>
-                            <p class="text-black" *ngIf="edit">{{ userview.rfid_card }}</p>
+                            <input *ngIf="edit" type="text" value="rfid_card"
+                            placeholder="{{userview.rfid_card}}"
+                            #rfid_card="ngModel" name="rfid_card"  
+                            [(ngModel)]="model.rfid_card"
+                            >
                           </div>
                         </div>
 
@@ -466,7 +494,11 @@
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
                             <p class="text-black" *ngIf="view">{{ userview.a_rfid_card }}</p>
-                            <p class="text-black" *ngIf="edit">{{ userview.a_rfid_card }}</p>
+                            <input *ngIf="edit" type="text" value="a_rfid_card" 
+                            placeholder="{{userview.a_rfid_card}}"
+                            #a_rfid_card="ngModel" name="a_rfid_card"  
+                            [(ngModel)]="model.a_rfid_card"
+                            >
                           </div>
                         </div>
 
@@ -521,11 +553,12 @@
                   <div *ngIf="edit" class="row">
                     <div class="col-3 col-lg-4 col-md-3"></div>
                     <div class="col-3 col-lg-4 col-md-3 row">
-                      <button class="save-form-btn">Save</button>
+                      <button class="save-form-btn" type="submit">Save</button>
                       <button class="cancel-form-btn" (click)="editClose()">Cancel</button>
                     </div>
                     <div class="col-3 col-lg-4 col-md-3"></div>
                   </div>
+                  </form>
                   </div>
                 </div>
               </div>

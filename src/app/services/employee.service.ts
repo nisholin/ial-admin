@@ -8,31 +8,25 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class EmployeeService {
-  PHP_API_SERVER = "http://192.168.0.144:8084/ial_canteen/";
-  //PHP_API_SERVER = "http://49.249.229.14/ial_canteen/master";
-  //49.249.229.14:3557
+  PHP_API_SERVER = "http://localhost:8084/ial_canteen/employee";
+
+
   constructor(private httpClient: HttpClient) { }
 
-  /* updateUser(user: User){
-    //alert("data-->"+user.employeename);
-    return this.httpClient.post<User>(`${this.PHP_API_SERVER}/employee_master_insert.php`, user);
-  } */
-  updateUser(angForm) {
-    console.log(angForm);
+  saveUser(angForm1) {
+    console.log(angForm1);
     //console.log(from_date);
     //console.log(image);
     //console.log(to_date);
-    //console.log(email);
-    return this.httpClient.post<any>(this.PHP_API_SERVER + '/empinsert.php', 
-    {angForm })
-    
+    //console.log(a_rfid_card);
+    return this.httpClient.post<any>(this.PHP_API_SERVER + '/empinsert.php', angForm1);
   }
-  readEmpDetails(): Observable<User[]>{
-		return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/index.php`);
+  readProducts(): Observable<User[]>{
+		return this.httpClient.get<User[]>(this.PHP_API_SERVER + '/index.php',);
 	}
-  //token
-setToken(token: string) {
-  localStorage.setItem('token', token);
-}
-}
+  updateProduct(angForm2){
+    console.log(angForm2);
+		return this.httpClient.put<User>(`${this.PHP_API_SERVER}/update_product.php`, angForm2);
+	}
+ }
 

@@ -30,12 +30,12 @@ export class MeetingRequestComponent implements OnInit {
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
   constructor(private employeeservice: EmployeeService) {
-    this.employeeservice.readEmpDetails().subscribe((user: User[])=>{
+    /* this.employeeservice.readEmpDetails().subscribe((user: User[])=>{
       this.user = user;
       this.dataSource = new MatTableDataSource(this.user);
       this.dataSource.paginator = this.paginator.toArray()[0];
       this.dataSource.sort = this.sort.toArray()[0];
-    }) 
+    })  */
    }
 
   ngOnInit(): void {
@@ -51,7 +51,7 @@ export class MeetingRequestComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  enableUserView(empcode) {
+  /* enableUserView(empcode) {
     alert("emp code-->"+empcode);
     this.employeeservice.readEmpDetails().subscribe((user: User[])=>{
       this.user = user;
@@ -70,7 +70,7 @@ export class MeetingRequestComponent implements OnInit {
     this.userView=true;
     this.view=true;
     this.edit=false;
-  }
+  } */
   newUserRegister() {
     this.newuser=true;
     this.tablehide=false;

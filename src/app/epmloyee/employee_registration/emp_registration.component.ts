@@ -27,6 +27,7 @@ export class EmpRegistrationComponent implements OnInit {
   user: User[];
   userview: any;
   emp_code: "";
+  userList: any;
 
   dialogConfig = new MatDialogConfig();
   isDtInitialized: boolean = false;
@@ -35,12 +36,24 @@ export class EmpRegistrationComponent implements OnInit {
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
 
   constructor(private employeeservice: EmployeeService) {  
-    this.employeeservice.readEmpDetails().subscribe((user: User[])=>{
-    this.user = user;
-    this.dataSource = new MatTableDataSource(this.user);
+    this.employeeservice.readProducts().subscribe((user:User[]) =>{
+      this.userList = user;
+      this.dataSource = new MatTableDataSource(this.userList);
+      this.dataSource.paginator = this.paginator.toArray()[0];
+      this.dataSource.sort = this.sort.toArray()[0];
+    },
+      error => {
+        alert('Error -->'+error);
+      }
+    );  
+/*     this.employeeservice.updateProduct().subscribe((user: User)=>{
+      console.log("Product updated" , user);
+    } */
+    /* const userdata = require("../../../assets/userdata.json");
+    this.userList=userdata;
+    this.dataSource = new MatTableDataSource(this.userList);
     this.dataSource.paginator = this.paginator.toArray()[0];
-    this.dataSource.sort = this.sort.toArray()[0];
-  }) 
+    this.dataSource.sort = this.sort.toArray()[0];   */
 }
   ngOnInit() {
     this.newuser=false;
@@ -48,7 +61,23 @@ export class EmpRegistrationComponent implements OnInit {
     this.userView=false;
     this.edit=false;
     this.view=false;
+    //this.loadUser();
   }
+
+  /*  loadUser(){
+    this.employeeservice.readProducts().subscribe((user:User[]) =>{
+      this.userList = user;
+      this.dataSource = new MatTableDataSource(this.userList);
+      this.dataSource.paginator = this.paginator.toArray()[0];
+      this.dataSource.sort = this.sort.toArray()[0];
+    },
+       error => {
+        console.log('Error -->'+error);
+      } 
+    );
+
+  }  */
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
@@ -57,24 +86,23 @@ export class EmpRegistrationComponent implements OnInit {
   }
   enableUserView(empcode) {
     alert("emp code-->"+empcode);
-    this.employeeservice.readEmpDetails().subscribe((user: User[])=>{
-      this.user = user;
+    this.employeeservice.readProducts().subscribe((userview: User[])=>{
+      this.user = userview;
       for(let i=0; i<this.user.length;i++){
         if(empcode==this.user[i].emp_code){
           this.userview = this.user[i];
-          //this.userview.emp_code = this.user[i].emp_code;
         }
       }
-      this.dataSource = new MatTableDataSource(this.user);
-      this.dataSource.paginator = this.paginator.toArray()[0];
-      this.dataSource.sort = this.sort.toArray()[0];
+      //this.dataSource = new MatTableDataSource(this.user);
+     // this.dataSource.paginator = this.paginator.toArray()[0];
+     // this.dataSource.sort = this.sort.toArray()[0];
     })
     this.newuser=false;
     this.tablehide=false;
     this.userView=true;
     this.view=true;
     this.edit=false;
-  }
+  } 
   newUserRegister() {
     this.newuser=true;
     this.tablehide=false;
@@ -98,10 +126,13 @@ export class EmpRegistrationComponent implements OnInit {
   }
    saveNewUser(angForm){
     // console.log(angForm.value.emp_name)
-     console.log(angForm.value)
+     console.log(angForm.value.a_rfid_card)
     //alert("data-->"+this.model.emp_code);
-   this.employeeservice.updateUser(angForm.value).subscribe(()=>{
-      
+   this.employeeservice.saveUser(angForm.value ).subscribe(()=>{
     }); 
   } 
+  employeeEditSave (empedit) {
+    this.employeeservice.updateProduct(empedit.value).subscribe((user: User)=>{
+  });
+}
 }

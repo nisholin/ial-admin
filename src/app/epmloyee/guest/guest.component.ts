@@ -33,12 +33,12 @@ export class GuestComponent implements OnInit {
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
 
   constructor(private guestservice: GuestService) {  
-    this.guestservice.readEmpDetails().subscribe((user: User[])=>{
+    /* this.guestservice.readEmpDetails().subscribe((user: User[])=>{
       this.user = user;
       this.dataSource = new MatTableDataSource(this.user);
       this.dataSource.paginator = this.paginator.toArray()[0];
       this.dataSource.sort = this.sort.toArray()[0];
-    }) 
+    })  */
    }
   ngOnInit() {
     this.newuser=false;
@@ -54,7 +54,7 @@ export class GuestComponent implements OnInit {
     }
   }
   enableUserView(empcode) {
-    alert("emp code-->"+empcode);
+     alert("emp code-->"+empcode);
     this.guestservice.readEmpDetails().subscribe((user: User[])=>{
       this.user = user;
       for(let i=0; i<this.user.length;i++){
@@ -71,7 +71,7 @@ export class GuestComponent implements OnInit {
     this.tablehide=false;
     this.userView=true;
     this.view=true;
-    this.edit=false;
+    this.edit=false; 
   }
   newUserRegister() {
     this.newuser=true;
