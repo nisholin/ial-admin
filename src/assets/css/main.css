@@ -560,7 +560,7 @@ tr.mat-header-row {
 }
 th.mat-header-cell {
   color: #ffffff;
-  text-align: center;
+  text-align: center !important;
 }
 .mat-form-field-appearance-legacy .mat-form-field-underline {
   height: 0px !important; 

@@ -11,7 +11,7 @@ export class User {
    company: string;
    rfid_card: string;
    a_rfid_card: string;
-    //from_date: string;
+    //from_date: Date;
     //to_date: string;
     //email: string;
     //image: string;

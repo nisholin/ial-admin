@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
-import { EmpRegistrationComponent } from './epmloyee/employee_registration/emp_registration.component';
+//import { EmpRegistrationComponent } from './epmloyee/employee_registration/emp_registration.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes =[

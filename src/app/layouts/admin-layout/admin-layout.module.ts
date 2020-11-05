@@ -5,36 +5,39 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
-import { MenuManagementComponent } from '../../canteen_menu/menu-management/menumanagement.component';
-import { SpecialLunchComponent } from '../../canteen_menu/speciallunch/speciallunch.component';
-import { WastageComponent } from '../../wastage/wastage.component';
-import { CanteenTimeComponent } from '../../canteen_menu/canteentime/canteentime.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
-import { ReportsComponent } from '../../reports/reports/reports.component';
-import { SummaryReportsComponent } from '../../reports/summary-reports/summary-reports.component';
-import { CompanyReportsComponent } from '../../reports/company-reports/company-reports.component';
-import { CatererReportsComponent } from '../../reports/caterer-reports/caterer-reports.component';
 
-import { TodaysMenuComponent } from '../../canteen_menu/todays-menu/todays-menu.component';
-import { NewMenuComponent } from '../../canteen_menu/new-menu/new-menu.component';
-import { AddNewMenuComponent } from '../../canteen_menu/add-new-menu/add-new-menu.component';
-import { NewSpecialLunchComponent } from '../../canteen_menu/new-special-lunch/new-special-lunch.component';
+//canteem_menus
+import { MenuManagementComponent } from '../../canteen_menu/components/menu-management/menumanagement.component';
+import { SpecialLunchComponent } from '../../canteen_menu/components/speciallunch/speciallunch.component';
+import { WastageComponent } from '../../wastage/wastage.component';
+import { CanteenTimeComponent } from '../../canteen_menu/components/canteentime/canteentime.component';
+import { TodaysMenuComponent } from '../../canteen_menu/components/todays-menu/todays-menu.component';
+import { NewMenuComponent } from '../../canteen_menu/components/new-menu/new-menu.component';
+import { AddNewMenuComponent } from '../../canteen_menu/components/add-new-menu/add-new-menu.component';
+import { NewSpecialLunchComponent } from '../../canteen_menu/components/new-special-lunch/new-special-lunch.component';
 
-//master
-import { NewCategoryComponent } from '../../master/new-category/new-category.component';
-import { AddNewCompanyComponent } from '../../master/add-new-company/add-new-company.component';
-import { DepartmentComponent } from '../../master/department/department.component';
-import { UploadComponent } from '../../master/upload/upload.component';
+//Employees
+import { EmpRegistrationComponent } from '../../epmloyee/components/employee_registration/emp_registration.component';
+import { ResetPasswordComponent } from '../../epmloyee/components/reset-password/reset-password.component';
+import { GuestComponent } from '../../epmloyee/components/guest/guest.component';
+import { ServiceProviderComponent } from '../../epmloyee/components/service-provider/service-provider.component';
+import { TraineeComponent } from '../../epmloyee/components/trainee/trainee.component';
+import { ContractorComponent } from '../../epmloyee/components/contractor/contractor.component';
+import { MeetingRequestComponent } from '../../epmloyee/components/meeting-request/meeting-request.component';
 
-//Employee
-import { EmpRegistrationComponent } from '../../epmloyee/employee_registration/emp_registration.component';
-import { ResetPasswordComponent } from '../../epmloyee/reset-password/reset-password.component';
-import { GuestComponent } from '../../epmloyee/guest/guest.component';
-import { ServiceProviderComponent } from '../../epmloyee/service-provider/service-provider.component';
-import { TraineeComponent } from '../../epmloyee/trainee/trainee.component';
-import { ContractorComponent } from '../../epmloyee/contractor/contractor.component';
-import { MeetingRequestComponent } from '../../epmloyee/meeting-request/meeting-request.component';
+//masters
+import { NewCategoryComponent } from '../../master/components/new-category/new-category.component';
+import { AddNewCompanyComponent } from '../../master/components/add-new-company/add-new-company.component';
+import { DepartmentComponent } from '../../master/components/department/department.component';
+import { UploadComponent } from '../../master/components/upload/upload.component';
+
+//reports
+import { ReportsComponent } from '../../reports/components/reports/reports.component';
+import { SummaryReportsComponent } from '../../reports/components/summary-reports/summary-reports.component';
+import { CompanyReportsComponent } from '../../reports/components/company-reports/company-reports.component';
+import { CatererReportsComponent } from '../../reports/components/caterer-reports/caterer-reports.component';
 
 //custom imports
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -105,6 +108,7 @@ import { MatIconModule } from '@angular/material/icon';
     MeetingRequestComponent,
   ],
   exports: [
+    MatFormFieldModule ,
     MatPaginatorModule,
     MatSidenavModule,
     MatListModule
