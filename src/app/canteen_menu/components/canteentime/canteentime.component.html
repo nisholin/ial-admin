@@ -12,43 +12,57 @@
         </div>
         <!--Table start-->
 			  <div class="example-container mat-elevation-z8">
-          <table mat-table #hBtable [dataSource]="dataSource" matSort>
-            <ng-container matColumnDef="Category">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
-              <td mat-cell *matCellDef="let row">
-                {{row.category}}
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="From">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> From </th>
-              <td mat-cell *matCellDef="let row">
-                {{ row.From }}
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="To">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> To </th>
-              <td mat-cell *matCellDef="let row">
-              {{ row.To }}
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="Actions">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions  </th>
-              <td mat-cell *matCellDef="let row">
-                <div class="row action-align">
-                  <div class="img-div" (click)="timeEdit()">
-                    <img src="assets/images/edit_icon.png" /> 
+          <form #canteenTimeForm="ngForm">
+            <table mat-table #hBtable [dataSource]="dataSource" matSort>
+              <ng-container matColumnDef="Category">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Category </th>
+                <td mat-cell *matCellDef="let row">
+                  {{row.menu_name}}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="From">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Start </th>
+                <td mat-cell *matCellDef="let row">
+                  <p *ngIf="view">
+                    {{ row.start_time }}
+                  </p>
+                  <p *ngIf="edit">
+                    <input type="time" #start_time="ngModel" name="start_time" 
+                    [(ngModel)]="model.start_time" placeholder="{{ row.start_time }}"/>
+                  </p>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="To">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> End </th>
+                <td mat-cell *matCellDef="let row">
+                  <p *ngIf="view">
+                    {{ row.end_time }}
+                  </p>
+                  <p *ngIf="edit">
+                    <input type="time" #end_time="ngModel" name="end_time" 
+                    [(ngModel)]="model.end_time"/>
+                  </p>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="Actions">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions <br/>(Edit & save)  </th>
+                <td mat-cell *matCellDef="let row">
+                  <div class="row action-align">
+                    <div class="img-div" (click)="timeEdit(row.id)">
+                      <img src="assets/images/edit_icon.png" /> 
+                    </div>
+                    <div class="img-div" (click)="updateCanteenTime(canteenTimeForm.value)">
+                      <img src="assets/images/tick_icon.png" /> 
+                    </div>
                   </div>
-                  <div class="img-div" (click)="editSave()">
-                    <img src="assets/images/tick_icon.png" /> 
-                  </div>
-                </div>
-              </td>
-            </ng-container>
-				
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row [ngClass]="table - row" tabindex="1" *matRowDef="let row; columns: displayedColumns"></tr>
-          </table>
-          <mat-paginator #sort [pageSize]="5"[hidePageSize]="true"></mat-paginator>
+                </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row [ngClass]="table - row" tabindex="1" *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+            <mat-paginator #sort [pageSize]="5"[hidePageSize]="true"></mat-paginator>
+          </form>
         </div>
         <!--Table End-->
       </div>

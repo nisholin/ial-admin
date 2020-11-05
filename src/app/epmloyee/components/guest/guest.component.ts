@@ -35,10 +35,10 @@ export class GuestComponent implements OnInit {
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
 
   constructor(private guestservice: GuestService) {  
-     this.guestservice.readDepartment().subscribe((department: Department[])=>{
-      this.departmentList = department;
-      console.log(this.departmentList);
-    })  
+    this.guestservice.readDepartment().subscribe((department: Department[])=>{
+    this.departmentList = department;
+    console.log(this.departmentList);
+  })  
    }
   ngOnInit() {
     this.newuser=false;

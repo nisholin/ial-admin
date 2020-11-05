@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SummaryReportsService } from '../../services/summary-reports.service';
 
 @Component({
   selector: 'app-summary-reports',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryReportsComponent implements OnInit {
 
-  constructor() { }
+  model : any={};
+  constructor(private summaryreportsservice: SummaryReportsService) { }
 
   ngOnInit(): void {
   }
 
+  saveSummaryReports(summaryreports) {
+    console.log(summaryreports.value)
+    this.summaryreportsservice.sendSummaryReportDate(summaryreports.value).subscribe(()=>{
+  },
+  error => {
+    alert('Network Error-->'+error);
+  });
+  }
 }
