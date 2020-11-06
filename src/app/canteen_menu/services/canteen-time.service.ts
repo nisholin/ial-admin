@@ -6,11 +6,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CanteenTimeService {
 
-  PHP_API_SERVER = "http://192.168.200.15:8084/ial_canteen/employee";
+  PHP_API_SERVER = "http://192.168.200.49/ial_canteen/admin/canteen/timing";
 
   constructor(private httpClient: HttpClient) { }
-  updateCanteenTime(canteentimeform) {
+  updateCanteenTime(canteentimeform,id) {
     console.log(canteentimeform);
-    return this.httpClient.post<any>(this.PHP_API_SERVER + '/empinsert.php', canteentimeform);
+    return this.httpClient.post<any>(this.PHP_API_SERVER + '/updatecanteen', canteentimeform,id);
   }
 }

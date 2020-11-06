@@ -9,94 +9,156 @@
           <hr>
         </div>
       <div class="card-body">
-        <!-- <div class="row">
-          <div class="col-2 col-lg-3 col-d-2"></div>
-          <div class="col-4 col-lg-6 col-d-4">
-            <div class="canteen-box">
-              <div class="canteentime-container p-t-20 p-b-20 m-l-auto m-r-auto">
-                <h3>Menu Name :</h3>
-                <select [(ngModel)]="selectedValue" (change)="menusShow(selectedValue)" aria-placeholder="bob">
-                  <option>--select Menu--</option>
-                   <option *ngFor="let menulist of menuList">{{  menulist.id }}</option> 
-                  <option >tea time -1</option>
-                </select>
-              </div>
-              <h3 class="menu_title">Menu List :</h3>
-              <div class="special-lunch-box">
-                <div class="special-container" *ngIf="menusView"><br/>
+        <!--Emp Edit Dialouge Start-->
+        <ng-template #edit>
+          <div class="canteen-box">
+            <form #empMenuEditUpdate="ngForm" (ngSubmit)="empMenuUpdate(empMenuEditUpdate)">
+            <div class="canteentime-container p-t-20 p-b-20 m-l-auto m-r-auto">
+              <h3>Menu Name :</h3>
+              <select #menu_name="ngModel" name="menu_name" 
+              [(ngModel)]="model.menu_name" (change)="menusShow(menu_name)" >
+                <option *ngFor="let canteentime of canteentime" 
+                value="{{canteentime.id}}">{{  canteentime.menu_name }}-{{canteentime.id}}</option> 
+              </select>
+            </div>
+            <h3 class="menu_title">Menu List :</h3>
+            <div class="special-lunch-box">
+              <div class="special-container" *ngIf="menusView"><br/>
+                <div *ngFor="let employeemenulist of employeeMenuList">
                   <input type="checkbox">&nbsp;&nbsp; 
-                  <lable>Fish</lable><br/>
-
-                  <input type="checkbox">&nbsp;&nbsp; 
-                  <lable>Mutton</lable><br/>
-
-                  <input type="checkbox">&nbsp;&nbsp;
-                  <lable>Chicken Biriyani</lable><br/>
-
-                  <input type="checkbox">&nbsp;&nbsp;
-                  <lable>Mutton Biriyani</lable><br/>
-
-                  <input type="checkbox">&nbsp;&nbsp;
-                  <lable>Fish Biriyani</lable>
+                  <lable>{{ employeemenulist.item_name }}</lable><br/>
                 </div>
+                <!-- <input type="checkbox">&nbsp;&nbsp; 
+                <lable>Mutton</lable><br/>
+
+                <input type="checkbox">&nbsp;&nbsp;
+                <lable>Chicken Biriyani</lable><br/>
+
+                <input type="checkbox">&nbsp;&nbsp;
+                <lable>Mutton Biriyani</lable><br/>
+
+                <input type="checkbox">&nbsp;&nbsp;
+                <lable>Fish Biriyani</lable> -->
               </div>
-              <br/>
-              <div *ngIf="menusView">
-                <button class="save-form-btn" style="width: 35% !important;">Save</button>
+            </div>
+            <br/>
+            <div *ngIf="menusView">
+              <button class="save-form-btn" style="width: 35% !important;" type="submit">Save</button>
+            </div>
+            <br/>
+            </form>
+          </div>
+       </ng-template>
+      <!--Emp Edit Dialouge End-->
+
+      <!--Cont Edit Dialouge Start-->
+      <ng-template #contractedit>
+        <div class="canteen-box">
+          <form #contMenuEditUpdate="ngForm" (ngSubmit)="contMenuUpdate(contMenuEditUpdate)">
+          <div class="canteentime-container p-t-20 p-b-20 m-l-auto m-r-auto">
+            <h3>Menu Name :</h3>
+            <select #menu_name="ngModel" name="menu_name" 
+            [(ngModel)]="model.menu_name" (change)="contractorMenusShow(menu_name)">
+              <option *ngFor="let contractormenulist of contractorMenuList">{{  contractormenulist.menu_name }}</option> 
+            </select>
+          </div>
+          <h3 class="menu_title">Menu List :</h3>
+          <div class="special-lunch-box">
+            <div class="special-container" *ngIf="menusView"><br/>
+              <div *ngFor="let contractormenulist of contractorMenuList">
+                <input type="checkbox">&nbsp;&nbsp; 
+                <lable>{{ contractormenulist.item_name }}</lable><br/>
               </div>
-              <br/>
+              <!-- <input type="checkbox">&nbsp;&nbsp; 
+              <lable>Mutton</lable><br/>
+
+              <input type="checkbox">&nbsp;&nbsp;
+              <lable>Chicken Biriyani</lable><br/>
+
+              <input type="checkbox">&nbsp;&nbsp;
+              <lable>Mutton Biriyani</lable><br/>
+
+              <input type="checkbox">&nbsp;&nbsp;
+              <lable>Fish Biriyani</lable> -->
             </div>
           </div>
+          <br/>
+          <div *ngIf="menusView">
+            <button class="save-form-btn" style="width: 35% !important;" type="submit">Save</button>
+          </div>
+          <br/>
+          </form>
         </div>
-        <div class="col-3 col-lg-3 col-d-3"></div> -->
-        <!--Employee Table start-->
-        <h2>Employee</h2>
-        <div class="example-container mat-elevation-z8">
-          <table mat-table #hBtable [dataSource]="dataSource1" matSort>
-              <ng-container matColumnDef="menuname">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Menu Name </th>
-                  <td mat-cell *matCellDef="let row">
-                    {{ row.menu_name }}
-                  </td>
-              </ng-container>
-              <ng-container matColumnDef="itemname">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Item Name </th>
-                  <td mat-cell *matCellDef="let row">
-                    {{ row.item_name }}
-                  </td>
-              </ng-container>
-              <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-              <tr mat-row [ngClass]="table - row" tabindex="1" *matRowDef="let row; columns: displayedColumns1"
-              ></tr>
-          </table>
-          <mat-paginator #sort [pageSize]="5"[hidePageSize]="true"></mat-paginator>
+     </ng-template>
+      <!--Cont Edit Dialouge End-->
+
+      <div class="row">
+        <div class="col-6 col-lg-2 col-md-6 fs-20">
+          <!-- <i class="fa fa-arrow-left" aria-hidden="true" (click)="close()"></i> -->
         </div>
-        <!--Employee Table end-->
-        <hr>
-        <br/>
-        <!--Contractor table start-->
-        <h2>Contractor</h2>
-        <div class="example-container mat-elevation-z8">
-          <table mat-table #hBtable [dataSource]="dataSource2" matSort>
+        <div class="col-4 col-lg-8 col-md-4">
+          <h2>Employee</h2>
+        </div>
+        <div class="col-4 col-lg-2 col-md-4">
+          <button class="add-btn" (click)="empMenuEditOpen(edit)">Edit</button>
+        </div>
+      </div>
+      <div class="example-container mat-elevation-z8">
+        <table mat-table #hBtable [dataSource]="dataSource1" matSort>
             <ng-container matColumnDef="menuname">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Menu Name </th>
-              <td mat-cell *matCellDef="let row">
-              {{ row.menu_name }}
-              </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Menu Name </th>
+                <td mat-cell *matCellDef="let row">
+                  {{ row.menu_name }}
+                </td>
             </ng-container>
             <ng-container matColumnDef="itemname">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header> Item Name </th>
-              <td mat-cell *matCellDef="let row">
-              {{ row.item_name }}
-              </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Item Name </th>
+                <td mat-cell *matCellDef="let row">
+                  {{ row.item_name }}
+                </td>
             </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
-            <tr mat-row [ngClass]="table - row" tabindex="1" *matRowDef="let row; columns: displayedColumns2"
+            <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+            <tr mat-row [ngClass]="table - row" tabindex="1" *matRowDef="let row; columns: displayedColumns1"
             ></tr>
-          </table>
-          <mat-paginator #sort [pageSize]="5"[hidePageSize]="true"></mat-paginator>
+        </table>
+        <mat-paginator #sort [pageSize]="5"[hidePageSize]="true"></mat-paginator>
+      </div>
+      <!--Employee Table end-->
+      <hr>
+      <br/>
+      <!--Contractor table start-->
+      <div class="row">
+        <div class="col-6 col-lg-2 col-md-6 fs-20">
+          <!-- <i class="fa fa-arrow-left" aria-hidden="true" (click)="close()"></i> -->
         </div>
-        <!--COntractor table end-->
+        <div class="col-4 col-lg-8 col-md-4">
+          <h2>Contractor</h2>
+        </div>
+        <div class="col-4 col-lg-2 col-md-4">
+          <button class="add-btn" (click)="contMenuEditOpen(contractedit)">Edit</button>
+        </div>
+      </div>
+      <div class="example-container mat-elevation-z8">
+        <table mat-table #hBtable [dataSource]="dataSource2" matSort>
+          <ng-container matColumnDef="menuname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Menu Name </th>
+            <td mat-cell *matCellDef="let row">
+            {{ row.menu_name }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="itemname">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Item Name </th>
+            <td mat-cell *matCellDef="let row">
+            {{ row.item_name }}
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+          <tr mat-row [ngClass]="table - row" tabindex="1" *matRowDef="let row; columns: displayedColumns2"
+          ></tr>
+        </table>
+        <mat-paginator #sort [pageSize]="5"[hidePageSize]="true"></mat-paginator>
+      </div>
+      <!--COntractor table end-->
       </div>
       </div>
     </div>

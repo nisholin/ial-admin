@@ -29,6 +29,7 @@ export class CanteenTimeComponent implements OnInit {
   edit				: any;
   canteentime		: CanteenTime[];
   id				: any;
+  fieldarray		: Array<any> =[];
 
   dialogConfig = new MatDialogConfig();
   isDtInitialized: boolean = false;
@@ -39,6 +40,9 @@ export class CanteenTimeComponent implements OnInit {
 	constructor(private commonservice: CommonService,private Canteentimeservice: CanteenTimeService) {
 		this.commonservice.readCanteentime().subscribe((canteentime: CanteenTime[])=>{
 		  this.canteentime = canteentime;
+		  for(let i=0; i<this.canteentime.length;i++){
+			this.canteentime[i].editable = false;
+		}
 		  console.log(this.canteentime);
 		  this.dataSource = new MatTableDataSource(this.canteentime);
 		  this.dataSource.paginator = this.paginator.toArray()[0];
@@ -54,29 +58,23 @@ export class CanteenTimeComponent implements OnInit {
 		this.view=true;
 		this.edit=false;
 	}
-	timeEdit(id) {
-		alert(id)
-		this.commonservice.readCanteentime().subscribe((canteentime: CanteenTime[])=>{
-		this.canteentime = canteentime;
-		for(let i=0; i<this.canteentime.length;i++){
-			if(id==this.canteentime[i].id){
-				alert(this.canteentime[i].id)
-				this.edit=true;
-			}
-		}
-		});
-		this.view=false;
+	timeEdit(row: any) {
+		row.editable = !row.editable;
 	}
 	editSave() {
 		this.edit=false;
 		this.view=true;
 	}
-	updateCanteenTime(canteentimeform) {
-		console.log(canteentimeform);
-		this.Canteentimeservice.updateCanteenTime(canteentimeform).subscribe(()=>{
+	cancel(row: any) {
+		row.editable = false;
+	}
+	updateCanteenTime(canteentimeform: any,id: any) {
+		this.fieldarray.push({id: id});
+		console.log(this.fieldarray)
+		this.Canteentimeservice.updateCanteenTime(canteentimeform,this.fieldarray).subscribe(()=>{
 		},
 		error => {
-		  alert('Network Error-->'+error);
+		  //alert('Network Error-->'+error);
 		});
 	} 
 }

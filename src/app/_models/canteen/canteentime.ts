@@ -6,4 +6,5 @@ export class CanteenTime {
     menu_name   : String;
     start_time  : Time;
     end_time    : Time;
+    editable    : boolean;
 }
