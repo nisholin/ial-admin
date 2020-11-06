@@ -32,5 +32,8 @@ table {
     margin-right: auto;
   }
   input[type=text] {
-      border: 1px solid #ccc !important;
+    /* border: 1px solid #ccc !important; */
+    border: none !important;
+    text-align: center;
+    background: transparent;
   }

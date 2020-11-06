@@ -16,15 +16,16 @@ import { Menu } from "../../../_models/canteen/menu";
 })
 export class MenuManagementComponent implements OnInit {
 
-  displayedColumns1  : string[] = ['id', 'name', 'progress', 'color'];
-  dataSource1        : MatTableDataSource<any>;
-  displayedColumns2  : string[] = ['id', 'name', 'progress', 'color'];
-  dataSource2        : MatTableDataSource<any>;
-  model             : any;
-  menu              : Menu[];
-  menuList          : any;
-  menusView         = false;
-  employeeMenuList  : any;
+  displayedColumns1   : string[] = ['menuname', 'itemname'];
+  dataSource1         : MatTableDataSource<any>;
+  displayedColumns2   : string[] = ['menuname', 'itemname'];
+  dataSource2         : MatTableDataSource<any>;
+  model               : any;
+  menu                : Menu[];
+  menuList            : any;
+  menusView           = false;
+  employeeMenuList    : any;
+  contractorMenuList  : any;
 
   dialogConfig      = new MatDialogConfig();
   isDtInitialized   : boolean = false;
@@ -33,19 +34,30 @@ export class MenuManagementComponent implements OnInit {
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
   
   constructor(private menumanagementservice: MenuManagementService) {
-    this.menumanagementservice.readMenu().subscribe((menu: Menu[])=>{
+    /* this.menumanagementservice.readMenu().subscribe((menu: Menu[])=>{
       this.menuList = Menu;
       //console.log(this.categoryList);
-    });
+    }); */
     this.menumanagementservice.readEmployeeMenu().subscribe((menu:Menu[]) =>{
       this.employeeMenuList = menu;
       this.dataSource1 = new MatTableDataSource(this.employeeMenuList);
       this.dataSource1.paginator = this.paginator.toArray()[0];
       this.dataSource1.sort = this.sort.toArray()[0];
     },
-      error => {
+      /* error => {
         alert('Network Error-->'+error);
-      }
+      } */
+    );
+    this.menumanagementservice.readContractorMenu().subscribe((menu:Menu[]) =>{
+      this.contractorMenuList = menu;
+      console.log(this.contractorMenuList);
+      this.dataSource2 = new MatTableDataSource(this.contractorMenuList);
+      this.dataSource2.paginator = this.paginator.toArray()[0];
+      this.dataSource2.sort = this.sort.toArray()[0];
+    },
+      /* error => {
+        alert('Network Error-->'+error);
+      } */
     );
    }
 
