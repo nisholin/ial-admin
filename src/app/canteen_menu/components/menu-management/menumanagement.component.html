@@ -9,18 +9,16 @@
           <hr>
         </div>
       <div class="card-body">
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-2 col-lg-3 col-d-2"></div>
-          <div class="col-4 col-lg-5 col-d-4">
+          <div class="col-4 col-lg-6 col-d-4">
             <div class="canteen-box">
               <div class="canteentime-container p-t-20 p-b-20 m-l-auto m-r-auto">
-                <h3>Select Category :</h3>
+                <h3>Menu Name :</h3>
                 <select [(ngModel)]="selectedValue" (change)="menusShow(selectedValue)" aria-placeholder="bob">
-                  <option>--select--</option>
-                  <option>Tea_Time-1</option>
-                  <option>BreakFast</option>
-                  <option>TeaTime-2</option>
-                  <option>Dinner</option>
+                  <option>--select Menu--</option>
+                   <option *ngFor="let menulist of menuList">{{  menulist.id }}</option> 
+                  <option >tea time -1</option>
                 </select>
               </div>
               <h3 class="menu_title">Menu List :</h3>
@@ -50,7 +48,75 @@
             </div>
           </div>
         </div>
-        <div class="col-3 col-lg-4 col-d-3"></div>
+        <div class="col-3 col-lg-3 col-d-3"></div> -->
+        <!--Employee Table start-->
+        <div class="example-container mat-elevation-z8">
+          <table mat-table #hBtable [dataSource]="dataSource1" matSort>
+              <ng-container matColumnDef="id">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                  <td mat-cell *matCellDef="let row">
+                    {{ row.code }}
+                  </td>
+              </ng-container>
+              <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                  <td mat-cell *matCellDef="let row">
+                    {{ row.name }}
+                  </td>
+              </ng-container>
+              <ng-container matColumnDef="progress">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
+                  <td mat-cell *matCellDef="let row">
+                    {{ row.code }}
+                  </td>
+              </ng-container>
+              <ng-container matColumnDef="color">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+                  <td mat-cell *matCellDef="let row">
+                    {{ row.name }}
+                  </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+              <tr mat-row [ngClass]="table - row" tabindex="1" *matRowDef="let row; columns: displayedColumns1"
+              ></tr>
+          </table>
+          <mat-paginator #sort [pageSize]="5"[hidePageSize]="true"></mat-paginator>
+        </div>
+        <!--Employee Table end-->
+        <!--Contractor table start-->
+        <div class="example-container mat-elevation-z8">
+          <table mat-table #hBtable [dataSource]="dataSource2" matSort>
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+              <td mat-cell *matCellDef="let row">
+              {{ row.code }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+              <td mat-cell *matCellDef="let row">
+              {{ row.name }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="progress">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
+              <td mat-cell *matCellDef="let row">
+              {{ row.code }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="color">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+              <td mat-cell *matCellDef="let row">
+              {{ row.name }}
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+            <tr mat-row [ngClass]="table - row" tabindex="1" *matRowDef="let row; columns: displayedColumns2"
+            ></tr>
+          </table>
+          <mat-paginator #sort [pageSize]="5"[hidePageSize]="true"></mat-paginator>
+        </div>
+        <!--COntractor table end-->
       </div>
       </div>
     </div>

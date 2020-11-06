@@ -9,6 +9,7 @@
           <hr>
         </div>
       <div class="card-body">
+        <form #addNewMenu="ngForm" (ngSubmit)="saveNewMenu(addNewMenu)">
         <div class="row">
           <div class="col-2 col-lg-2 col-d-2"></div>
           <div class="col-4 col-lg-5 col-d-4">
@@ -17,7 +18,9 @@
                 <p>Name</p>
               </div>
               <div class="col-6 col-lg-6 col-md-6">
-                <input type="text" placeholder="&nbsp; Name"/>
+                <input type="text" placeholder="&nbsp; Name"
+                #menu_name="ngModel" name="menu_name" 
+                [(ngModel)]="model.menu_name"/>
               </div>
             </div>
 
@@ -26,10 +29,10 @@
                 <p>Canteen Time</p>
               </div>
               <div class="col-6 col-lg-6 col-md-6">
-                <select>
+                <select #menu_name="ngModel" name="menu_name" 
+                [(ngModel)]="model.menu_name">
                   <option>--Select--</option>
-                  <option>Tea Time</option>
-                  <option>Lunch</option>
+                  <option *ngFor="let canteentime of canteentime">{{ canteentime.menu_name }}</option>
                 </select>
               </div>
             </div>
@@ -89,7 +92,8 @@
             <button class="cancel-form-btn" (click)="close()">Cancel</button>
           </div>
         <div class="col-3 col-lg-4 col-md-3"></div>
-      </div>
+        </div>
+        </form>
       </div>
       </div>
     </div>

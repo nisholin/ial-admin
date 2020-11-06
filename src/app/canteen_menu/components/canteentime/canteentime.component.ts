@@ -2,7 +2,6 @@ import { Component, OnInit, QueryList, ViewChildren, } from '@angular/core';
 import { AnyTxtRecord } from 'dns';
 import { ToastrService } from 'ngx-toastr';
 import { from } from 'rxjs';
-import { CanteenTime } from '../../../_models/canteentime';
 import { MatDialogConfig } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
@@ -11,6 +10,10 @@ import { MatTableDataSource } from "@angular/material/table";
 //services
 import { CanteenTimeService } from "../../services/canteen-time.service";
 import { CommonService } from'../../../services/common.service';
+
+//_models
+import { CanteenTime } from '../../../_models/canteen/canteentime';
+
 
 @Component({
   selector: 'app-canteentime',

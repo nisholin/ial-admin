@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, from } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
-import { CanteenTime } from '../_models/canteentime';
+import { CanteenTime } from '../_models/canteen/canteentime';
 import { map } from 'rxjs/operators';
 
 @Injectable({
