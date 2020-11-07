@@ -565,6 +565,9 @@ th.mat-header-cell {
 .mat-form-field-appearance-legacy .mat-form-field-underline {
   height: 0px !important; 
 }
+.mat-paginator {
+  background: whitesmoke !important;
+}
 /* mat-form-field css end*/
 input[type=text]{
   width: 100%;

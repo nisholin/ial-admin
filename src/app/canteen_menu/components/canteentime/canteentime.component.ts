@@ -55,26 +55,22 @@ export class CanteenTimeComponent implements OnInit {
 	}
  
 	ngOnInit() {
-		this.view=true;
-		this.edit=false;
+		this.fieldarray = [];
 	}
 	timeEdit(row: any) {
 		row.editable = !row.editable;
 	}
-	editSave() {
-		this.edit=false;
-		this.view=true;
-	}
 	cancel(row: any) {
 		row.editable = false;
 	}
-	updateCanteenTime(canteentimeform: any,id: any) {
-		this.fieldarray.push({id: id});
-		console.log(this.fieldarray)
-		this.Canteentimeservice.updateCanteenTime(canteentimeform,this.fieldarray).subscribe(()=>{
+	updateCanteenTime(starttime: any,endtime: any,id: any) {
+		this.fieldarray.push({id: id,start_time: starttime,end_time: endtime});
+		//console.log(this.fieldarray)
+		this.Canteentimeservice.updateCanteenTime(this.fieldarray).subscribe(()=>{
 		},
 		error => {
 		  //alert('Network Error-->'+error);
 		});
+		this.fieldarray = [];
 	} 
 }

@@ -18,15 +18,18 @@
               <select #menu_name="ngModel" name="menu_name" 
               [(ngModel)]="model.menu_name" (change)="menusShow(menu_name)" >
                 <option *ngFor="let canteentime of canteentime" 
-                value="{{canteentime.id}}">{{  canteentime.menu_name }}-{{canteentime.id}}</option> 
+                value="{{canteentime.id}}">{{ canteentime.menu_name }}</option> 
               </select>
             </div>
             <h3 class="menu_title">Menu List :</h3>
             <div class="special-lunch-box">
               <div class="special-container" *ngIf="menusView"><br/>
-                <div *ngFor="let employeemenulist of employeeMenuList">
-                  <input type="checkbox">&nbsp;&nbsp; 
-                  <lable>{{ employeemenulist.item_name }}</lable><br/>
+                <div *ngFor="let changedemployeemenuList of changedEmployeeMenuList; let i= index">
+                  <input type="checkbox" value="changedemployeemenuList.item_id" 
+                  (click)="rowSelected(i,changedemployeemenuList, $event.target.checked)">&nbsp;&nbsp; 
+                  <lable value="changedemployeemenuList.item_id">
+                    {{ changedemployeemenuList.item_name }}-{{ changedemployeemenuList.item_id }}
+                  </lable><br/>
                 </div>
                 <!-- <input type="checkbox">&nbsp;&nbsp; 
                 <lable>Mutton</lable><br/>
@@ -57,29 +60,20 @@
           <form #contMenuEditUpdate="ngForm" (ngSubmit)="contMenuUpdate(contMenuEditUpdate)">
           <div class="canteentime-container p-t-20 p-b-20 m-l-auto m-r-auto">
             <h3>Menu Name :</h3>
-            <select #menu_name="ngModel" name="menu_name" 
-            [(ngModel)]="model.menu_name" (change)="contractorMenusShow(menu_name)">
-              <option *ngFor="let contractormenulist of contractorMenuList">{{  contractormenulist.menu_name }}</option> 
+            <select #cont_menu_name="ngModel" name="cont_menu_name" 
+            [(ngModel)]="model.cont_menu_name" (change)="contractorMenusShow(cont_menu_name)">
+              <option *ngFor="let contractormenulist of contractorMenuList"
+              value="{{contractormenulist.menu}}" 
+              >{{ contractormenulist.item_name }}</option> 
             </select>
           </div>
           <h3 class="menu_title">Menu List :</h3>
           <div class="special-lunch-box">
             <div class="special-container" *ngIf="menusView"><br/>
-              <div *ngFor="let contractormenulist of contractorMenuList">
+              <div *ngFor="let changescontractormenuList of changescontractorMenuList">
                 <input type="checkbox">&nbsp;&nbsp; 
-                <lable>{{ contractormenulist.item_name }}</lable><br/>
+                <lable>{{ changescontractormenuList.item_name }}</lable><br/>
               </div>
-              <!-- <input type="checkbox">&nbsp;&nbsp; 
-              <lable>Mutton</lable><br/>
-
-              <input type="checkbox">&nbsp;&nbsp;
-              <lable>Chicken Biriyani</lable><br/>
-
-              <input type="checkbox">&nbsp;&nbsp;
-              <lable>Mutton Biriyani</lable><br/>
-
-              <input type="checkbox">&nbsp;&nbsp;
-              <lable>Fish Biriyani</lable> -->
             </div>
           </div>
           <br/>

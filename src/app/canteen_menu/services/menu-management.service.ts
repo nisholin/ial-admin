@@ -9,8 +9,11 @@ import { Menu } from "../../_models/canteen/menu";
   providedIn: 'root'
 })
 export class MenuManagementService {
+  parameters: any;
+  parameters2: any;
 
   PHP_API_SERVER = "http://192.168.200.49/ial_canteen/admin/canteen/menu_item_mapping";
+  PHP_API_SERVER2 = "http://192.168.200.49/ial_canteen/admin/canteen/menu_item_mapping";
 
   constructor(private httpClient: HttpClient) { }
   //get method
@@ -20,13 +23,28 @@ export class MenuManagementService {
   readEmployeeMenu(): Observable<Menu[]>{
 		return this.httpClient.get<Menu[]>(`${this.PHP_API_SERVER}/employee_index.php`);
   }
-  readEmployeeMenuList(menu): Observable<Menu[]>{
-    console.log("data-->"+menu);
-		return this.httpClient.get<Menu[]>(`${this.PHP_API_SERVER}/employee_index.php`+menu);
-  }
+   readEmployeeMenuList(fieldarray): Observable<Menu[]>{
+    console.log(fieldarray);
+    this.parameters = "?";
+    this.parameters +="id="+fieldarray;
+		return this.httpClient.get<Menu[]>(`${this.PHP_API_SERVER}/employeeedit.php`+ this.parameters);
+  } 
   readContractorMenu(): Observable<Menu[]>{
 		return this.httpClient.get<Menu[]>(`${this.PHP_API_SERVER}/contractor_index.php`);
   }
+  contractorMenusShow(contmenuname): Observable<Menu[]>{
+    console.log(contmenuname);
+    this.parameters2 = "?";
+    this.parameters2 +="id="+contmenuname;
+		return this.httpClient.get<Menu[]>(`${this.PHP_API_SERVER}/contractoredit.php`+ this.parameters2);
+  }
+  
+  //post Method 
+   /*  postMenuId(fieldarray) {
+    console.log(fieldarray);
+    return this.httpClient.post<Menu[]>(this.PHP_API_SERVER + '/employeeedit', fieldarray);
+  }   */
+
   //update Method
   updateEmpMenu(empeditupdateForm){
     console.log(empeditupdateForm);

@@ -51,7 +51,7 @@
                     <div class="img-div" (click)="timeEdit(row)" *ngIf="!row.editable">
                       <img src="assets/images/edit_icon.png" /> 
                     </div>
-                    <div class="img-div" (click)="updateCanteenTime(canteenTimeForm.value,row.id)" *ngIf="row.editable">
+                    <div class="img-div" (click)="updateCanteenTime(row.start_time,row.end_time,row.id)" *ngIf="row.editable">
                       <img src="assets/images/tick_icon.png" /> 
                     </div>
                     <div class="img-div" (click)="cancel(row)" *ngIf="row.editable">
