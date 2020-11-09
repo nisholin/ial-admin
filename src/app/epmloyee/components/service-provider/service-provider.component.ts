@@ -1,11 +1,14 @@
 import { Component, OnInit, ViewChildren, ViewChild, QueryList, ElementRef, Inject } from '@angular/core';
-import { EmployeeService } from '../../services/employee.service';
-import { User } from '../../../_models/user';
+//custom_imports
 import { MatDialogConfig } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatListModule } from '@angular/material/list';
+//services
+import { ServiceProviderService } from '../../services/service-provider.service';
+//_models
+import { ServiceProvider } from '../../../_models/employee/service_provider';
 
 @Component({
   selector: 'app-service-provider',
@@ -22,7 +25,7 @@ export class ServiceProviderComponent implements OnInit {
   userView: any;
   edit: any;
   view: any;
-  user: User[];
+  serviceprovider: ServiceProvider[];
   userview: any;
 
   dialogConfig = new MatDialogConfig();
@@ -30,13 +33,13 @@ export class ServiceProviderComponent implements OnInit {
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
-  constructor(private employeeservice: EmployeeService) {
-    /* this.employeeservice.readEmpDetails().subscribe((user: User[])=>{
-      this.user = user;
-      this.dataSource = new MatTableDataSource(this.user);
-      this.dataSource.paginator = this.paginator.toArray()[0];
-      this.dataSource.sort = this.sort.toArray()[0];
-    })  */
+  constructor(private Serviceproviderservice: ServiceProviderService) {
+    this.Serviceproviderservice.readServiceProvider().subscribe((serviceprovider: ServiceProvider[])=>{
+    this.serviceprovider = serviceprovider;
+    this.dataSource = new MatTableDataSource(this.serviceprovider);
+    this.dataSource.paginator = this.paginator.toArray()[0];
+    this.dataSource.sort = this.sort.toArray()[0];
+    });  
    }
 
   ngOnInit(): void {
@@ -52,26 +55,23 @@ export class ServiceProviderComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
- /*  enableUserView(empcode) {
+  enableServiceProviderView(empcode) {
     alert("emp code-->"+empcode);
-    this.employeeservice.readEmpDetails().subscribe((user: User[])=>{
-      this.user = user;
-      for(let i=0; i<this.user.length;i++){
-        if(empcode==this.user[i].emp_code){
-          this.userview = this.user[i];
+    this.Serviceproviderservice.readServiceProvider().subscribe((serviceprovider: ServiceProvider[])=>{
+      this.serviceprovider = serviceprovider;
+      for(let i=0; i<this.serviceprovider.length;i++){
+        if(empcode==this.serviceprovider[i].emp_code){
+          this.userview = this.serviceprovider[i];
           //this.userview.emp_code = this.user[i].emp_code;
         }
       }
-      this.dataSource = new MatTableDataSource(this.user);
-      this.dataSource.paginator = this.paginator.toArray()[0];
-      this.dataSource.sort = this.sort.toArray()[0];
-    })
+    });
     this.newuser=false;
     this.tablehide=false;
     this.userView=true;
     this.view=true;
     this.edit=false;
-  } */
+  } 
   newUserRegister() {
     this.newuser=true;
     this.tablehide=false;

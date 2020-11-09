@@ -1,5 +1,6 @@
 export class Guest {
     id              : Number;
+    emp_code        : Number;
     emp_name        : String;
     dept_id	        : Number;
     rfid_no         : String;

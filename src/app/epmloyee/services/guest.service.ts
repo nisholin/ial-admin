@@ -2,22 +2,28 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, from } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
+//_models
+import { Guest } from "../../_models/employee/guest";
 import { Department } from '../../_models/employee/department';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GuestService {
- PHP_API_SERVER = "http://192.168.200.15:8084/ial_canteen/master/department";
+ PHP_API_SERVER = "http://192.168.200.49/ial_canteen/categorymaster_index";
+ PHP_API_SERVER2 = "http://192.168.200.49/ial_canteen/master/department";
 
   constructor(private httpClient: HttpClient) { }
-   saveGuest(name) {
-    console.log(name)
-    return this.httpClient.post<any>(this.PHP_API_SERVER + '/employee_master_insert.php', { name })
+   saveGuest(addGuestForm) {
+    console.log(addGuestForm)
+    return this.httpClient.post<any>(this.PHP_API_SERVER + '/employee_master_insert.php',addGuestForm)
     
   }
+  readGuestDetails(): Observable<Guest[]>{
+		return this.httpClient.get<Guest[]>(`${this.PHP_API_SERVER}/guest_index.php`);
+  }
   readDepartment(): Observable<Department[]>{
-		return this.httpClient.get<Department[]>(`${this.PHP_API_SERVER}/index.php`);
+		return this.httpClient.get<Department[]>(`${this.PHP_API_SERVER2}/index.php`);
   } 
   updateGuest(angForm2,emp_code){
     console.log(emp_code);

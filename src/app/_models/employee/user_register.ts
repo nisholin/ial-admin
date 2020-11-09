@@ -10,9 +10,9 @@ export class UserRegister {
         company: string,
         rfid_card: number,
         a_rfid_card: number,
-       // from_date: string,
-        //to_date: string,
-        //email: string,
+        from_date: string,
+        to_date: string,
+        email: string,
         //image: string,
         
         ) {}

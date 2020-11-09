@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-
+//_models
+import { Contract } from "../../_models/employee/contract";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContractorService {
 
-  PHP_API_SERVER = "http://49.249.229.14/ial_canteen/category_index";
+  PHP_API_SERVER = "http://192.168.200.49/ial_canteen/categorymaster_index/contractor_index";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -18,8 +19,8 @@ export class ContractorService {
     return this.httpClient.post<any>(this.PHP_API_SERVER + '/employee_master_insert.php', { name })
     
   }
-  readContract(): Observable<any>{
-		return this.httpClient.get<any>(`${this.PHP_API_SERVER}/guest_index.php`);
+  readContract(): Observable<Contract[]>{
+		return this.httpClient.get<Contract[]>(`${this.PHP_API_SERVER}/guest_index.php`);
   } 
   updateContract(angForm2,emp_code){
     console.log(emp_code);

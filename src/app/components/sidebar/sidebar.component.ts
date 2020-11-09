@@ -48,11 +48,11 @@ export const ROUTES: RouteInfo[] = [
     },
   ], submenu: true },
 
-  { path: '/', title: 'Employee',  icon:'education_atom', class: 'icons',
+  { path: '/', title: 'User',  icon:'education_atom', class: 'icons',
   childern: [
     {
       id: "employeeregistration",
-      label: "Registration",
+      label: "Employee",
       path: "/emp_registration",
     },
     {

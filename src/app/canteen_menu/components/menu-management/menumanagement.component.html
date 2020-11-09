@@ -12,11 +12,11 @@
         <!--Emp Edit Dialouge Start-->
         <ng-template #edit>
           <div class="canteen-box">
-            <form #empMenuEditUpdate="ngForm" (ngSubmit)="empMenuUpdate(empMenuEditUpdate)">
+            <form #empMenuEditUpdate="ngForm" (ngSubmit)="rowSelected(empMenuEditUpdate)">
             <div class="canteentime-container p-t-20 p-b-20 m-l-auto m-r-auto">
               <h3>Menu Name :</h3>
-              <select #menu_name="ngModel" name="menu_name" 
-              [(ngModel)]="model.menu_name" (change)="menusShow(menu_name)" >
+              <select #menu="ngModel" name="menu" 
+              [(ngModel)]="model.menu" (change)="menusShow(menu)" >
                 <option *ngFor="let canteentime of canteentime" 
                 value="{{canteentime.id}}">{{ canteentime.menu_name }}</option> 
               </select>
@@ -24,9 +24,9 @@
             <h3 class="menu_title">Menu List :</h3>
             <div class="special-lunch-box">
               <div class="special-container" *ngIf="menusView"><br/>
-                <div *ngFor="let changedemployeemenuList of changedEmployeeMenuList; let i= index">
+                <div *ngFor="let changedemployeemenuList of changedEmployeeMenuList;let i= index">
                   <input type="checkbox" value="changedemployeemenuList.item_id" 
-                  (click)="rowSelected(i,changedemployeemenuList, $event.target.checked)">&nbsp;&nbsp; 
+                  (click)="empMenuUpdate(i,changedemployeemenuList,$event.target.checked,empMenuEditUpdate)">&nbsp;&nbsp; 
                   <lable value="changedemployeemenuList.item_id">
                     {{ changedemployeemenuList.item_name }}-{{ changedemployeemenuList.item_id }}
                   </lable><br/>
@@ -45,9 +45,9 @@
               </div>
             </div>
             <br/>
-            <div *ngIf="menusView">
+            <!-- <div *ngIf="menusView">
               <button class="save-form-btn" style="width: 35% !important;" type="submit">Save</button>
-            </div>
+            </div> -->
             <br/>
             </form>
           </div>
@@ -71,8 +71,9 @@
           <div class="special-lunch-box">
             <div class="special-container" *ngIf="menusView"><br/>
               <div *ngFor="let changescontractormenuList of changescontractorMenuList">
-                <input type="checkbox">&nbsp;&nbsp; 
-                <lable>{{ changescontractormenuList.item_name }}</lable><br/>
+                <input type="checkbox" value="changedemployeemenuList.item_id" 
+                (click)="contMenuUpdate(i,changescontractormenuList,$event.target.checked,contMenuEditUpdate)">&nbsp;&nbsp; 
+                <lable>{{ changescontractormenuList.item_name }}-{{ changescontractormenuList.item_id }}</lable><br/>
               </div>
             </div>
           </div>

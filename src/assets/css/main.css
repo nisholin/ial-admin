@@ -594,3 +594,9 @@ input[type=text]{
 i {
   cursor: pointer;
 }
+ngx-spinner {
+  position: absolute;left: 45%;top: 50% !important;
+}
+.spinner-img {
+  width: 30%;
+}

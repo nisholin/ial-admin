@@ -34,7 +34,8 @@ export class MenuManagementComponent implements OnInit {
   fieldarray		              : Array<any> =[];
   changedEmployeeMenuList     : any;
   changescontractorMenuList   : any;
-  prodArr                     : Array<any> =[];
+  empArr                      : Array<any> =[];
+  contArr                     : Array<any>  =[];
   isCheckedArr                : Array<any> =[];
   isShowEditDelete            = [];
 
@@ -88,7 +89,7 @@ export class MenuManagementComponent implements OnInit {
     //this.fieldarray.push({id: menuid.value});
     this.menumanagementservice.readEmployeeMenuList(menuid.value).subscribe((menu:Menu[]) =>{
       this.changedEmployeeMenuList = menu;
-      console.log(this.changedEmployeeMenuList)
+      console.log(this.changedEmployeeMenuList);
     }) 
     this.menusView=true;
     this.fieldarray = [];
@@ -122,41 +123,26 @@ export class MenuManagementComponent implements OnInit {
       modalRef.close()
     }, 3000); */
   }
-  empMenuUpdate(empeditupdateForm) {
-    console.log(empeditupdateForm.value);
-    this.menumanagementservice.updateEmpMenu(empeditupdateForm.value).subscribe(()=>{
-    },
-    error => {
-      alert('Network Error-->'+error);
-    });
-  }
-  contMenuUpdate(conteditupdateForm) {
-    console.log(conteditupdateForm.value);
-    this.menumanagementservice.updateContMenu(conteditupdateForm.value).subscribe(()=>{
-    },
-    error => {
-      alert('Network Error-->'+error);
-    });
-  }
-  rowSelected(index: number, item: any, isChecked: boolean) {
+  contMenuUpdate(index: number, item: any, isChecked: boolean,menu) {
+    console.log(menu.value)
     if (isChecked) {
       item.indexVal = index;
-      this.prodArr.push(item);
+      this.contArr.push(item);
       
       this.isCheckedArr.push({ checked: true, indexVal: index });
       this.isShowEditDelete[index] = false;
     } else {
-      this.removeItem(this.isCheckedArr, index, "checked");
-      this.removeItem(this.prodArr, index, "product");
-    }console.log(this.prodArr);
-
+      this.contremoveItem(this.isCheckedArr, index, "checked");
+      this.contremoveItem(this.contArr, index, "product");
+    }
+    this.menumanagementservice.updateContMenu(this.contArr,menu.value).subscribe(()=>{
+    },
+    error => {
+      //alert('Network Error-->'+error);
+    });
   }
-  removeItem(isCheckedArr: any, index: number, type: string) {
-    // console.log('isCheckedArr', isCheckedArr)
-    // console.log('index12', index)
+  contremoveItem(isCheckedArr: any, index: number, type: string) {
     isCheckedArr.forEach((item, indexCheck) => {
-      // console.log('indexVal', item.indexVal)
-      // console.log('index', index)
       if (item.indexVal === index) {
         isCheckedArr.splice(indexCheck, 1);
       }
@@ -165,7 +151,38 @@ export class MenuManagementComponent implements OnInit {
     if (type === "checked") {
       this.isCheckedArr = isCheckedArr;
     } else if (type === "product") {
-      this.prodArr = isCheckedArr;
+      this.contArr = isCheckedArr;
+    }
+  }
+  empMenuUpdate(index: number, item: any, isChecked: boolean,menu) {
+    console.log(menu.value)
+    if (isChecked) {
+      item.indexVal = index;
+      this.empArr.push(item);
+      
+      this.isCheckedArr.push({ checked: true, indexVal: index });
+      this.isShowEditDelete[index] = false;
+    } else {
+      this.empremoveItem(this.isCheckedArr, index, "checked");
+      this.empremoveItem(this.empArr, index, "product");
+    }
+    this.menumanagementservice.updateEmpMenu(this.empArr,menu.value).subscribe(()=>{
+    },
+    error => {
+      //alert('Network Error-->'+error);
+    });
+  }
+  empremoveItem(isCheckedArr: any, index: number, type: string) {
+    isCheckedArr.forEach((item, indexCheck) => {
+      if (item.indexVal === index) {
+        isCheckedArr.splice(indexCheck, 1);
+      }
+    });
+
+    if (type === "checked") {
+      this.isCheckedArr = isCheckedArr;
+    } else if (type === "product") {
+      this.empArr = isCheckedArr;
     }
   }
 }

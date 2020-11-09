@@ -12,6 +12,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 //import {MatSelectModule} from '@angular/material/select';
 //import { MatFormFieldModule } from '@angular/material/form-field';
@@ -57,7 +58,8 @@ import { LoginComponent } from './login/login.component';
     //MatDatepickerModule,
     //MatNativeDateModule,
     //MatToolbarModule,
-    //MatIconModule
+    //MatIconModule,
+    NgxSpinnerModule
   ],
   exports: [
     //MatSidenavModule,

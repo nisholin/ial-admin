@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { User } from '../../_models/user';
+//_models
+import { ServiceProvider } from '../../_models/employee/service_provider';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceProviderService {
 
-  PHP_API_SERVER = "http://localhost:8084/ial_canteen/employee";
-
+  PHP_API_SERVER = "http://192.168.200.49/ial_canteen/categorymaster_index/service_index";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -22,8 +22,8 @@ export class ServiceProviderService {
     //console.log(a_rfid_card);
     return this.httpClient.post<any>(this.PHP_API_SERVER + '/empinsert.php', angForm1);
   }
-  readServiceProvider(): Observable<User[]>{
-		return this.httpClient.get<User[]>(this.PHP_API_SERVER + '/index.php',);
+  readServiceProvider(): Observable<ServiceProvider[]>{
+		return this.httpClient.get<ServiceProvider[]>(this.PHP_API_SERVER + '/index.php',);
 	}
   updateServiceProvider(angForm2,emp_code){
     console.log(emp_code);

@@ -1,12 +1,14 @@
 import { Component, OnInit,ViewChildren, ViewChild, QueryList, ElementRef, Inject } from '@angular/core';
-import { EmployeeService } from '../../services/employee.service';
-import { User } from '../../../_models/user';
+//custom imports
 import { MatDialogConfig } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatListModule } from '@angular/material/list';
-
+//services
+import { TraineeService } from '../../services/trainee.service';
+//_models
+import { Trainee } from "../../../_models/employee/trainee";
 @Component({
   selector: 'app-trainee',
   templateUrl: './trainee.component.html',
@@ -22,7 +24,7 @@ export class TraineeComponent implements OnInit {
   userView: any;
   edit: any;
   view: any;
-  user: User[];
+  trainee: Trainee[];
   userview: any;
 
   dialogConfig = new MatDialogConfig();
@@ -30,13 +32,13 @@ export class TraineeComponent implements OnInit {
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
-  constructor(private employeeservice: EmployeeService) { 
-    /* this.employeeservice.readEmpDetails().subscribe((user: User[])=>{
-    this.user = user;
-    this.dataSource = new MatTableDataSource(this.user);
+  constructor(private traineeservice: TraineeService) { 
+    this.traineeservice.readTraineeDetails().subscribe((trainee: Trainee[])=>{
+    this.trainee = trainee;
+    this.dataSource = new MatTableDataSource(this.trainee);
     this.dataSource.paginator = this.paginator.toArray()[0];
     this.dataSource.sort = this.sort.toArray()[0];
-  })  */
+  })  
   }
 
   ngOnInit(): void {
@@ -52,26 +54,23 @@ export class TraineeComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  /* enableUserView(empcode) {
+  enableTraineeView(empcode) {
     alert("emp code-->"+empcode);
-    this.employeeservice.readEmpDetails().subscribe((user: User[])=>{
-      this.user = user;
-      for(let i=0; i<this.user.length;i++){
-        if(empcode==this.user[i].emp_code){
-          this.userview = this.user[i];
+    this.traineeservice.readTraineeDetails().subscribe((trainee: Trainee[])=>{
+      this.trainee = trainee;
+      for(let i=0; i<this.trainee.length;i++){
+        if(empcode==this.trainee[i].emp_code){
+          this.userview = this.trainee[i];
           //this.userview.emp_code = this.user[i].emp_code;
         }
       }
-      this.dataSource = new MatTableDataSource(this.user);
-      this.dataSource.paginator = this.paginator.toArray()[0];
-      this.dataSource.sort = this.sort.toArray()[0];
-    })
+    });
     this.newuser=false;
     this.tablehide=false;
     this.userView=true;
     this.view=true;
     this.edit=false;
-  } */
+  } 
   newUserRegister() {
     this.newuser=true;
     this.tablehide=false;
@@ -93,11 +92,12 @@ export class TraineeComponent implements OnInit {
     this.edit=true;
     this.view=false;
   }
-   /* saveNewUser(ngForm1){
-     console.log(ngForm1.value)
+  saveTrainee(addTraineeForm){
+    alert("test");
+     console.log(addTraineeForm.value)
     //alert("data-->"+this.model.emp_code);
-   this.employeeservice.updateUser(ngForm1.value.emp_code).subscribe(()=>{
+  /*  this.employeeservice.updateUser(ngForm1.value.emp_code).subscribe(()=>{
       
-    }); 
-  }  */
+    });  */
+  }  
 }

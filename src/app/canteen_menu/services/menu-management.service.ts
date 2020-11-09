@@ -9,17 +9,16 @@ import { Menu } from "../../_models/canteen/menu";
   providedIn: 'root'
 })
 export class MenuManagementService {
-  parameters: any;
-  parameters2: any;
+  parameters    : any;
+  parameters2   : any;
+  parameters3   : any;
 
   PHP_API_SERVER = "http://192.168.200.49/ial_canteen/admin/canteen/menu_item_mapping";
   PHP_API_SERVER2 = "http://192.168.200.49/ial_canteen/admin/canteen/menu_item_mapping";
 
   constructor(private httpClient: HttpClient) { }
+
   //get method
-  /* readMenu(): Observable<Menu[]>{
-		return this.httpClient.get<Menu[]>(`${this.PHP_API_SERVER}/index.php`);
-  } */
   readEmployeeMenu(): Observable<Menu[]>{
 		return this.httpClient.get<Menu[]>(`${this.PHP_API_SERVER}/employee_index.php`);
   }
@@ -39,21 +38,23 @@ export class MenuManagementService {
 		return this.httpClient.get<Menu[]>(`${this.PHP_API_SERVER}/contractoredit.php`+ this.parameters2);
   }
   
-  //post Method 
-   /*  postMenuId(fieldarray) {
-    console.log(fieldarray);
-    return this.httpClient.post<Menu[]>(this.PHP_API_SERVER + '/employeeedit', fieldarray);
+  //update
+ /*  updateMenu(prodArr,menu: any) {
+    console.log(prodArr);
+    this.parameters3 = "?";
+    this.parameters3 +="menu="+menu;
+    console.log(this.parameters3)
+    return this.httpClient.put<Menu[]>(this.PHP_API_SERVER + '/employeeedit',this.parameters3,prodArr);
   }   */
-
-  //update Method
-  updateEmpMenu(empeditupdateForm){
-    console.log(empeditupdateForm);
-    //console.log(angForm2);
-		return this.httpClient.put<any>(`${this.PHP_API_SERVER}/empupdate.php`, empeditupdateForm);
+  updateEmpMenu(empArr,menu: any){
+    console.log(empArr);
+    console.log(menu);
+    return this.httpClient.put<Menu[]>(this.PHP_API_SERVER + '/employeeupdate.php',menu,empArr);
   }
-  updateContMenu(empeditupdateForm){
-    console.log(empeditupdateForm);
+  updateContMenu(contArr,menu: any){
+    console.log(contArr);
+    console.log(menu);
     //console.log(angForm2);
-		return this.httpClient.put<any>(`${this.PHP_API_SERVER}/empupdate.php`, empeditupdateForm);
+		return this.httpClient.put<any>(`${this.PHP_API_SERVER}/contractorupdate.php`,menu,contArr);
 	}
 }

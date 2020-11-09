@@ -9,6 +9,8 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatListModule } from '@angular/material/list';
+//loading
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-emp_registration',
@@ -36,17 +38,16 @@ export class EmpRegistrationComponent implements OnInit {
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
 
-  constructor(private employeeservice: EmployeeService,public router : Router) {  
-    this.employeeservice.readEmployee().subscribe((user:User[]) =>{
-      this.userList = user;
-      this.dataSource = new MatTableDataSource(this.userList);
-      this.dataSource.paginator = this.paginator.toArray()[0];
-      this.dataSource.sort = this.sort.toArray()[0];
-    },
-      error => {
-        alert('Network Error-->'+error);
-      }
-    );  
+  constructor(
+    private employeeservice: EmployeeService,
+    public router : Router,
+    private spinner: NgxSpinnerService
+    ) {  
+     
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
     //json declaration
     /* const userdata = require("../../../assets/userdata.json");
     this.userList=userdata;
@@ -55,13 +56,29 @@ export class EmpRegistrationComponent implements OnInit {
     this.dataSource.sort = this.sort.toArray()[0];   */
 }
   ngOnInit() {
+    /** spinner starts on init */
+    this.spinner.show();
+    this.tableShow();
     this.newuser=false;
-    this.tablehide=true;
     this.userView=false;
     this.edit=false;
     this.view=false;
   }
-
+  tableShow() {
+    this.tablehide=true;
+    this.employeeservice.readEmployee().subscribe((user:User[]) =>{
+      this.userList = user;
+      this.spinner.hide();
+      this.dataSource = new MatTableDataSource(this.userList);
+      this.dataSource.paginator = this.paginator.toArray()[0];
+      this.dataSource.sort = this.sort.toArray()[0];
+    },
+      error => {
+        alert('Network Error-->'+error);
+        this.spinner.hide();
+      }
+    ); 
+  }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {

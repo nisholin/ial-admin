@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class EmployeeService {
-  PHP_API_SERVER = "http://192.168.200.15:8084/ial_canteen/employee";
+  PHP_API_SERVER = "http://192.168.200.49/ial_canteen/master/employee_master";
 
 
   constructor(private httpClient: HttpClient) { }

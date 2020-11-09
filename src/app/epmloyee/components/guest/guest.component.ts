@@ -1,12 +1,16 @@
 import { Component, OnInit, ViewChildren, ViewChild, QueryList, ElementRef, Inject } from '@angular/core';
-import { GuestService } from '../../services/guest.service';
-import { Department } from '../../../_models/employee/department';
 import { MatDialogConfig } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatListModule } from '@angular/material/list';
-
+//services
+import { GuestService } from '../../services/guest.service';
+import { CommonService } from '../../../services/common.service';
+//_models
+import { Guest } from "../../../_models/employee/guest";
+import { Department } from '../../../_models/employee/department';
+import { CanteenTime } from '../../../_models/canteen/canteentime';
 
 @Component({
   selector: 'app-guest',
@@ -25,6 +29,8 @@ export class GuestComponent implements OnInit {
   edit            : any;
   view            : any;
   department      : Department[];
+  guest           : Guest[];
+  canteentime      : CanteenTime[];
   userview        : any;
   departmentList  : any;
 
@@ -34,11 +40,37 @@ export class GuestComponent implements OnInit {
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
 
-  constructor(private guestservice: GuestService) {  
+  constructor(
+    private guestservice: GuestService,
+    private commonservice: CommonService
+    ) {  
+    this.guestservice.readGuestDetails().subscribe((guest: Guest[])=>{
+    this.guest = guest;
+    console.log(this.guest);
+    this.dataSource = new MatTableDataSource(this.guest);
+    this.dataSource.paginator = this.paginator.toArray()[0];
+    this.dataSource.sort = this.sort.toArray()[0];
+    },
+      error => {
+        //alert('Network Error-->'+error);
+      }
+    );
     this.guestservice.readDepartment().subscribe((department: Department[])=>{
-    this.departmentList = department;
-    console.log(this.departmentList);
-  })  
+      this.departmentList = department;
+      console.log(this.guest);
+      },
+        error => {
+          //alert('Network Error-->'+error);
+        }
+      );
+      this.commonservice.readCanteentime().subscribe((canteentime: CanteenTime[])=>{
+        this.canteentime = canteentime;
+        console.log(canteentime);
+      },
+      error => {
+        //alert('Network Error-->'+error);
+      }
+      );  
    }
   ngOnInit() {
     this.newuser=false;
@@ -53,26 +85,23 @@ export class GuestComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  /* enableUserView(empcode) {
+  enableGuestView(empcode) {
      alert("emp code-->"+empcode);
-    this.guestservice.readGuest().subscribe((user: User[])=>{
-      this.user = user;
-      for(let i=0; i<this.user.length;i++){
-        if(empcode==this.user[i].emp_code){
-          this.userview = this.user[i];
+    this.guestservice.readGuestDetails().subscribe((guest: Guest[])=>{
+      this.guest = guest;
+      for(let i=0; i<this.guest.length;i++){
+        if(empcode==this.guest[i].emp_code){
+          this.userview = this.guest[i];
           //this.userview.emp_code = this.user[i].emp_code;
         }
       }
-      this.dataSource = new MatTableDataSource(this.user);
-      this.dataSource.paginator = this.paginator.toArray()[0];
-      this.dataSource.sort = this.sort.toArray()[0];
-    })
+    });
     this.newuser=false;
     this.tablehide=false;
     this.userView=true;
     this.view=true;
     this.edit=false; 
-  } */
+  } 
   newUserRegister() {
     this.newuser=true;
     this.tablehide=false;
@@ -94,11 +123,14 @@ export class GuestComponent implements OnInit {
     this.edit=true;
     this.view=false;
   }
-   /* saveNewUser(ngForm1){
-     console.log(ngForm1.value)
+  saveGuest(addGuestForm){
+     console.log(addGuestForm.value)
     //alert("data-->"+this.model.emp_code);
-   this.guestservice.saveGuest(ngForm1.value.emp_code).subscribe(()=>{
-      
-    }); 
-  }  */
+   this.guestservice.saveGuest(addGuestForm.value).subscribe(()=>{
+    },
+    error => {
+      //alert('Network Error-->'+error);
+    }
+    ); 
+  }  
 }
