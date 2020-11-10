@@ -6,14 +6,13 @@ import { MatDialogConfig } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
-
 //services
 import { CanteenTimeService } from "../../services/canteen-time.service";
 import { CommonService } from'../../../services/common.service';
-
 //_models
 import { CanteenTime } from '../../../_models/canteen/canteentime';
-
+//loading
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-canteentime',
@@ -37,40 +36,49 @@ export class CanteenTimeComponent implements OnInit {
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
   
-	constructor(private commonservice: CommonService,private Canteentimeservice: CanteenTimeService) {
-		this.commonservice.readCanteentime().subscribe((canteentime: CanteenTime[])=>{
-		  this.canteentime = canteentime;
-		  for(let i=0; i<this.canteentime.length;i++){
-			this.canteentime[i].editable = false;
-		}
-		  console.log(this.canteentime);
-		  this.dataSource = new MatTableDataSource(this.canteentime);
-		  this.dataSource.paginator = this.paginator.toArray()[0];
-		  this.dataSource.sort = this.sort.toArray()[0];
-		},
-		  error => {
-			alert('Error -->'+error);
-		  }
-		);  
+constructor(
+	private commonservice: CommonService,
+	private Canteentimeservice: CanteenTimeService,
+	private spinner: NgxSpinnerService
+	) {
+	this.commonservice.readCanteentime().subscribe((canteentime: CanteenTime[])=>{
+		this.canteentime = canteentime;
+		for(let i=0; i<this.canteentime.length;i++){
+		this.canteentime[i].editable = false;
 	}
- 
-	ngOnInit() {
-		this.fieldarray = [];
-	}
-	timeEdit(row: any) {
-		row.editable = !row.editable;
-	}
-	cancel(row: any) {
-		row.editable = false;
-	}
-	updateCanteenTime(starttime: any,endtime: any,id: any) {
-		this.fieldarray.push({id: id,start_time: starttime,end_time: endtime});
-		//console.log(this.fieldarray)
-		this.Canteentimeservice.updateCanteenTime(this.fieldarray).subscribe(()=>{
-		},
+		console.log(this.canteentime);
+		this.dataSource = new MatTableDataSource(this.canteentime);
+		this.dataSource.paginator = this.paginator.toArray()[0];
+		this.dataSource.sort = this.sort.toArray()[0];
+	},
 		error => {
-		  //alert('Network Error-->'+error);
-		});
-		this.fieldarray = [];
-	} 
+		alert('Error -->'+error);
+		}
+	);  
+}
+
+ngOnInit() {
+	this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
+	this.fieldarray = [];								
+}
+timeEdit(row: any) {
+	row.editable = !row.editable;
+}
+cancel(row: any) {
+	row.editable = false;
+}
+updateCanteenTime(starttime: any,endtime: any,id: any) {
+	this.fieldarray.push({id: id,start_time: starttime,end_time: endtime});
+	//console.log(this.fieldarray)
+	this.Canteentimeservice.updateCanteenTime(this.fieldarray).subscribe(()=>{
+	},
+	error => {
+		//alert('Network Error-->'+error);
+	});
+	this.fieldarray = [];
+} 
 }

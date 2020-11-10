@@ -64,6 +64,7 @@ import { LoginComponent } from './login/login.component';
   exports: [
     //MatSidenavModule,
     //MatListModule
+    NgxSpinnerModule
   ],
   declarations: [
     AppComponent,

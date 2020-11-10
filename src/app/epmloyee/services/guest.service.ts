@@ -12,12 +12,13 @@ import { Department } from '../../_models/employee/department';
 export class GuestService {
  PHP_API_SERVER = "http://192.168.200.49/ial_canteen/categorymaster_index";
  PHP_API_SERVER2 = "http://192.168.200.49/ial_canteen/master/department";
+ PHP_API_SERVER3 = "http://192.168.200.49/ial_canteen/master/guest";
 
   constructor(private httpClient: HttpClient) { }
-   saveGuest(addGuestForm) {
-    console.log(addGuestForm)
-    return this.httpClient.post<any>(this.PHP_API_SERVER + '/employee_master_insert.php',addGuestForm)
-    
+   saveGuest(addGuestForm,guestArr) {
+    console.log(addGuestForm);
+    console.log(guestArr);
+    return this.httpClient.post<any>(this.PHP_API_SERVER3 +'/guest_insert.php',addGuestForm)
   }
   readGuestDetails(): Observable<Guest[]>{
 		return this.httpClient.get<Guest[]>(`${this.PHP_API_SERVER}/guest_index.php`);

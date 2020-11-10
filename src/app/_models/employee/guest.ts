@@ -3,6 +3,7 @@ export class Guest {
     emp_code        : Number;
     emp_name        : String;
     dept_id	        : Number;
+    dept_name       : String;
     rfid_no         : String;
     category_id     : Number;
     from_date       : Date;

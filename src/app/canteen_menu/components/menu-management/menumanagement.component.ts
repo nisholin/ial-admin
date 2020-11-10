@@ -163,8 +163,8 @@ export class MenuManagementComponent implements OnInit {
       this.isCheckedArr.push({ checked: true, indexVal: index });
       this.isShowEditDelete[index] = false;
     } else {
-      this.empremoveItem(this.isCheckedArr, index, "checked");
-      this.empremoveItem(this.empArr, index, "product");
+      this.menuremoveItem(this.isCheckedArr, index, "checked");
+      this.menuremoveItem(this.empArr, index, "product");
     }
     this.menumanagementservice.updateEmpMenu(this.empArr,menu.value).subscribe(()=>{
     },
@@ -172,7 +172,7 @@ export class MenuManagementComponent implements OnInit {
       //alert('Network Error-->'+error);
     });
   }
-  empremoveItem(isCheckedArr: any, index: number, type: string) {
+  menuremoveItem(isCheckedArr: any, index: number, type: string) {
     isCheckedArr.forEach((item, indexCheck) => {
       if (item.indexVal === index) {
         isCheckedArr.splice(indexCheck, 1);

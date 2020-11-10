@@ -9,6 +9,8 @@ import { MatListModule } from '@angular/material/list';
 import { ServiceProviderService } from '../../services/service-provider.service';
 //_models
 import { ServiceProvider } from '../../../_models/employee/service_provider';
+//loading
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-service-provider',
@@ -33,7 +35,10 @@ export class ServiceProviderComponent implements OnInit {
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
-  constructor(private Serviceproviderservice: ServiceProviderService) {
+  constructor(
+    private Serviceproviderservice: ServiceProviderService,
+    private spinner: NgxSpinnerService
+    ) {
     this.Serviceproviderservice.readServiceProvider().subscribe((serviceprovider: ServiceProvider[])=>{
     this.serviceprovider = serviceprovider;
     this.dataSource = new MatTableDataSource(this.serviceprovider);
@@ -43,6 +48,11 @@ export class ServiceProviderComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
     this.newuser=false;
     this.tablehide=true;
     this.userView=false;

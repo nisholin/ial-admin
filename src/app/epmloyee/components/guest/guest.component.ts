@@ -11,6 +11,8 @@ import { CommonService } from '../../../services/common.service';
 import { Guest } from "../../../_models/employee/guest";
 import { Department } from '../../../_models/employee/department';
 import { CanteenTime } from '../../../_models/canteen/canteentime';
+//loading
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-guest',
@@ -21,18 +23,21 @@ export class GuestComponent implements OnInit {
   displayedColumns: string[] = ['image', 'empcode', 'empname', 'department','category','rfid','actions'];
   dataSource  : MatTableDataSource<any>;
 
-  menuList        : any= {};
-  model           : any= {};
-  newuser         : any;
-  tablehide       : any;
-  userView        : any;
-  edit            : any;
-  view            : any;
-  department      : Department[];
-  guest           : Guest[];
-  canteentime      : CanteenTime[];
-  userview        : any;
-  departmentList  : any;
+  menuList          : any= {};
+  model             : any= {};
+  newuser           : any;
+  tablehide         : any;
+  userView          : any;
+  edit              : any;
+  view              : any;
+  department        : Department[];
+  guest             : Guest[];
+  canteentime       : CanteenTime[];
+  userview          : any;
+  departmentList    : any;
+  guestArr          : Array<any> =[];
+  isCheckedArr      : Array<any> =[];
+  isShowEditDelete  = [];
 
   dialogConfig = new MatDialogConfig();
   isDtInitialized: boolean = false;
@@ -42,7 +47,8 @@ export class GuestComponent implements OnInit {
 
   constructor(
     private guestservice: GuestService,
-    private commonservice: CommonService
+    private commonservice: CommonService,
+    private spinner: NgxSpinnerService
     ) {  
     this.guestservice.readGuestDetails().subscribe((guest: Guest[])=>{
     this.guest = guest;
@@ -73,6 +79,11 @@ export class GuestComponent implements OnInit {
       );  
    }
   ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
     this.newuser=false;
     this.tablehide=true;
     this.userView=false;
@@ -124,13 +135,42 @@ export class GuestComponent implements OnInit {
     this.view=false;
   }
   saveGuest(addGuestForm){
-     console.log(addGuestForm.value)
+    //console.log(addGuestForm.value.company_name)
+    //console.log(this.guestArr);
     //alert("data-->"+this.model.emp_code);
-   this.guestservice.saveGuest(addGuestForm.value).subscribe(()=>{
+   this.guestservice.saveGuest(addGuestForm.value,this.guestArr).subscribe(()=>{
     },
     error => {
       //alert('Network Error-->'+error);
     }
     ); 
-  }  
+    this.guestArr = [];
+  }
+  guestMenuUpdate(index: number, guest: any, isChecked: boolean) {
+    console.log(guest.value);
+    if (isChecked) {
+      guest.indexVal = index;
+      this.guestArr.push(guest);
+      
+      this.isCheckedArr.push({ checked: true, indexVal: index });
+      this.isShowEditDelete[index] = false;
+    } else {
+      this.guestremoveItem(this.isCheckedArr, index, "checked");
+      this.guestremoveItem(this.guestArr, index, "product");
+    }
+    console.log(this.guestArr);
+  } 
+  guestremoveItem(isCheckedArr: any, index: number, type: string) {
+    isCheckedArr.forEach((item, indexCheck) => {
+      if (item.indexVal === index) {
+        isCheckedArr.splice(indexCheck, 1);
+      }
+    });
+
+    if (type === "checked") {
+      this.isCheckedArr = isCheckedArr;
+    } else if (type === "product") {
+      this.guestArr = isCheckedArr;
+    }
+  } 
 }

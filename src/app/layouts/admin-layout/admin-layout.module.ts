@@ -54,7 +54,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule} from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
@@ -81,6 +81,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    NgxSpinnerModule
   ],
   declarations: [
     EmpRegistrationComponent,

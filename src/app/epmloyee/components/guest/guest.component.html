@@ -8,6 +8,9 @@
           <hr> 
         </div>-->
         <div class="card-body">
+          <ngx-spinner>
+            <!-- <img src="assets/images/Pulse-1s-200px.gif" class="spinner-img"/> --> 
+          </ngx-spinner>
           <!--Table start-->
           <div *ngIf="tablehide">
             <div class="row">
@@ -161,8 +164,10 @@
                       <div class="special-lunch-box"><br/>
                         <div class="special-container">
                           <div *ngFor="let canteentime of canteentime">
-                            <input type="checkbox">&nbsp;&nbsp; 
-                            <lable>{{ canteentime.menu_name }}</lable><br/>
+                            <input type="checkbox" (click)="guestMenuUpdate(i,canteentime,$event.target.checked)"
+                            >&nbsp;&nbsp; 
+                            <lable>
+                            {{ canteentime.menu_name }}</lable><br/>
                           </div>
                         </div>
                         <br/>

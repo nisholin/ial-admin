@@ -43,11 +43,6 @@ export class EmpRegistrationComponent implements OnInit {
     public router : Router,
     private spinner: NgxSpinnerService
     ) {  
-     
-    setTimeout(() => {
-      /** spinner ends after 5 seconds */
-      this.spinner.hide();
-    }, 2000);
     //json declaration
     /* const userdata = require("../../../assets/userdata.json");
     this.userList=userdata;
@@ -57,7 +52,7 @@ export class EmpRegistrationComponent implements OnInit {
 }
   ngOnInit() {
     /** spinner starts on init */
-    this.spinner.show();
+    
     this.tableShow();
     this.newuser=false;
     this.userView=false;
@@ -65,10 +60,14 @@ export class EmpRegistrationComponent implements OnInit {
     this.view=false;
   }
   tableShow() {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
     this.tablehide=true;
     this.employeeservice.readEmployee().subscribe((user:User[]) =>{
       this.userList = user;
-      this.spinner.hide();
       this.dataSource = new MatTableDataSource(this.userList);
       this.dataSource.paginator = this.paginator.toArray()[0];
       this.dataSource.sort = this.sort.toArray()[0];

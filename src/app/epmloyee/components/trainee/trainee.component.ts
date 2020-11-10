@@ -9,6 +9,8 @@ import { MatListModule } from '@angular/material/list';
 import { TraineeService } from '../../services/trainee.service';
 //_models
 import { Trainee } from "../../../_models/employee/trainee";
+//loading
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-trainee',
   templateUrl: './trainee.component.html',
@@ -32,7 +34,10 @@ export class TraineeComponent implements OnInit {
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
-  constructor(private traineeservice: TraineeService) { 
+  constructor(
+    private traineeservice: TraineeService,
+    private spinner: NgxSpinnerService
+    ) { 
     this.traineeservice.readTraineeDetails().subscribe((trainee: Trainee[])=>{
     this.trainee = trainee;
     this.dataSource = new MatTableDataSource(this.trainee);
@@ -42,6 +47,12 @@ export class TraineeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    /** spinner starts on init */
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
     this.newuser=false;
     this.tablehide=true;
     this.userView=false;

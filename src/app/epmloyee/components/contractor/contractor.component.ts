@@ -8,6 +8,8 @@ import { MatListModule } from '@angular/material/list';
 import { ContractorService } from '../../services/contractor.service';
 //_models
 import { Contract } from '../../../_models/employee/contract';
+//loading
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-contractor',
@@ -32,7 +34,10 @@ export class ContractorComponent implements OnInit {
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
-  constructor(private contractorservice: ContractorService) { 
+  constructor(
+    private contractorservice: ContractorService,
+    private spinner: NgxSpinnerService
+    ) { 
     this.contractorservice.readContract().subscribe((contract: Contract[])=>{
     this.contract = contract;
     this.dataSource = new MatTableDataSource(this.contract);
@@ -42,6 +47,11 @@ export class ContractorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 2000);
     this.newuser=false;
     this.tablehide=true;
     this.userView=false;
