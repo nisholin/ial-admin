@@ -9,7 +9,8 @@ import { map } from 'rxjs/operators';
 })
 export class EmployeeService {
   PHP_API_SERVER = "http://192.168.200.49/ial_canteen/master/employee_master";
-
+  //node js api
+  private baseUrl = 'http://localhost:8080/api/customers';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -19,15 +20,15 @@ export class EmployeeService {
     //console.log(image);
     //console.log(to_date);
     //console.log(a_rfid_card);
-    return this.httpClient.post<any>(this.PHP_API_SERVER + '/empinsert.php', angForm1);
+    return this.httpClient.post<any>(this.PHP_API_SERVER +'/empinsert.php',angForm1);
   }
   readEmployee(): Observable<User[]>{
-		return this.httpClient.get<User[]>(this.PHP_API_SERVER + '/index.php',);
+		return this.httpClient.get<User[]>(this.PHP_API_SERVER +'/index.php');
 	}
   updateEmployee(angForm2,emp_code){
     console.log(emp_code);
     console.log(angForm2);
-		return this.httpClient.put<any>(`${this.PHP_API_SERVER}/empupdate.php`, angForm2,emp_code);
+		return this.httpClient.put<any>(`${this.PHP_API_SERVER}/empupdate.php`+angForm2,emp_code);
 	}
  }
 
