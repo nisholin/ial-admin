@@ -10,6 +10,8 @@ import { map } from 'rxjs/operators';
 })
 export class CommonService {
   PHP_API_SERVER = "http://192.168.200.49/ial_canteen/master/canteen_time";
+  baseUrl = "http://localhost:3000/api"
+  
   currentView:boolean = false;
   viewSideNaviSource = new BehaviorSubject(this.currentView);
 
@@ -18,8 +20,11 @@ export class CommonService {
     this.currentView = value === false ? value : !this.currentView
     this.viewSideNaviSource.next(this.currentView);
   }
-  readCanteentime(): Observable<CanteenTime[]>{
+   readCanteentime(): Observable<CanteenTime[]>{
     return this.httpClient.get<CanteenTime[]>(`${this.PHP_API_SERVER}/index.php` )
     console.log("Datas--->"+CanteenTime)
-	}
+  } 
+  /* readCanteentime(): Observable<CanteenTime[]> {
+    return this.httpClient.get<CanteenTime[]>(`${this.baseUrl}` + `/users`)
+  } */
 }
