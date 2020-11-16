@@ -63,7 +63,7 @@
 @mixin sidebar-color($color){
   &:after{
     /*background: $color;*/
-    background: #2150bf;
+    background-image: linear-gradient(180deg, #0098e4, #003ba0);
     /* background: #0169c3; */
   }
 

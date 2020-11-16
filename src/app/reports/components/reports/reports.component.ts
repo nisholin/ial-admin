@@ -17,7 +17,8 @@ import { GuestService } from '../../../epmloyee/services/guest.service';
 export class ReportsComponent implements OnInit {
 
   model           : any={};
-  department      : Category[];
+  department      : Department[];
+  category        : Category[];
   company         : Company[];
   categoryList    : any;
   companyList     : any;
@@ -39,7 +40,7 @@ export class ReportsComponent implements OnInit {
     this.guestservice.readDepartment().subscribe((department: Department[])=>{
       this.departmentList = department;
       //console.log(this.departmentList);
-    }) 
+    }); 
   }
 
   ngOnInit(): void {

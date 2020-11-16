@@ -20,7 +20,7 @@ export class EmployeeService {
     //console.log(image);
     //console.log(to_date);
     //console.log(a_rfid_card);
-    return this.httpClient.post<any>(this.PHP_API_SERVER +'/empinsert.php',angForm1);
+    return this.httpClient.post<any>(this.PHP_API_SERVER +'/employee_master_insert.php',angForm1);
   }
   readEmployee(): Observable<User[]>{
 		return this.httpClient.get<User[]>(this.PHP_API_SERVER +'/index.php');

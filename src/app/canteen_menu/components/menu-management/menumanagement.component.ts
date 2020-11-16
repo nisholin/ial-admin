@@ -85,7 +85,7 @@ export class MenuManagementComponent implements OnInit {
     this.fieldarray = [];
   }
   menusShow(menuid){
-    alert(menuid.value);
+    //alert(menuid.value);
     //this.fieldarray.push({id: menuid.value});
     this.menumanagementservice.readEmployeeMenuList(menuid.value).subscribe((menu:Menu[]) =>{
       this.changedEmployeeMenuList = menu;
@@ -95,7 +95,7 @@ export class MenuManagementComponent implements OnInit {
     this.fieldarray = [];
   }
   contractorMenusShow(contmenunid){
-    alert(contmenunid.value);
+    //alert(contmenunid.value);
     this.menumanagementservice.contractorMenusShow(contmenunid.value).subscribe((menu:Menu[]) =>{
       this.changescontractorMenuList = menu;
     })
@@ -159,12 +159,14 @@ export class MenuManagementComponent implements OnInit {
     if (isChecked) {
       item.indexVal = index;
       this.empArr.push(item);
-      
+      alert("Item Updated..");
+
       this.isCheckedArr.push({ checked: true, indexVal: index });
       this.isShowEditDelete[index] = false;
     } else {
       this.menuremoveItem(this.isCheckedArr, index, "checked");
       this.menuremoveItem(this.empArr, index, "product");
+      alert("Item Removed");
     }
     this.menumanagementservice.updateEmpMenu(this.empArr,menu.value).subscribe(()=>{
     },

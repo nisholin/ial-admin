@@ -19,7 +19,7 @@ export const ROUTES: RouteInfo[] = [
       id: "todaysmenu",
       label: "Todays Menu",
       path: "/todays-menu",
-      icon:'education_atom'
+      icon: 'education_atom',
     },
     {
       id: "canteentime",

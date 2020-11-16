@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChildren, ViewChild, QueryList, ElementRef, Inje
 import * as Chartist from 'chartist';
 import { from } from 'rxjs';
 import { Router } from '@angular/router';
-import { EmployeeService } from '../../services/employee.service';
-import { User } from '../../../_models/user';
 import { MatDialogConfig } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
@@ -11,6 +9,14 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatListModule } from '@angular/material/list';
 //loading
 import { NgxSpinnerService } from "ngx-spinner";
+//services
+import { EmployeeService } from '../../services/employee.service';
+import { ReportService } from "../../../reports/services/report.service";
+import { GuestService } from '../../../epmloyee/services/guest.service';
+//_models
+import { User } from '../../../_models/user';
+import { Company } from "../../../_models/common/company";
+import { Department } from '../../../_models/employee/department';
 
 @Component({
   selector: 'app-emp_registration',
@@ -18,37 +24,45 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ['./emp_registration.component.css']
 })
 export class EmpRegistrationComponent implements OnInit {
-  displayedColumns: string[] = ['image', 'empcode', 'empname', 'department','category','rfid','actions'];
-  dataSource: MatTableDataSource<any>;
-  menuList: any = {};
-  model : any={};
-  newuser: any;
-  tablehide: any;
-  userView: any;
-  edit: any;
-  view: any;
-  user: User[];
-  userview: any;
-  emp_code: "";
-  userList: any;
+  displayedColumns  : string[] = ['image', 'empcode', 'empname', 'department','category','rfid','actions'];
+  dataSource        : MatTableDataSource<any>;
+  menuList          : any = {};
+  model             : any={};
+  newuser           : any;
+  tablehide         : any;
+  userView          : any;
+  edit              : any;
+  view              : any;
+  user              : User[];
+  userview          : any;
+  emp_code          : "";
+  userList          : any;
+  company           : Company[];
+  companyList       : any;
+  department        : Department[];
+  departmentList    : any;
 
-  dialogConfig = new MatDialogConfig();
-  isDtInitialized: boolean = false;
+  dialogConfig      = new MatDialogConfig();
+  isDtInitialized   : boolean = false;
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
 
   constructor(
     private employeeservice: EmployeeService,
+    private reportservice: ReportService,
+    private guestservice: GuestService,
     public router : Router,
     private spinner: NgxSpinnerService
     ) {  
-    //json declaration
-    /* const userdata = require("../../../assets/userdata.json");
-    this.userList=userdata;
-    this.dataSource = new MatTableDataSource(this.userList);
-    this.dataSource.paginator = this.paginator.toArray()[0];
-    this.dataSource.sort = this.sort.toArray()[0];   */
+      this.reportservice.readCompany().subscribe((company: Company[])=>{
+        this.companyList = company;
+        //console.log(this.companyList);
+      });
+      this.guestservice.readDepartment().subscribe((department: Department[])=>{
+        this.departmentList = department;
+        //console.log(this.departmentList);
+      });
 }
   ngOnInit() {
     /** spinner starts on init */
@@ -85,7 +99,7 @@ export class EmpRegistrationComponent implements OnInit {
     }
   }
   enableUserView(empcode) {
-    alert("emp code-->"+empcode);
+    //alert("emp code-->"+empcode);
     this.employeeservice.readEmployee().subscribe((userview: User[])=>{
       this.user = userview;
       for(let i=0; i<this.user.length;i++){
@@ -132,7 +146,7 @@ export class EmpRegistrationComponent implements OnInit {
     this.router.navigate(['/emp_registration']);
   } 
   employeeEditSave (empedit,emp_code) {
-    console.log(emp_code);
+    console.log(empedit.value);
     this.employeeservice.updateEmployee(empedit.value,emp_code).subscribe(()=>{
   },
   error => {
