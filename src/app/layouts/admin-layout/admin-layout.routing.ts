@@ -9,6 +9,7 @@ import { TodaysMenuComponent } from '../../canteen_menu/components/todays-menu/t
 import { NewMenuComponent } from '../../canteen_menu/components/new-menu/new-menu.component';
 import { AddNewMenuComponent } from '../../canteen_menu/components/add-new-menu/add-new-menu.component';
 import { NewSpecialLunchComponent } from '../../canteen_menu/components/new-special-lunch/new-special-lunch.component';
+import { BiriyaniConfigComponent } from '../../canteen_menu/components/biriyani-config/biriyani-config.component';
 
 //Employee 
 import { EmpRegistrationComponent } from '../../epmloyee/components/employee_registration/emp_registration.component';
@@ -18,12 +19,12 @@ import { ServiceProviderComponent } from '../../epmloyee/components/service-prov
 import { TraineeComponent } from '../../epmloyee/components/trainee/trainee.component';
 import { ContractorComponent } from '../../epmloyee/components/contractor/contractor.component';
 import { MeetingRequestComponent } from '../../epmloyee/components/meeting-request/meeting-request.component';
+import { DepartmentComponent } from '../../epmloyee/components/department/department.component';
 
 //master
-import { NewCategoryComponent } from '../../master/components/new-category/new-category.component';
-import { AddNewCompanyComponent } from '../../master/components/add-new-company/add-new-company.component';
-import { DepartmentComponent } from '../../master/components/department/department.component';
-import { UploadComponent } from '../../master/components/upload/upload.component';
+import { NewCategoryComponent } from '../../manual-entry/components/employee/new-category.component';
+import { AddNewCompanyComponent } from '../../manual-entry/components/contractor/add-new-company.component';
+import { UploadComponent } from '../../manual-entry/components/meeting-request/upload.component';
 
 //reports
 import { ReportsComponent } from '../../reports/components/reports/reports.component';
@@ -32,27 +33,30 @@ import { CompanyReportsComponent } from '../../reports/components/company-report
 import { CatererReportsComponent } from '../../reports/components/caterer-reports/caterer-reports.component';
 
 export const AdminLayoutRoutes: Routes = [
-    { path: 'emp_registration',      component: EmpRegistrationComponent },
-    { path: 'menumanagement',   component: MenuManagementComponent },
-    { path: 'upload',     component: UploadComponent },
-    { path: 'speciallunch',          component: SpecialLunchComponent },
-    { path: 'wastage',           component: WastageComponent },
-    { path: 'canteentime',  component: CanteenTimeComponent },
-    { path: 'reset-password',  component: ResetPasswordComponent },
-    { path: 'reports',  component: ReportsComponent },
-    { path: 'summary-reports',  component: SummaryReportsComponent },
-    { path: 'company-reports',  component: CompanyReportsComponent },
-    { path: 'caterer-reports',  component: CatererReportsComponent },
-    { path: 'todays-menu',  component: TodaysMenuComponent },
-    { path: 'new-menu',  component: NewMenuComponent },
-    { path: 'add-new-menu',  component: AddNewMenuComponent },
-    { path: 'new-special-lunch',  component: NewSpecialLunchComponent },
-    { path: 'new-category',  component: NewCategoryComponent },
-    { path: 'add-new-company',  component: AddNewCompanyComponent },
-    { path: 'department',  component: DepartmentComponent },
-    { path: 'guest',  component: GuestComponent },
-    { path: 'service-provider',  component: ServiceProviderComponent },
-    { path: 'trainee',  component: TraineeComponent },
-    { path: 'contractor',  component: ContractorComponent },
-    { path: 'meeting-request',  component: MeetingRequestComponent },
+    //canteen
+    { path: 'canteentime',               component: CanteenTimeComponent },
+    { path: 'menuitemmapping',           component: MenuManagementComponent },
+    { path: 'speciallunch',              component: SpecialLunchComponent },
+    { path: 'menuitem',                  component: NewMenuComponent },
+    { path: 'newspecialmenu',            component: NewSpecialLunchComponent },
+    { path: 'weeklyitemconfiguration',   component: AddNewMenuComponent },
+    { path: 'menuquantitymapping',       component: TodaysMenuComponent },
+    { path: 'biriyaniconfiguration',       component: BiriyaniConfigComponent },
+
+    { path: 'emp_registration',          component: EmpRegistrationComponent },
+    { path: 'department',                component: DepartmentComponent },
+    { path: 'upload',                    component: UploadComponent },
+    { path: 'wastage',                   component: WastageComponent },
+    { path: 'reset-password',            component: ResetPasswordComponent },
+    { path: 'reports',                   component: ReportsComponent },
+    { path: 'summary-reports',           component: SummaryReportsComponent },
+    { path: 'company-reports',           component: CompanyReportsComponent },
+    { path: 'caterer-reports',           component: CatererReportsComponent },
+    { path: 'new-category',              component: NewCategoryComponent },
+    { path: 'add-new-company',           component: AddNewCompanyComponent },
+    { path: 'guest',                     component: GuestComponent },
+    { path: 'service-provider',          component: ServiceProviderComponent },
+    { path: 'trainee',                   component: TraineeComponent },
+    { path: 'contractor',                component: ContractorComponent },
+    { path: 'meeting-request',           component: MeetingRequestComponent },
 ];

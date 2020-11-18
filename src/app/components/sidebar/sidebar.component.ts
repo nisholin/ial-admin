@@ -13,40 +13,6 @@ declare interface RouteInfo {
     submenu: boolean;
 }
 export const ROUTES: RouteInfo[] = [
-  { path: '/', title: 'Canteen Menu',  icon: 'design_app', class: '',
-  childern: [
-    {
-      id: "todaysmenu",
-      label: "Todays Menu",
-      path: "/todays-menu",
-      icon: 'education_atom',
-    },
-    {
-      id: "canteentime",
-      label: "Canteen Time",
-      path: "/canteentime",
-    },{
-      id: "itemmenumanagement",
-      label: "Menu Management",
-      path: "/menumanagement",
-    },{
-      id: "newmenu",
-      label: "New Menu",
-      path: "/new-menu",
-    },{
-      id: "addnewmenu",
-      label: "Add New Menu",
-      path: "/add-new-menu",
-    },{
-      id: "speciallunch",
-      label: "Special Lunch",
-      path: "/speciallunch",
-    },{
-      id: "newspeciallunch",
-      label: "New Special Lunch",
-      path: "/new-special-lunch",
-    },
-  ], submenu: true },
 
   { path: '/', title: 'User',  icon:'education_atom', class: 'icons',
   childern: [
@@ -61,8 +27,13 @@ export const ROUTES: RouteInfo[] = [
       path: "/guest",
     },
     {
-      id: "service-provider",
-      label: "Service Provider",
+      id: "contractor",
+      label: "Contractor",
+      path: "/contractor",
+    },
+    {
+      id: "contractorguest",
+      label: "Contractor Guest",
       path: "/service-provider",
     },
     {
@@ -71,43 +42,84 @@ export const ROUTES: RouteInfo[] = [
       path: "/trainee",
     },
     {
-      id: "contractor",
-      label: "Contractor",
-      path: "/contractor",
-    },
-    {
       id: "meeting-request",
-      label: "Meeting Request",
+      label: "Category",
       path: "/meeting-request",
     },
     {
-      id: "resetpassword",
-      label: "Reset Passsword",
+      id: "company",
+      label: "Company",
       path: "/reset-password",
-    }
-  ], submenu: true },
-
-  /* { path: '/wastage', title: 'Wastage',  icon:'location_map-big', class: '',childern: [], submenu: false }, */
-  { path: '/', title: 'Master',  icon:'ui-1_bell-53', class: '',
-  childern: [
-    {
-      id: "newcategory",
-      label: "New Category",
-      path: "/new-category",
-    },
-    {
-      id: "addnewcompany",
-      label: "Add New Company",
-      path: "/add-new-company",
     },
     {
       id: "department",
       label: "Department",
       path: "/department",
     },
+  ], submenu: true },
+
+  { path: '/', title: 'Canteen Menu',  icon: 'design_app', class: '',
+  childern: [
     {
-      id: "upload",
-      label: "Upload",
+      id: "canteentime",
+      label: "Canteen Time",
+      path: "/canteentime",
+    },
+    {
+      id: "menuitemmapping",
+      label: "Menu Item Mapping",
+      path: "/menuitemmapping",
+    },
+    {
+      id: "speciallunch",
+      label: "Special lunch",
+      path: "/speciallunch",
+      icon: 'speciallunch',
+    },
+    {
+      id: "menuitem",
+      label: "Menu Ttem",
+      path: "/menuitem",
+    },
+    {
+      id: "newspecialmenu",
+      label: "New Special Menu",
+      path: "/newspecialmenu",
+    },
+    {
+      id: "weeklyitemconfiguration",
+      label: "Item Configuration",
+      path: "/weeklyitemconfiguration",
+    },
+    {
+      id: "menuquantitymapping",
+      label: "Menu Mapping",
+      path: "/menuquantitymapping",
+    },
+    {
+      id: "biriyaniconfiguration",
+      label: "Biriyani Config",
+      path: "/biriyaniconfiguration",
+    }
+  ], submenu: true },
+
+
+  /* { path: '/wastage', title: 'Wastage',  icon:'location_map-big', class: '',childern: [], submenu: false }, */
+  { path: '/', title: 'Manual Entry',  icon:'ui-1_bell-53', class: '',
+  childern: [
+    {
+      id: "manualentry",
+      label: "Employee",
+      path: "/new-category",
+    },
+    {
+      id: "addnewcompany",
+      label: "Contractor",
+      path: "/add-new-company",
+    },
+    {
+      id: "meetingrequest",
+      label: "Meeting Request",
       path: "/upload",
     },
   ], submenu: true },

@@ -26,6 +26,7 @@ import { Department } from '../../../_models/employee/department';
 export class EmpRegistrationComponent implements OnInit {
   displayedColumns  : string[] = ['image', 'empcode', 'empname', 'department','category','rfid','actions'];
   dataSource        : MatTableDataSource<any>;
+  
   menuList          : any = {};
   model             : any={};
   newuser           : any;
@@ -137,17 +138,19 @@ export class EmpRegistrationComponent implements OnInit {
   }
    saveNewUser(angForm){
     // console.log(angForm.value.emp_name)
-     console.log(angForm.value.a_rfid_card)
+     console.log(angForm.value.a_rfid_card);
     this.employeeservice.saveUser(angForm.value).subscribe(()=>{
     },
     error => {
-      alert('Network Error-->'+error);
+     // alert('Network Error-->'+error);
     }); 
-    this.router.navigate(['/emp_registration']);
+    //this.router.navigate(['/emp_registration']);
+    this.tablehide=true;
   } 
-  employeeEditSave (empedit,emp_code) {
+  employeeEditSave (empedit) {
     console.log(empedit.value);
-    this.employeeservice.updateEmployee(empedit.value,emp_code).subscribe(()=>{
+    console.log(empedit.value.emp_code);
+    this.employeeservice.updateEmployee(empedit.value.emp_code,empedit.value).subscribe(()=>{
   },
   error => {
     alert('Network Error-->'+error);

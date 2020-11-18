@@ -1,8 +1,9 @@
 import { Injectable  } from '@angular/core';
-import { User } from '../../_models/user';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+//_models
+import { User } from '../../_models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { map } from 'rxjs/operators';
 export class EmployeeService {
   PHP_API_SERVER = "http://192.168.200.49/ial_canteen/master/employee_master";
   //node js api
-  private baseUrl = 'http://localhost:8080/api/customers';
+  private baseUrl = 'http://localhost:4000/api/users';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -25,10 +26,9 @@ export class EmployeeService {
   readEmployee(): Observable<User[]>{
 		return this.httpClient.get<User[]>(this.PHP_API_SERVER +'/index.php');
 	}
-  updateEmployee(angForm2,emp_code){
-    console.log(emp_code);
+  updateEmployee(empcode,angForm2){
     console.log(angForm2);
-		return this.httpClient.put<any>(`${this.PHP_API_SERVER}/empupdate.php`+angForm2,emp_code);
+		return this.httpClient.put<any>(`${this.baseUrl}/update/`+empcode,angForm2);
 	}
  }
 

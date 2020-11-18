@@ -81,355 +81,356 @@
             </div>
           </div>
           <!--Table End-->
-            <!--Guest register div start-->
-            <div class="row" *ngIf="newuser">
-              <div class="col-md-12">
-                <div class="card">
-                  <div class="card-header">
-                    <h5 class="title t-a-c form-heading">New Users</h5>
-                    <hr>
-                  </div>
-                <div class="card-body">
-                  <form #addGuestForm="ngForm" (ngSubmit)="saveGuest(addGuestForm)"> 
-                    <div class="row"> 
-                      <div class="col-1 col-lg-1 col-d-1"></div>
-                      <div class="col-4 col-lg-5 col-d-4">
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>RFID Number</p>
-                          </div>
-                          <div class="col-6 col-lg-6 col-md-6">
-                            <input type="text" placeholder="&nbsp; Employee code" 
-                            #rfid_no="ngModel" name="rfid_no"  [(ngModel)]="model.rfid_no"
-                            />
-                          </div>
-                        </div> 
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>From Date</p>
-                          </div>
-                          <div class="col-6 col-lg-6 col-md-6">
-                            <input type="date" placeholder="&nbsp; Employee name"
-                            #from_date="ngModel" name="from_date"  [(ngModel)]="model.from_date"
-                            />
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>To Date</p>
-                          </div>
-                          <div class="col-6 col-lg-6 col-md-6">
-                            <input type="date" placeholder="&nbsp; Employee name"
-                            #to_date="ngModel" name="to_date"  [(ngModel)]="model.to_date"
-                            />
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Guest Name</p>
-                          </div>
-                          <div class="col-6 col-lg-6 col-md-6">
-                            <input type="text" placeholder="&nbsp; Employee name"
-                            #emp_name="ngModel" name="emp_name"  [(ngModel)]="model.emp_name"
-                            />
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Company Name</p>
-                          </div>
-                          <div class="col-6 col-lg-6 col-md-6">
-                            <input type="text" placeholder="&nbsp; Company Name"
-                            #company_name="ngModel" name="company_name"  
-                            [(ngModel)]="model.company_name"
-                            />
-                          </div>
-                        </div> 
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Department</p>
-                          </div>
-                          <div class="col-6 col-lg-6 col-md-6">
-                            <select #dept_name="ngModel" name="dept_name"  
-                            [(ngModel)]="model.dept_name">
-                              <option *ngFor="let departmentlist of departmentList">
-                                {{departmentlist.dept_name}}
-                              </option>
-                            </select>
-                          </div>
-                        </div> 
-                    </div>
-
-                    <div class="col-4 col-lg-6 col-d-4">
-                      <div class="special-lunch-box"><br/>
-                        <div class="special-container">
-                          <div *ngFor="let canteentime of canteentime">
-                            <input type="checkbox" (click)="guestMenuUpdate(i,canteentime,$event.target.checked)"
-                            >&nbsp;&nbsp; 
-                            <lable>
-                            {{ canteentime.menu_name }}</lable><br/>
-                          </div>
-                        </div>
-                        <br/>
-                      </div>
-                    </div>
-                    </div> 
-                    <div class="row">
-                      <div class="col-3 col-lg-4 col-md-3"></div>
-                      <div class="col-3 col-lg-4 col-md-3 row">
-                        <button class="save-form-btn" type="submit">Save</button>
-                        <button class="cancel-form-btn" (click)="close()">Cancel</button>
-                      </div>
-                      <div class="col-3 col-lg-4 col-md-3"></div>
-                    </div>
-                  </form>
+          
+          <!--Guest register div start-->
+          <div class="row" *ngIf="newuser">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="title t-a-c form-heading">New Users</h5>
+                  <hr>
                 </div>
-                </div>
-              </div>
-            </div>
-            <!--User register div End-->
-
-            <!--User View Start-->
-            <div *ngIf="userView">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-6 col-lg-10 col-md-6 fs-20">
-                    <i class="fa fa-arrow-left" aria-hidden="true" (click)="close()"></i>
-                  </div>
-                  <div class="col-4 col-lg-2 col-md-4">
-                    <button class="add-btn" (click)="userEditOpen()">Edit</button>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header">
-                    <h5 class="title t-a-c form-heading" *ngIf="view">User View</h5>
-                    <h5 class="title t-a-c form-heading" *ngIf="edit">Users Edit</h5>
-                    <hr>
-                  </div>
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-6 col-lg-6 col-d-6">
-                        <!-- <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Category</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{userview.emp_name}}</p>
-                            <select *ngIf="edit">
-                              <option>--manager--</option>
-                              <option>Employee</option>
-                              <option>Cleaner</option>
-                            </select>
-                          </div>
-                        </div> -->
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Employee Code</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.emp_code }}</p>
-                            <p class="text-black" *ngIf="edit">{{ userview.emp_code }}</p>
-                          </div>
+              <div class="card-body">
+                <form #addGuestForm="ngForm" (ngSubmit)="saveGuest(addGuestForm)"> 
+                  <div class="row"> 
+                    <div class="col-1 col-lg-1 col-d-1"></div>
+                    <div class="col-4 col-lg-5 col-d-4">
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>RFID Number</p>
                         </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Employee Name</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.emp_name }}</p>
-                            <input type="text" *ngIf="edit" value="Jai Kumar"/>
-                          </div>
+                        <div class="col-6 col-lg-6 col-md-6">
+                          <input type="text" placeholder="&nbsp; Employee code" 
+                          #rfid_no="ngModel" name="rfid_no"  [(ngModel)]="model.rfid_no"
+                          />
                         </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Department</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.department }}</p>
-                            <select *ngIf="edit">
-                              <option>--Select--</option>
-                              <option>Manager</option>
-                              <option>Cleaner</option>
-                            </select>
-                          </div>
+                      </div> 
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>From Date</p>
                         </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Category</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">Worker</p>
-                            <select *ngIf="edit">
-                              <option>--Select--</option>
-                              <option>Manager</option>
-                              <option>Cleaner</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Guest</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.guest_permit }}</p>
-                            <div *ngIf="edit">
-                              <input type="checkbox"> 
-                              &nbsp;
-                              <span>yes</span>
-                              &nbsp;&nbsp;
-                              <input type="checkbox"> 
-                              &nbsp;
-                              <span>No</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Access</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.access }}</p>
-                            <select *ngIf="edit">
-                              <option>--Select--</option>
-                              <option>Yes</option>
-                              <option>No</option>
-                            </select>
-                          </div>
+                        <div class="col-6 col-lg-6 col-md-6">
+                          <input type="date" placeholder="&nbsp; Employee name"
+                          #from_date="ngModel" name="from_date"  [(ngModel)]="model.from_date"
+                          />
                         </div>
                       </div>
-
-                      <div class="col-6 col-lg-6 col-d-6">
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Company</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.company }}</p>
-                            <select *ngIf="edit">
-                              <option>--select--</option>
-                              <option>Manager</option>
-                              <option>Cleaner</option>
-                            </select>
-                          </div>
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>To Date</p>
                         </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>RFID</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.rfid_card }}</p>
-                            <p class="text-black" *ngIf="edit">{{ userview.rfid_card }}</p>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Temporary RFID</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.a_rfid_card }}</p>
-                            <p class="text-black" *ngIf="edit">{{ userview.a_rfid_card }}</p>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Temporary ID Date</p>
-                            <p>(From Date-To Date)</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <div class="row">
-                              <div class="col-6 col-lg-6 col-md-6">
-                                <p class="text-black" *ngIf="view">{{ userview.from_date }}</p>
-                                <input type="date" *ngIf="edit" value="23-09-20"/>
-                              </div>
-                              <div class="col-6 col-lg-6 col-md-6">
-                                <p class="text-black" *ngIf="view">{{ userview.to_date }}</p>
-                                <input type="date" *ngIf="edit" />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Email Id</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.email }}</p>
-                            <input *ngIf="edit" type="text" value="jaikumar@gmail.com">
-                          </div>
-                        </div>
-
-                        <div class="row" *ngIf="edit">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Employee Image</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <input type="file">
-                          </div>
+                        <div class="col-6 col-lg-6 col-md-6">
+                          <input type="date" placeholder="&nbsp; Employee name"
+                          #to_date="ngModel" name="to_date"  [(ngModel)]="model.to_date"
+                          />
                         </div>
                       </div>
-                   </div>
-                  <div *ngIf="edit" class="row">
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Guest Name</p>
+                        </div>
+                        <div class="col-6 col-lg-6 col-md-6">
+                          <input type="text" placeholder="&nbsp; Employee name"
+                          #emp_name="ngModel" name="emp_name"  [(ngModel)]="model.emp_name"
+                          />
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Company Name</p>
+                        </div>
+                        <div class="col-6 col-lg-6 col-md-6">
+                          <input type="text" placeholder="&nbsp; Company Name"
+                          #company_name="ngModel" name="company_name"  
+                          [(ngModel)]="model.company_name"
+                          />
+                        </div>
+                      </div> 
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Department</p>
+                        </div>
+                        <div class="col-6 col-lg-6 col-md-6">
+                          <select #dept_name="ngModel" name="dept_name"  
+                          [(ngModel)]="model.dept_name">
+                            <option *ngFor="let departmentlist of departmentList">
+                              {{departmentlist.dept_name}}
+                            </option>
+                          </select>
+                        </div>
+                      </div> 
+                  </div>
+
+                  <div class="col-4 col-lg-6 col-d-4">
+                    <div class="special-lunch-box"><br/>
+                      <div class="special-container">
+                        <div *ngFor="let canteentime of canteentime">
+                          <input type="checkbox" (click)="guestMenuUpdate(i,canteentime,$event.target.checked)"
+                          >&nbsp;&nbsp; 
+                          <lable>
+                          {{ canteentime.menu_name }}</lable><br/>
+                        </div>
+                      </div>
+                      <br/>
+                    </div>
+                  </div>
+                  </div> 
+                  <div class="row">
                     <div class="col-3 col-lg-4 col-md-3"></div>
                     <div class="col-3 col-lg-4 col-md-3 row">
-                      <button class="save-form-btn">Save</button>
-                      <button class="cancel-form-btn" (click)="editClose()">Cancel</button>
+                      <button class="save-form-btn" type="submit">Save</button>
+                      <button class="cancel-form-btn" (click)="close()">Cancel</button>
                     </div>
                     <div class="col-3 col-lg-4 col-md-3"></div>
                   </div>
+                </form>
+              </div>
+              </div>
+            </div>
+          </div>
+          <!--User register div End-->
+
+          <!--User View Start-->
+          <div *ngIf="userView">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-6 col-lg-10 col-md-6 fs-20">
+                  <i class="fa fa-arrow-left" aria-hidden="true" (click)="close()"></i>
+                </div>
+                <div class="col-4 col-lg-2 col-md-4">
+                  <button class="add-btn" (click)="userEditOpen()">Edit</button>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="title t-a-c form-heading" *ngIf="view">User View</h5>
+                  <h5 class="title t-a-c form-heading" *ngIf="edit">Users Edit</h5>
+                  <hr>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-6 col-lg-6 col-d-6">
+                      <!-- <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Category</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <p class="text-black" *ngIf="view">{{userview.emp_name}}</p>
+                          <select *ngIf="edit">
+                            <option>--manager--</option>
+                            <option>Employee</option>
+                            <option>Cleaner</option>
+                          </select>
+                        </div>
+                      </div> -->
+
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Employee Code</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <p class="text-black" *ngIf="view">{{ userview.emp_code }}</p>
+                          <p class="text-black" *ngIf="edit">{{ userview.emp_code }}</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Employee Name</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <p class="text-black" *ngIf="view">{{ userview.emp_name }}</p>
+                          <input type="text" *ngIf="edit" value="Jai Kumar"/>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Department</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <p class="text-black" *ngIf="view">{{ userview.department }}</p>
+                          <select *ngIf="edit">
+                            <option>--Select--</option>
+                            <option>Manager</option>
+                            <option>Cleaner</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Category</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <p class="text-black" *ngIf="view">Worker</p>
+                          <select *ngIf="edit">
+                            <option>--Select--</option>
+                            <option>Manager</option>
+                            <option>Cleaner</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Guest</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <p class="text-black" *ngIf="view">{{ userview.guest_permit }}</p>
+                          <div *ngIf="edit">
+                            <input type="checkbox"> 
+                            &nbsp;
+                            <span>yes</span>
+                            &nbsp;&nbsp;
+                            <input type="checkbox"> 
+                            &nbsp;
+                            <span>No</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Access</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <p class="text-black" *ngIf="view">{{ userview.access }}</p>
+                          <select *ngIf="edit">
+                            <option>--Select--</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-6 col-lg-6 col-d-6">
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Company</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <p class="text-black" *ngIf="view">{{ userview.company }}</p>
+                          <select *ngIf="edit">
+                            <option>--select--</option>
+                            <option>Manager</option>
+                            <option>Cleaner</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>RFID</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <p class="text-black" *ngIf="view">{{ userview.rfid_card }}</p>
+                          <p class="text-black" *ngIf="edit">{{ userview.rfid_card }}</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Temporary RFID</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <p class="text-black" *ngIf="view">{{ userview.a_rfid_card }}</p>
+                          <p class="text-black" *ngIf="edit">{{ userview.a_rfid_card }}</p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Temporary ID Date</p>
+                          <p>(From Date-To Date)</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <div class="row">
+                            <div class="col-6 col-lg-6 col-md-6">
+                              <p class="text-black" *ngIf="view">{{ userview.from_date }}</p>
+                              <input type="date" *ngIf="edit" value="23-09-20"/>
+                            </div>
+                            <div class="col-6 col-lg-6 col-md-6">
+                              <p class="text-black" *ngIf="view">{{ userview.to_date }}</p>
+                              <input type="date" *ngIf="edit" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Email Id</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <p class="text-black" *ngIf="view">{{ userview.email }}</p>
+                          <input *ngIf="edit" type="text" value="jaikumar@gmail.com">
+                        </div>
+                      </div>
+
+                      <div class="row" *ngIf="edit">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Employee Image</p>
+                        </div>
+                        <div class="col-1 col-lg-1 col-md-1">
+                          <p>:</p>
+                        </div>
+                        <div class="col-5 col-lg-5 col-md-5">
+                          <input type="file">
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                <div *ngIf="edit" class="row">
+                  <div class="col-3 col-lg-4 col-md-3"></div>
+                  <div class="col-3 col-lg-4 col-md-3 row">
+                    <button class="save-form-btn">Save</button>
+                    <button class="cancel-form-btn" (click)="editClose()">Cancel</button>
+                  </div>
+                  <div class="col-3 col-lg-4 col-md-3"></div>
+                </div>
                 </div>
               </div>
             </div>
-            <!--User View End-->
+          </div>
+          <!--User View End-->
         </div>
     </div>
   </div>

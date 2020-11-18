@@ -17,6 +17,7 @@ import { TodaysMenuComponent } from '../../canteen_menu/components/todays-menu/t
 import { NewMenuComponent } from '../../canteen_menu/components/new-menu/new-menu.component';
 import { AddNewMenuComponent } from '../../canteen_menu/components/add-new-menu/add-new-menu.component';
 import { NewSpecialLunchComponent } from '../../canteen_menu/components/new-special-lunch/new-special-lunch.component';
+import { BiriyaniConfigComponent } from '../../canteen_menu/components/biriyani-config/biriyani-config.component';
 
 //Employees
 import { EmpRegistrationComponent } from '../../epmloyee/components/employee_registration/emp_registration.component';
@@ -26,12 +27,13 @@ import { ServiceProviderComponent } from '../../epmloyee/components/service-prov
 import { TraineeComponent } from '../../epmloyee/components/trainee/trainee.component';
 import { ContractorComponent } from '../../epmloyee/components/contractor/contractor.component';
 import { MeetingRequestComponent } from '../../epmloyee/components/meeting-request/meeting-request.component';
+import { DepartmentComponent } from '../../epmloyee/components/department/department.component';
 
 //masters
-import { NewCategoryComponent } from '../../master/components/new-category/new-category.component';
-import { AddNewCompanyComponent } from '../../master/components/add-new-company/add-new-company.component';
-import { DepartmentComponent } from '../../master/components/department/department.component';
-import { UploadComponent } from '../../master/components/upload/upload.component';
+import { NewCategoryComponent } from '../../manual-entry/components/employee/new-category.component';
+import { AddNewCompanyComponent } from '../../manual-entry/components/contractor/add-new-company.component';
+//import { DepartmentComponent } from '../../master/components/department/department.component';
+import { UploadComponent } from '../../manual-entry/components/meeting-request/upload.component';
 
 //reports
 import { ReportsComponent } from '../../reports/components/reports/reports.component';
@@ -84,19 +86,22 @@ import { NgxSpinnerModule } from "ngx-spinner";
     NgxSpinnerModule
   ],
   declarations: [
-    EmpRegistrationComponent,
-    MenuManagementComponent,
-    UploadComponent,
-    SpecialLunchComponent,
-    WastageComponent,
+    //canteen
     CanteenTimeComponent,
+    MenuManagementComponent,
+    SpecialLunchComponent,
+    BiriyaniConfigComponent,
+    NewMenuComponent,
+    TodaysMenuComponent,
+
+    EmpRegistrationComponent,
+    UploadComponent,
+    WastageComponent,
     ResetPasswordComponent,
     ReportsComponent,
     SummaryReportsComponent,
     CompanyReportsComponent,
     CatererReportsComponent,
-    TodaysMenuComponent,
-    NewMenuComponent,
     AddNewMenuComponent,
     NewSpecialLunchComponent,
     NewCategoryComponent,

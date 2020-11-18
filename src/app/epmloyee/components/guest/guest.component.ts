@@ -75,8 +75,7 @@ export class GuestComponent implements OnInit {
       },
       error => {
         //alert('Network Error-->'+error);
-      }
-      );  
+      });  
    }
   ngOnInit() {
     this.spinner.show();
