@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewCategoryComponent } from './new-category.component';
+import { ContractorManualEntry } from './cont-manual-entry.component';
 
-describe('NewCategoryComponent', () => {
-  let component: NewCategoryComponent;
-  let fixture: ComponentFixture<NewCategoryComponent>;
+describe('AddNewCompanyComponent', () => {
+  let component: ContractorManualEntry;
+  let fixture: ComponentFixture<ContractorManualEntry>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewCategoryComponent ]
+      declarations: [ ContractorManualEntry ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewCategoryComponent);
+    fixture = TestBed.createComponent(ContractorManualEntry);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

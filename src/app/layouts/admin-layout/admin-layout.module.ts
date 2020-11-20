@@ -1,4 +1,4 @@
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -26,14 +26,14 @@ import { GuestComponent } from '../../epmloyee/components/guest/guest.component'
 import { ServiceProviderComponent } from '../../epmloyee/components/service-provider/service-provider.component';
 import { TraineeComponent } from '../../epmloyee/components/trainee/trainee.component';
 import { ContractorComponent } from '../../epmloyee/components/contractor/contractor.component';
-import { MeetingRequestComponent } from '../../epmloyee/components/meeting-request/meeting-request.component';
+//import { MeetingRequestComponent } from '../../epmloyee/components/meeting-request/meeting-request.component';
 import { DepartmentComponent } from '../../epmloyee/components/department/department.component';
 
-//masters
-import { NewCategoryComponent } from '../../manual-entry/components/employee/new-category.component';
-import { AddNewCompanyComponent } from '../../manual-entry/components/contractor/add-new-company.component';
+//Manual Entry
+import { EmployeeManualEntryComponent } from '../../manual-entry/components/employee/emp-manual-entry.component';
+import { ContractorManualEntryComponent } from '../../manual-entry/components/contractor/cont-manual-entry.component';
 //import { DepartmentComponent } from '../../master/components/department/department.component';
-import { UploadComponent } from '../../manual-entry/components/meeting-request/upload.component';
+import { MeetingRequestComponent } from '../../manual-entry/components/meeting-request/meeting-request.component';
 
 //reports
 import { ReportsComponent } from '../../reports/components/reports/reports.component';
@@ -60,7 +60,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 
 
 @NgModule({
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
   imports: [
     CommonModule,
     FormsModule,
@@ -95,7 +95,6 @@ import { NgxSpinnerModule } from "ngx-spinner";
     TodaysMenuComponent,
 
     EmpRegistrationComponent,
-    UploadComponent,
     WastageComponent,
     ResetPasswordComponent,
     ReportsComponent,
@@ -104,8 +103,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     CatererReportsComponent,
     AddNewMenuComponent,
     NewSpecialLunchComponent,
-    NewCategoryComponent,
-    AddNewCompanyComponent,
+    EmployeeManualEntryComponent,
+    ContractorManualEntryComponent,
     DepartmentComponent,
     GuestComponent,
     ServiceProviderComponent,

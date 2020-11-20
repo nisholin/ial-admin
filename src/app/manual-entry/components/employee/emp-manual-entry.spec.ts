@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddNewCompanyComponent } from './add-new-company.component';
+import { EmpManualEntry } from './emp-manual-entry.component';
 
-describe('AddNewCompanyComponent', () => {
-  let component: AddNewCompanyComponent;
-  let fixture: ComponentFixture<AddNewCompanyComponent>;
+describe('NewCategoryComponent', () => {
+  let component: EmpManualEntry;
+  let fixture: ComponentFixture<EmpManualEntry>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddNewCompanyComponent ]
+      declarations: [ EmpManualEntry ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddNewCompanyComponent);
+    fixture = TestBed.createComponent(EmpManualEntry);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

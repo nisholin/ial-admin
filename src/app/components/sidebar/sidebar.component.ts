@@ -110,17 +110,17 @@ export const ROUTES: RouteInfo[] = [
     {
       id: "manualentry",
       label: "Employee",
-      path: "/new-category",
+      path: "/emp-manual-entry",
     },
     {
       id: "addnewcompany",
       label: "Contractor",
-      path: "/add-new-company",
+      path: "/cont-manual-entry",
     },
     {
       id: "meetingrequest",
       label: "Meeting Request",
-      path: "/upload",
+      path: "/meeting-request",
     },
   ], submenu: true },
 

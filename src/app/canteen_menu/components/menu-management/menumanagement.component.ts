@@ -88,9 +88,9 @@ export class MenuManagementComponent implements OnInit {
     //alert(menuid.value);
     //this.fieldarray.push({id: menuid.value});
     this.menumanagementservice.readEmployeeMenuList(menuid.value).subscribe((menu:Menu[]) =>{
-      this.changedEmployeeMenuList = menu;
-      console.log(this.changedEmployeeMenuList);
-    }) 
+    this.changedEmployeeMenuList = menu;
+    console.log(this.changedEmployeeMenuList);
+    }); 
     this.menusView=true;
     this.fieldarray = [];
   }

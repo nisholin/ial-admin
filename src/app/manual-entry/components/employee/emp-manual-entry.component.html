@@ -44,15 +44,17 @@
               <div class="col-2 col-lg-3 col-md-2"></div>
               <div class="col-4 col-lg-6 col-md-4">
               <div class="row">
-                <div class="col-1 col-lg-1 col-md-1"></div>
+                <div class="col-1 col-lg-2 col-md-1"></div>
                 <div class="col-2 col-lg-4 col-md-2">
-                <input type="date" />
+                  <input type="date" />
                 </div>
                 <div class="col-2 col-lg-4 col-md-2">
-                <input type="date" />
+                  <input type="date" />
                 </div>
-                <div class="col-2 col-lg-3 col-md-2">
-                  <button class="search-btn">Search</button>
+                <div class="col-2 col-lg-2 col-md-2">
+                  <button class="search-btn button">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
                 </div>
               </div>
               </div>
@@ -112,10 +114,10 @@
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions <br/>(Edit & Delete)</th>
                 <td mat-cell *matCellDef="let row">
                   <div class="row action-align img-align">
-                    <div class="img-div" (click)="enableUserView()">
+                    <div class="img-div" (click)="empManualEntyrEdit(row.id)">
                       <img src="assets/images/edit_icon.png" /> 
                     </div>
-                    <div class="img-div" (click)="updateCanteenTime()">
+                    <div class="img-div" (click)="deleteEntry(row.id)">
                       <img src="assets/images/delete.png" /> 
                     </div>
                   </div>
@@ -139,13 +141,13 @@
                   <div class="col-4 col-lg-2 col-md-4">
                   </div>
                 </div>
-                <div class="card">
+                <div class="card" style="top: 0% !important;">
                   <div class="card-header">
                     <h5 class="title t-a-c form-heading">New Entry</h5>
                     <hr>
                   </div>
                 <div class="card-body">
-                  <form #addGuestForm="ngForm" (ngSubmit)="saveGuest(addGuestForm)"> 
+                  <form #addEmpManualEntry="ngForm" (ngSubmit)="saveEmpManualEntry(addEmpManualEntry)"> 
                     <div class="row"> 
                       <div class="col-1 col-lg-1 col-d-1"></div>
                       <div class="col-4 col-lg-5 col-d-4">
@@ -154,16 +156,19 @@
                             <p>Code</p>
                           </div>
                           <div class="col-6 col-lg-6 col-md-6">
-                            <input type="text" placeholder="&nbsp; Employee code" 
+                            <input type="text" placeholder="&nbsp; Enter Code"
+                            #code="ngModel" name="code" 
+                            [(ngModel)]="model.code"
                             />
                           </div>
-                        </div> 
+                        </div>
                         <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
                             <p>Canteen Type</p>
                           </div>
                           <div class="col-6 col-lg-6 col-md-6">
-                            <select>
+                            <select #canteen_type="ngModel" name="canteen_type" 
+                            [(ngModel)]="model.canteen_type">
                               <option>Main Canteen</option>
                               <option>Contractor</option>
                             </select>
@@ -174,8 +179,10 @@
                             <p>Employee Code</p>
                           </div>
                           <div class="col-6 col-lg-6 col-md-6">
-                            <input type="text" placeholder="&nbsp; Employee name"
-                            />
+                            <input type="text" placeholder="&nbsp; Type Code Here"
+                            #emp_code="ngModel" name="emp_code" 
+                            [(ngModel)]="model.emp_code"
+                            (change)="getEmpDetails(emp_code)"/>
                           </div>
                         </div>
                         <div class="row">
@@ -183,8 +190,9 @@
                             <p>Employee Name</p>
                           </div>
                           <div class="col-6 col-lg-6 col-md-6">
-                            <input type="text" placeholder="&nbsp; Employee name"
-                            />
+                            <input type="text" [(ngModel)]="model.emp_name" 
+                            value="{{ model.emp_name }}" [ngModelOptions]="{standalone: true}"
+                            readonly/>
                           </div>
                         </div>
                         <div class="row">
@@ -193,7 +201,8 @@
                           </div>
                           <div class="col-6 col-lg-6 col-md-6">
                             <input type="date" placeholder="&nbsp; Company Name"
-                            
+                            #date="ngModel" name="date" 
+                            [(ngModel)]="model.date"
                             />
                           </div>
                         </div> 
@@ -202,7 +211,10 @@
                             <p>category</p>
                           </div>
                           <div class="col-6 col-lg-6 col-md-6">
-                            <input type="text"  readonly/>
+                            <input type="text" value="{{model.category_name}}"
+                            #category_id="ngModel" name="category_id" 
+                            [(ngModel)]="model.category_id"  [ngModelOptions]="{standalone: true}"
+                             readonly/> 
                           </div>
                         </div> 
                     </div>
@@ -210,17 +222,20 @@
                     <div class="col-4 col-lg-6 col-d-4">
                       <div class="menu-box"><br/>
                         <div class="special-container">
-                          <div *ngFor="let canteentime of canteentimelist">
+                          <div *ngFor="let itemlist of itemList;let i = index">
                             <div class="row">
                               <div class="col-6 col-lg-6 col-md-6">
-                                <input type="checkbox"
-                                >&nbsp;&nbsp; 
-                                <lable>
-                                {{ canteentime.menu_name }}</lable><br/>
+                                <input type="checkbox" value="{{itemlist.item_id}}"
+                                (click)="empMenuUpdate(i,itemlist,$event.target.checked)">&nbsp;&nbsp; 
+                                <lable value="{{itemlist.item_id}}" >
+                                {{ itemlist.item_name }}</lable><br/>
                               </div>
-                                <div class="col-6 col-lg-6 col-md-6">
-                                  <input type="number" />
-                                </div>
+                              <div class="col-6 col-lg-6 col-md-6">
+                              <input type="number" 
+                              #item_count="ngModel" name="item_count" 
+                              [(ngModel)]="count.item_count"
+                              />
+                            </div> 
                             </div>
                           </div>
                         </div>
@@ -284,29 +299,108 @@
             </div>
             <!--Upload End-->
 
-            <!--User View And Edit Start-->
+            <!--Emp Manual Entry Edit Start-->
             <div *ngIf="userView">
               <div class="col-md-12"> 
                 <div class="row">
                   <div class="col-6 col-lg-10 col-md-6 fs-20">
                     <i class="fa fa-arrow-left" aria-hidden="true" (click)="close()"></i>
                   </div>
-                  <div class="col-4 col-lg-2 col-md-4">
-                    <button class="add-btn" (click)="userEditOpen()">Edit</button>
-                  </div>
+                  <div class="col-4 col-lg-2 col-md-4"></div>
                 </div>
                  
                 <div class="card">
                   <div class="card-header">
-                    <h5 class="title t-a-c form-heading" *ngIf="view">User View</h5>
-                    <h5 class="title t-a-c form-heading" *ngIf="edit">Users Edit</h5>
+                    <h5 class="title t-a-c form-heading">Edit</h5>
                     <hr>
                   </div>
                   <div class="card-body">
-                    <form #empEdit="ngForm" (ngSubmit)="employeeEditSave(empEdit)">
+                    <form #empManualEditValues="ngForm" 
+                    (ngSubmit)="empManualEditSave(empManualEditValues,empmanualentrylistview.id)"
+                    >
                     <div class="row">
                       <div class="col-6 col-lg-6 col-d-6">
-                        <!-- <div class="row">
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Code</p>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <input type="text" value="{{ empmanualentrylistview.code }}" 
+                             #code="ngModel" name="code"  [(ngModel)]="empmanualentrylistview.code"
+                             [ngModelOptions]="{standalone: true}"
+                            readonly
+                            />
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Canteen Type</p>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <select  #canteen_type="ngModel" name="canteen_type"  
+                            [(ngModel)]="empmanualentrylistview.canteen_type"
+                            >
+                              <option>{{ empmanualentrylistview.canteen_type }}</option>
+                              <option>Main Contractor</option>
+                              <option>Contractor</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Emp Code</p>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <input type="text" 
+                            #emp_code="ngModel" name="emp_code"  
+                            [(ngModel)]="empmanualentrylistview.emp_code"
+                            [ngModelOptions]="{standalone: true}"
+                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <input type="checkbox"
+                            >&nbsp;&nbsp; 
+                            <lable>Tea</lable><br/>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <input type="number" />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-6 col-lg-6 col-d-6">
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Date</p>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <input type="date" id="date"
+                            #date="ngModel" name="date"  [(ngModel)]="model.date" 
+                            value="{{ empmanualentrylistview.date }}"
+                            required/>
+                          </div>
+                        </div>
+
+                        <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
                             <p>Category</p>
                           </div>
@@ -314,62 +408,15 @@
                             <p>:</p>
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">Manager</p>
-                            <select *ngIf="edit" #category="ngModel" name="category" 
-                            [(ngModel)]="model.category">
-                              <option>--manager--</option>
-                              <option>Employee</option>
-                              <option>Cleaner</option>
-                            </select>
-                          </div>
-                        </div> -->
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Employee Code</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.emp_code }}</p>
-                            <input type="text" *ngIf="edit" placeholder="{{ userview.emp_code }}" 
-                             #emp_code="ngModel" 
-                            name="emp_code"  [(ngModel)]="model.emp_code"
-                            readonly>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Employee Name</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.emp_name }}</p>
-                            <input type="text" *ngIf="edit" 
-                            #emp_name="ngModel" name="emp_name"  [(ngModel)]="model.emp_name"
-                            placeholder="{{ userview.emp_name }}"/>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Department</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.department }}</p>
-                            <select *ngIf="edit" 
-                            #department="ngModel" name="department"  value="{{ userview.department }}"
-                            [(ngModel)]="model.department" placeholder="{{ userview.department }}"
+                            <select 
+                            #category_id="ngModel" name="category_id"  
+                            [(ngModel)]="empmanualentrylistview.category_id"
                             >
-                              <option *ngFor="let departmentlist of departmentList" value="{{ departmentlist.id }}">
-                                {{ departmentlist.dept_name }}
+                             <option>{{ empmanualentrylistview.category_name }}</option>
+                              <option *ngFor="let categorylist of categoryList"
+                              value="{{ categorylist.id }}"
+                              >
+                                {{ categorylist.category_name }}
                               </option>
                             </select>
                           </div>
@@ -377,196 +424,25 @@
 
                         <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
-                            <p>veg_nonveg</p>
+                            <p>Emp Name</p>
                           </div>
                           <div class="col-1 col-lg-1 col-md-1">
                             <p>:</p>
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{userview.veg_nonveg}}</p>
-                            <select *ngIf="edit"
-                            #veg_nonveg="ngModel" name="veg_nonveg"  
-                            [(ngModel)]="model.veg_nonveg"
-                            >
-                              <option>--Select--</option>
-                              <option value="1">veg</option>
-                              <option value="2">non-veg</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Guest</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.guest_permit }}</p>
-                            <div *ngIf="edit" >
-                              <input type="radio" value="1"
-                              #guest_permit="ngModel" name="guest_permit"  
-                              [(ngModel)]="model.guest_permit"
-                              > 
-                              &nbsp;
-                              <span>yes</span>
-                              &nbsp;&nbsp;
-                              <input type="radio"value="0"
-                              #guest_permit="ngModel" name="guest_permit"  
-                              [(ngModel)]="model.guest_permit"
-                              > 
-                              &nbsp;
-                              <span>No</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Access</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.access }}</p>
-                            <select *ngIf="edit"
-                            #access="ngModel" name="access"  
-                            [(ngModel)]="model.access"
-                            >
-                              <option>--Select--</option>
-                              <option value="0">Yes</option>
-                              <option value="1">No</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Company</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.company }}</p>
-                            <select *ngIf="edit"
-                            #company="ngModel" name="company"  
-                            [(ngModel)]="userview.company"
-                            >
-                              <option *ngFor="let companylist of companyList" value="{{ companylist.id }}">
-                              {{ companylist.company_name }}
-                              </option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="col-6 col-lg-6 col-d-6">
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>RFID</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.rfid_card }}</p>
-                            <input *ngIf="edit" type="text" value="{{ userview.rfid_card }}"
-                            value="{{userview.rfid_card}}"
-                            #rfid_card="ngModel" name="rfid_card"  
-                            [(ngModel)]="userview.rfid_card"
-                            >
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Temporary RFID</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.a_rfid_card }}</p>
-                            <input *ngIf="edit" type="text" value="{{ userview.a_rfid_card }}" 
-                            placeholder="{{userview.a_rfid_card}}"
-                            #a_rfid_card="ngModel" name="a_rfid_card"  
-                            [(ngModel)]="userview.a_rfid_card"
-                            >
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>From Date</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.from_date }}</p>
-                            <input type="date" *ngIf="edit"
-                            #from_date="ngModel" name="from_date"  value="{{ userview.from_date }}"
-                            [(ngModel)]="model.from_date"
-                            />
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>To Date</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.to_date }}</p>
-                            <input type="date" *ngIf="edit"
-                            #to_date="ngModel" name="to_date"  
-	                          [(ngModel)]="model.to_date"
-                            />
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Email Id</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ userview.email }}</p>
-                            <input *ngIf="edit" type="text" value="{{ userview.email }}"
-                            #email="ngModel" name="email"  
-                            [(ngModel)]="userview.email"
-                            >
-                          </div>
-                        </div>
-
-                        <div class="row" *ngIf="edit">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Employee Image</p>
-                          </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                            <p>:</p>
-                          </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                            <input type="file" 
-                            #image="ngModel" name="image"  
-                            [(ngModel)]="model.image"
-                            >
+                            <input type="text" value="{{ empmanualentrylistview.emp_name }}"
+                            #emp_name="ngModel" emp_name="code"  
+                            [(ngModel)]="empmanualentrylistview.emp_name"
+                            [ngModelOptions]="{standalone: true}"
+                            readonly/>
                           </div>
                         </div>
                       </div>
                    </div>
-                  <div *ngIf="edit" class="row">
+                   <div class="row">
                     <div class="col-3 col-lg-4 col-md-3"></div>
-                    <div class="col-3 col-lg-4 col-md-3 row">
+                    <div class="col-3 col-lg-4 col-md-3">
                       <button class="save-form-btn" type="submit">Save</button>
-                      <button class="cancel-form-btn" (click)="editClose()">Cancel</button>
                     </div>
                     <div class="col-3 col-lg-4 col-md-3"></div>
                   </div>
