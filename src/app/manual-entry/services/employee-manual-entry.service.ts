@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+//CUSTOM IMPORTS
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-//_models
+//_MODELS
 import { EmployeeManualEntry } from "../../_models/manual-entry/employee-manual-entry";
 import { Item } from "../../../app/_models/manual-entry/item";
 

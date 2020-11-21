@@ -4,16 +4,15 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
 //services
-import { MeetingRequestService } from '../../services/meeting-request.service';
 //_modesl
 import { MeetingRequest } from '../../../_models/employee/meeting_request';
 
 @Component({
-  selector: 'app-meeting-request',
-  templateUrl: './meeting-request.component.html',
-  styleUrls: ['./meeting-request.component.css']
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.css']
 })
-export class MeetingRequestComponent implements OnInit {
+export class CategoryComponent implements OnInit {
   displayedColumns: string[] = ['image', 'empcode', 'empname', 'department','category','rfid','actions'];
   dataSource: MatTableDataSource<any>;
   menuList: any = {};
@@ -31,13 +30,13 @@ export class MeetingRequestComponent implements OnInit {
 
   @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
   @ViewChildren(MatSort) sort = new QueryList<MatSort>();
-  constructor(private meetingrequestservice: MeetingRequestService) {
-      this.meetingrequestservice.readMeetingRequestDetails().subscribe((meetingrequest: MeetingRequest[])=>{
+  constructor() {
+     /*  this.meetingrequestservice.readMeetingRequestDetails().subscribe((meetingrequest: MeetingRequest[])=>{
       this.meetingrequest = meetingrequest;
       this.dataSource = new MatTableDataSource(this.meetingrequest);
       this.dataSource.paginator = this.paginator.toArray()[0];
       this.dataSource.sort = this.sort.toArray()[0];
-    })  
+    }); */  
    }
 
   ngOnInit(): void {

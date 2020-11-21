@@ -112,4 +112,21 @@ export class ContractorManualEntryComponent implements OnInit {
     this.contEditView     = true;
     this.tablehide        = false;
   }
+  contManualEditSave(contManualEditValues: any,id : any) {
+    console.log(contManualEditValues.value);
+    this.contmanualentryservice.updateContManualEnty(contManualEditValues.value,id).subscribe((contmanualentry: ContManualEntry[])=>{
+    },
+    error => {
+      //alert('Network Error-->'+error);
+    });
+  }
+  deleteCont(id: any) {
+    console.log(id);
+    this.contmanualentryservice.deleteEntry(id).subscribe(() =>{
+      alert("Deleted Successfully");
+    },
+    error => {
+      //alert('Network Error-->'+error);
+    });
+  }
 }

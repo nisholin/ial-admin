@@ -1,6 +1,7 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialogConfig } from "@angular/material/dialog";
+//table
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -70,6 +71,7 @@ export class EmployeeManualEntryComponent implements OnInit {
     error => {
       //alert('Network Error-->'+error);
     });
+    
     this.reportservice.readCategory().subscribe((category: Category[])=>{
       this.categoryList = category;
       //console.log(this.categoryList);

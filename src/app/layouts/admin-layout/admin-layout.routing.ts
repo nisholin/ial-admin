@@ -18,7 +18,7 @@ import { GuestComponent } from '../../epmloyee/components/guest/guest.component'
 import { ServiceProviderComponent } from '../../epmloyee/components/service-provider/service-provider.component';
 import { TraineeComponent } from '../../epmloyee/components/trainee/trainee.component';
 import { ContractorComponent } from '../../epmloyee/components/contractor/contractor.component';
-//import { MeetingRequestComponent } from '../../epmloyee/components/meeting-request/meeting-request.component';
+import { CategoryComponent } from '../../epmloyee/components/category/category.component';
 import { DepartmentComponent } from '../../epmloyee/components/department/department.component';
 
 //master
@@ -43,7 +43,10 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'menuquantitymapping',       component: TodaysMenuComponent },
     { path: 'biriyaniconfiguration',       component: BiriyaniConfigComponent },
 
+    //User
     { path: 'emp_registration',          component: EmpRegistrationComponent },
+    { path: 'category',                  component: CategoryComponent },
+
     { path: 'department',                component: DepartmentComponent },
     { path: 'wastage',                   component: WastageComponent },
     { path: 'reset-password',            component: ResetPasswordComponent },
@@ -55,7 +58,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'service-provider',          component: ServiceProviderComponent },
     { path: 'trainee',                   component: TraineeComponent },
     { path: 'contractor',                component: ContractorComponent },
-    { path: 'meeting-request',           component: MeetingRequestComponent },
     //Manual Entry
     { path: 'emp-manual-entry',              component: EmployeeManualEntryComponent },
     { path: 'cont-manual-entry',           component: ContractorManualEntryComponent },

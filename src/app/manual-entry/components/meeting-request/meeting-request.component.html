@@ -5,37 +5,209 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h5 class="title t-a-c form-heading">Upload</h5>
-          <hr>
+          
         </div>
         <div class="card-body">
+          <ngx-spinner>
+            <!-- <img src="assets/images/Pulse-1s-200px.gif" class="spinner-img"/> --> 
+         </ngx-spinner>
+         
+         <!--Table Start-->
+         <div *ngIf="tablehide">
           <div class="row">
-            <div class="col-4 col-lg-4 col-d-4"></div>
-            <div class="col-4 col-lg-4 col-d-4">
-              <div class="canteen-box">
-                <form>
-                  <div class="canteentime-container p-t-20 p-b-20 m-l-auto m-r-auto">
-                    <select>
-                        <option>--select--</option>
-                        <option>Employee Master</option>
-                        <option>Todays's Menu</option>
-                    </select>
-                    <br/>
-                    <label>
-                      <i class="fa fa-upload" aria-hidden="true"></i>
-                      Choose File
-                      <input type="file" size="60" >
-                    </label> 
-                    </div>
-                    <button class="save-form-btn" style="width: 35% !important;border-radius: 0px;">Upload</button>
-                    <br/>
-                </form>
+            <div class="col-5 col-lg-3 col-md-5">
+            <mat-form-field>
+              <input matInput (keyup)="applyFilter($event.target.value)" 
+              placeholder="&#xF002;&nbsp;&nbsp; Search">
+            </mat-form-field>
+            </div>
+            <div class="col-2 col-lg-5 col-md-2"></div>
+            <div class="col-4 col-lg-4 col-md-4">
+              <div class="row">
+                <div class="col-6 col-lg-6 col-md-6">
+                 <!--  <button class="add-btn" (click)="newEmpManualEntry()">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    &nbsp;&nbsp;Add
+                  </button> -->
+                </div>
+                <div class="col-6 col-lg-6 col-md-6">
+                  <button class="add-btn" (click)="newMeetingRequest()">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    &nbsp;&nbsp;Add
+                  </button>
                 </div>
               </div>
             </div>
-            <div class="col-4 col-lg-4 col-d-4">
+          </div>
+           <div class="row">
+             <div class="col-5 col-lg-3 col-md-5"></div>
+             <div class="col-2 col-lg-3 col-md-2"></div>
+             <div class="col-4 col-lg-6 col-md-4">
+             <div class="row">
+               <div class="col-1 col-lg-2 col-md-1"></div>
+               <div class="col-2 col-lg-4 col-md-2">
+                 <input type="date" />
+               </div>
+               <div class="col-2 col-lg-4 col-md-2">
+                 <input type="date" />
+               </div>
+               <div class="col-2 col-lg-2 col-md-2">
+                 <button class="search-btn button">
+                   <i class="fa fa-search" aria-hidden="true"></i>
+                 </button>
+               </div>
+             </div>
+             </div>
+           </div>
+
+           <div class="example-container mat-elevation-z8">
+             <table mat-table #hBtable [dataSource]="dataSource" matSort>
+             <ng-container matColumnDef="no">
+               <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
+               <td mat-cell *matCellDef="let row;let i = index;">
+               {{i}}
+               </td>
+             </ng-container>
+             <ng-container matColumnDef="code">
+               <th mat-header-cell *matHeaderCellDef mat-sort-header> Code </th>
+               <td mat-cell *matCellDef="let row">
+               {{ row.code }}
+               </td>
+             </ng-container>
+             <ng-container matColumnDef="date">
+               <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+               <td mat-cell *matCellDef="let row">
+               {{ row.date }}
+                </td>
+             </ng-container>
+             <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+              <td mat-cell *matCellDef="let row">
+                <p *ngIf="row.status === 1" class="green">approved</p>
+                <p *ngIf="row.status === 2" class="red">Rejected</p>
+              </td>
+            </ng-container>
+             <ng-container matColumnDef="actions">
+               <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
+               <td mat-cell *matCellDef="let row">
+                 <div class="row action-align img-align">
+                   <div class="img-div" (click)="empManualEntyrEdit(row.id)">
+                     <img src="assets/images/eye.png" /> 
+                   </div>
+                 </div>
+               </td>
+             </ng-container>
+             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+             <tr mat-row [ngClass]="table - row" tabindex="1" *matRowDef="let row; columns: displayedColumns"></tr>
+             </table>
+             <mat-paginator #sort [pageSize]="5"[hidePageSize]="true"></mat-paginator>
+           </div>
+           </div>
+           <!--Table End-->
+        </div>
+         <!--New Meeting Request Start-->
+         <div class="row" *ngIf="newMeeting">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-6 col-lg-10 col-md-6 fs-20">
+                <i class="fa fa-arrow-left" aria-hidden="true" (click)="close()"></i>
+              </div>
+              <div class="col-4 col-lg-2 col-md-4">
+              </div>
+            </div>
+              <div class="card-header">
+                <h5 class="title t-a-c form-heading">New Entry</h5>
+                <hr>
+              </div>
+              <form #addEmpManualEntry="ngForm" (ngSubmit)="saveEmpManualEntry(addEmpManualEntry)"> 
+                <div class="row"> 
+                  <div class="col-1 col-lg-1 col-d-1"></div>
+                  <div class="col-4 col-lg-5 col-d-4">
+                    <div class="row">
+                      <div class="col-6 col-lg-4 col-md-6">
+                        <p>Code</p>
+                      </div>
+                      <div class="col-6 col-lg-6 col-md-6">
+                        <input type="text" placeholder="&nbsp; Enter Code"
+                        #code="ngModel" name="code" 
+                        [(ngModel)]="model.code"
+                        />
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 col-lg-4 col-md-6">
+                        <p>Canteen Type</p>
+                      </div>
+                      <div class="col-6 col-lg-6 col-md-6">
+                        <select #canteen_type="ngModel" name="canteen_type" 
+                        [(ngModel)]="model.canteen_type">
+                          <option>Main Canteen</option>
+                          <option>Contractor</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 col-lg-4 col-md-6">
+                        <p>Employee Code</p>
+                      </div>
+                      <div class="col-6 col-lg-6 col-md-6">
+                        <input type="text" placeholder="&nbsp; Type Code Here"
+                        #emp_code="ngModel" name="emp_code" 
+                        [(ngModel)]="model.emp_code"
+                        (change)="getEmpDetails(emp_code)"/>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 col-lg-4 col-md-6">
+                        <p>Employee Name</p>
+                      </div>
+                      <div class="col-6 col-lg-6 col-md-6">
+                        <input type="text" [(ngModel)]="model.emp_name" 
+                        value="{{ model.emp_name }}" [ngModelOptions]="{standalone: true}"
+                        readonly/>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 col-lg-4 col-md-6">
+                        <p>Date</p>
+                      </div>
+                      <div class="col-6 col-lg-6 col-md-6">
+                        <input type="date" placeholder="&nbsp; Company Name"
+                        #date="ngModel" name="date" 
+                        [(ngModel)]="model.date"
+                        />
+                      </div>
+                    </div> 
+                    <div class="row">
+                      <div class="col-6 col-lg-4 col-md-6">
+                        <p>category</p>
+                      </div>
+                      <div class="col-6 col-lg-6 col-md-6">
+                        <input type="text" value="{{model.category_name}}"
+                        #category_id="ngModel" name="category_id" 
+                        [(ngModel)]="model.category_id"  [ngModelOptions]="{standalone: true}"
+                         readonly/> 
+                      </div>
+                    </div> 
+                </div>
+
+                <div class="col-4 col-lg-6 col-d-4">
+                 
+                </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-3 col-lg-4 col-md-3"></div>
+                  <div class="col-3 col-lg-4 col-md-3 row">
+                  </div>
+                  <div class="col-3 col-lg-4 col-md-3">
+                    <button class="save-form-btn position-left" type="submit">Submit</button>
+                  </div>
+                </div>
+              </form>
           </div>
         </div>
+         <!--New Meeting Request End-->
       </div>
     </div>
   </div>

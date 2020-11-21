@@ -14,7 +14,19 @@ export class ContManualEntryService {
 
   constructor(private httpClient: HttpClient) { }
 
+  //view
   readContManualEnty(): Observable<ContManualEntry[]> {
     return this.httpClient.get<ContManualEntry[]>(this.baseUrl +'/users');
+  }
+  //update
+  updateContManualEnty(contManualEditValues: any,id: any) {
+    console.log(contManualEditValues);
+    return this.httpClient.put<ContManualEntry[]>(this.baseUrl+'/contedit/'+id,contManualEditValues);
+  }
+  //delete
+  //delete
+  deleteEntry(id: any){
+    console.log(id);
+    return this.httpClient.delete<any>(this.baseUrl+'/contdelete/'+id);
   }
 }

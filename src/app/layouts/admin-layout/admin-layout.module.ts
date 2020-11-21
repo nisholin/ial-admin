@@ -26,7 +26,7 @@ import { GuestComponent } from '../../epmloyee/components/guest/guest.component'
 import { ServiceProviderComponent } from '../../epmloyee/components/service-provider/service-provider.component';
 import { TraineeComponent } from '../../epmloyee/components/trainee/trainee.component';
 import { ContractorComponent } from '../../epmloyee/components/contractor/contractor.component';
-//import { MeetingRequestComponent } from '../../epmloyee/components/meeting-request/meeting-request.component';
+import { CategoryComponent } from '../../epmloyee/components/category/category.component';
 import { DepartmentComponent } from '../../epmloyee/components/department/department.component';
 
 //Manual Entry
@@ -94,7 +94,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
     NewMenuComponent,
     TodaysMenuComponent,
 
+    //User
     EmpRegistrationComponent,
+    CategoryComponent,
+
     WastageComponent,
     ResetPasswordComponent,
     ReportsComponent,

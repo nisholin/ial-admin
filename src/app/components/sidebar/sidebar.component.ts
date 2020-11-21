@@ -42,9 +42,9 @@ export const ROUTES: RouteInfo[] = [
       path: "/trainee",
     },
     {
-      id: "meeting-request",
+      id: "category",
       label: "Category",
-      path: "/meeting-request",
+      path: "/category",
     },
     {
       id: "company",
