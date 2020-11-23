@@ -231,9 +231,8 @@
                                 {{ itemlist.item_name }}</lable><br/>
                               </div>
                               <div class="col-6 col-lg-6 col-md-6">
-                              <input type="number" 
-                              #item_count="ngModel" name="item_count" 
-                              [(ngModel)]="count.item_count"
+                              <input type="number" (change)="saveCount(itemlist.item_id,itemlist.item_count)"
+                               name="item_count" [(ngModel)]="itemlist.item_count" 
                               />
                             </div> 
                             </div>

@@ -54,6 +54,7 @@ export class EmployeeManualEntryComponent implements OnInit {
   empmanualentrylistview  : any={};
   category                : Category  [];
   categoryList            : any;
+  itemcount               : any;
 
   constructor(
     private employeemanualservice: EmployeeManualEntryService,
@@ -100,6 +101,10 @@ export class EmployeeManualEntryComponent implements OnInit {
     this.upload     = false;
     this.employeemanualservice.readItem().subscribe((item: Item[])=>{
       this.itemList = item;
+      
+      for(let i=0;i<this.itemList.length;i++){
+        this.itemList[i].item_count = 0;
+      }
       //alert(this.canteentimelist.length);
       console.log(this.itemList);
     },
@@ -155,7 +160,7 @@ export class EmployeeManualEntryComponent implements OnInit {
   }
   saveEmpManualEntry(saveEmpManualEntry) {
     console.log(saveEmpManualEntry.value);
-    //console.log(this.empItemArr);
+    console.log(this.empItemArr[0].item_id);
     this.empmanualentryArr.push(this.empItemArr,saveEmpManualEntry.value);
     console.log("new array",this.empmanualentryArr);
     this.employeemanualservice.saveEmpEntry(this.empmanualentryArr).subscribe((employeemanualentry:EmployeeManualEntry[]) =>{
@@ -170,7 +175,7 @@ export class EmployeeManualEntryComponent implements OnInit {
     if (isChecked) {
       itemlist.indexVal = index;
       console.log(itemlist.item_id);
-      this.empItemArr.push({item_id: itemlist.item_id});
+      //this.empItemArr.push({item_id: itemlist.item_id});
       console.log(this.empItemArr);
 
       this.isCheckedArr.push({ checked: true, indexVal: index });
@@ -212,4 +217,20 @@ export class EmployeeManualEntryComponent implements OnInit {
       //alert('Network Error-->'+error);
     });
   }
+   saveCount(itemid: any,itemcount: any) {
+   var index ;
+   alert(itemid);
+   alert(itemcount);
+   this.empItemArr.push({item_id: itemid ,item_count: itemcount});
+   console.log(this.empItemArr);
+   /*  for(let i=0;i<this.itemList.length;i++){
+    console.log(this.itemList.item_id);
+    if(this.itemList[i].item_id === itemid){
+      index = i;
+      this.itemList[index].item_count = itemcount;
+      console.log(this.itemList);
+    }
+  }  */
+
+  } 
 }

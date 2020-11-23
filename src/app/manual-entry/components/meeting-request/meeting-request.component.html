@@ -3,16 +3,15 @@
 <div class="main-content">
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          
-        </div>
+        <!--<div class="card-header">
+           <h5 class="title t-a-c form-heading">MenuManagement</h5>
+          <hr> 
+        </div>-->
         <div class="card-body">
           <ngx-spinner>
-            <!-- <img src="assets/images/Pulse-1s-200px.gif" class="spinner-img"/> --> 
-         </ngx-spinner>
-         
-         <!--Table Start-->
+             <!-- <img src="assets/images/Pulse-1s-200px.gif" class="spinner-img"/> --> 
+          </ngx-spinner>
+          <!--Table Start-->
          <div *ngIf="tablehide">
           <div class="row">
             <div class="col-5 col-lg-3 col-md-5">
@@ -91,7 +90,7 @@
                <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
                <td mat-cell *matCellDef="let row">
                  <div class="row action-align img-align">
-                   <div class="img-div" (click)="empManualEntyrEdit(row.id)">
+                   <div class="img-div" (click)="meetingDetailsView(row.id)">
                      <img src="assets/images/eye.png" /> 
                    </div>
                  </div>
@@ -104,111 +103,403 @@
            </div>
            </div>
            <!--Table End-->
-        </div>
-         <!--New Meeting Request Start-->
-         <div class="row" *ngIf="newMeeting">
-          <div class="col-md-12">
-            <div class="row">
-              <div class="col-6 col-lg-10 col-md-6 fs-20">
-                <i class="fa fa-arrow-left" aria-hidden="true" (click)="close()"></i>
-              </div>
-              <div class="col-4 col-lg-2 col-md-4">
+
+            <!--User register div start-->
+            <div class="row" *ngIf="newMeeting">
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-6 col-lg-10 col-md-6 fs-20">
+                    <i class="fa fa-arrow-left" aria-hidden="true" (click)="close()"></i>
+                  </div>
+                  <div class="col-4 col-lg-2 col-md-4">
+                  </div>
+                </div>
+                <div class="card" style="top: 0% !important;">
+                  <div class="card-header">
+                    <h5 class="title t-a-c form-heading">New Entry</h5>
+                    <hr>
+                  </div>
+                <div class="card-body">
+                  <form #addEmpManualEntry="ngForm" (ngSubmit)="saveEmpManualEntry(addEmpManualEntry)"> 
+                    <div class="row"> 
+                      <div class="col-1 col-lg-1 col-d-1"></div>
+                      <div class="col-4 col-lg-5 col-d-4">
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Code</p>
+                          </div>
+                          <div class="col-6 col-lg-6 col-md-6">
+                            <input type="text" placeholder="&nbsp; Enter Code"
+                            #code="ngModel" name="code" 
+                            [(ngModel)]="model.code" [ngModelOptions]="{standalone: true}"
+                            readonly/>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Employee No</p>
+                          </div>
+                          <div class="col-6 col-lg-6 col-md-6">
+                            <input type="text" />
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Employee Code</p>
+                          </div>
+                          <div class="col-6 col-lg-6 col-md-6">
+                            <input type="text" placeholder="&nbsp; Type Code Here"
+                            #emp_code="ngModel" name="emp_code" 
+                            [(ngModel)]="model.emp_code"
+                            (change)="getEmpDetails(emp_code)"/>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Employee Name</p>
+                          </div>
+                          <div class="col-6 col-lg-6 col-md-6">
+                            <input type="text"
+                            readonly/>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Department</p>
+                          </div>
+                          <div class="col-6 col-lg-6 col-md-6">
+                            <select>
+                              <option>--Select department--</option>
+                              <option *ngFor="let departmentlist of departmentList">
+                                {{ departmentlist.dept_name }}
+                              </option>
+                            </select>
+                          </div>
+                        </div> 
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Meeting Type</p>
+                          </div>
+                          <div class="col-6 col-lg-6 col-md-6">
+                            <select>
+                              <option>--Select--</option>
+                              <option>General Meeting</option>
+                              <option>Vip Meeting</option>
+                            </select>
+                          </div>
+                        </div> 
+                    </div>
+  
+                    <div class="col-4 col-lg-6 col-d-4">
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Date</p>
+                        </div>
+                        <div class="col-6 col-lg-6 col-md-6">
+                          <input type="date" /> 
+                        </div>
+                      </div> 
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Number Of Persons</p>
+                        </div>
+                        <div class="col-6 col-lg-6 col-md-6">
+                          <input type="text" /> 
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Remarks</p>
+                        </div>
+                        <div class="col-6 col-lg-6 col-md-6">
+                          <input type="text" /> 
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6 col-lg-4 col-md-6">
+                          <p>Meeting Room</p>
+                        </div>
+                        <div class="col-6 col-lg-6 col-md-6">
+                          <input type="text" /> 
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                    <!--Add Dynamic Table Start-->
+                    <table class="table table-striped table-bordered">
+                      <thead>
+                          <tr>
+                            <th>Item</th>
+                          </tr>
+                      </thead> 
+                      <tbody>
+                          <tr *ngFor="let field of tableArray; let i = index">
+                            <td>
+                              <select [(ngModel)]="field.name"  type="text" name="{{field.name}}"
+                              [ngModelOptions]="{standalone: true}"
+                              >
+                                <option *ngFor="let menulist of menuList">{{ menulist.item_name}}</option>
+                              </select>
+                            </td>
+                            <td>
+                              <input [(ngModel)]="field.number"  type="number" name="{{field.number}}" 
+                              [ngModelOptions]="{standalone: true}"
+                              />
+                            </td>
+                            <td>
+                              <button class="btn btn-default row-delete"  type="button" (click)="deleteFieldValue(i)">Delete</button>
+                            </td>
+                          </tr>
+                         <!--  <tr>
+                            <td>
+                              <input  type="text" id="newAttributeCode" [(ngModel)]="newAttribute.code" name="newAttributeCode" />
+                            </td>
+                            <td>
+                              <input  type="text" id="newAttributeName" [(ngModel)]="newAttribute.name" name="newAttributeName" />
+                            </td>
+                            
+                          </tr> -->
+                          <tr>
+                            <td>
+                            <button class="btn btn-default row-add-btn" type="button" (click)="addFieldValue()">Add</button>
+                          </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                    <!--Add Dynamic Table End-->
+                    <div class="row">
+                      <div class="col-3 col-lg-4 col-md-3"></div>
+                      <div class="col-3 col-lg-4 col-md-3">
+                        <button class="save-form-btn" type="submit">Save</button>
+                      </div>
+                      <div class="col-3 col-lg-4 col-md-3">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                </div>
               </div>
             </div>
-              <div class="card-header">
-                <h5 class="title t-a-c form-heading">New Entry</h5>
-                <hr>
-              </div>
-              <form #addEmpManualEntry="ngForm" (ngSubmit)="saveEmpManualEntry(addEmpManualEntry)"> 
-                <div class="row"> 
-                  <div class="col-1 col-lg-1 col-d-1"></div>
-                  <div class="col-4 col-lg-5 col-d-4">
-                    <div class="row">
-                      <div class="col-6 col-lg-4 col-md-6">
-                        <p>Code</p>
-                      </div>
-                      <div class="col-6 col-lg-6 col-md-6">
-                        <input type="text" placeholder="&nbsp; Enter Code"
-                        #code="ngModel" name="code" 
-                        [(ngModel)]="model.code"
-                        />
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-6 col-lg-4 col-md-6">
-                        <p>Canteen Type</p>
-                      </div>
-                      <div class="col-6 col-lg-6 col-md-6">
-                        <select #canteen_type="ngModel" name="canteen_type" 
-                        [(ngModel)]="model.canteen_type">
-                          <option>Main Canteen</option>
-                          <option>Contractor</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-6 col-lg-4 col-md-6">
-                        <p>Employee Code</p>
-                      </div>
-                      <div class="col-6 col-lg-6 col-md-6">
-                        <input type="text" placeholder="&nbsp; Type Code Here"
-                        #emp_code="ngModel" name="emp_code" 
-                        [(ngModel)]="model.emp_code"
-                        (change)="getEmpDetails(emp_code)"/>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-6 col-lg-4 col-md-6">
-                        <p>Employee Name</p>
-                      </div>
-                      <div class="col-6 col-lg-6 col-md-6">
-                        <input type="text" [(ngModel)]="model.emp_name" 
-                        value="{{ model.emp_name }}" [ngModelOptions]="{standalone: true}"
-                        readonly/>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-6 col-lg-4 col-md-6">
-                        <p>Date</p>
-                      </div>
-                      <div class="col-6 col-lg-6 col-md-6">
-                        <input type="date" placeholder="&nbsp; Company Name"
-                        #date="ngModel" name="date" 
-                        [(ngModel)]="model.date"
-                        />
-                      </div>
-                    </div> 
-                    <div class="row">
-                      <div class="col-6 col-lg-4 col-md-6">
-                        <p>category</p>
-                      </div>
-                      <div class="col-6 col-lg-6 col-md-6">
-                        <input type="text" value="{{model.category_name}}"
-                        #category_id="ngModel" name="category_id" 
-                        [(ngModel)]="model.category_id"  [ngModelOptions]="{standalone: true}"
-                         readonly/> 
-                      </div>
-                    </div> 
-                </div>
+            <!--User register div End-->
 
-                <div class="col-4 col-lg-6 col-d-4">
-                 
-                </div>
-                </div>
-
+            <!--User View And Edit Start-->
+            <div *ngIf="meetingView">
+              <div class="col-md-12"> 
                 <div class="row">
-                  <div class="col-3 col-lg-4 col-md-3"></div>
-                  <div class="col-3 col-lg-4 col-md-3 row">
+                  <div class="col-6 col-lg-10 col-md-6 fs-20">
+                    <i class="fa fa-arrow-left" aria-hidden="true" (click)="close()"></i>
                   </div>
-                  <div class="col-3 col-lg-4 col-md-3">
-                    <button class="save-form-btn position-left" type="submit">Submit</button>
+                  <div class="col-4 col-lg-2 col-md-4">
+                    <button class="add-btn" (click)="meetingEditOpen()" *ngIf="view">Edit</button>
                   </div>
                 </div>
-              </form>
-          </div>
+                 
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="title t-a-c form-heading" *ngIf="view">View</h5>
+                    <h5 class="title t-a-c form-heading" *ngIf="edit">Edit</h5>
+                    <hr>
+                  </div>
+                  <div class="card-body">
+                    <form #empEdit="ngForm" (ngSubmit)="employeeEditSave(empEdit)">
+                    <div class="row">
+                      <div class="col-6 col-lg-6 col-d-6">
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Code</p>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <p class="text-black" *ngIf="view">
+                              {{ meetinglistview.code }}
+                            </p>
+                            <input type="text" *ngIf="edit" value="{{ meetinglistview.code }}" 
+                             #code="ngModel" name="code"  [(ngModel)]="meetinglistview.code"
+                             [ngModelOptions]="{standalone: true}"
+                            readonly>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Employee No</p>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <p class="text-black" *ngIf="view">{{ meetinglistview.emp_code }}</p>
+                            <input type="text" *ngIf="edit" 
+                            #emp_code="ngModel" name="emp_code"  [(ngModel)]="meetinglistview.emp_code"
+                            value="{{ meetinglistview.emp_code }}"/>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Employee Name</p>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <p class="text-black" *ngIf="view">{{ meetinglistview.emp_code }}</p>
+                            <input type="text" *ngIf="edit" 
+                            #emp_name="ngModel" name="emp_name"  [(ngModel)]="meetinglistview.emp_code"
+                            value="{{ meetinglistview.emp_code }}"/>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Department</p>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <p class="text-black" *ngIf="view">{{ meetinglistview.department_id }}</p>
+                            <select *ngIf="edit" 
+                            #department="ngModel" name="department"  value="{{ meetinglistview.department_id }}"
+                            [(ngModel)]="meetinglistview.department_id" 
+                            >
+                              <option *ngFor="let departmentlist of departmentList" value="{{ departmentlist.id }}">
+                                {{ departmentlist.dept_name }}
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Meeting Type</p>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <p class="text-black" *ngIf="view">{{meetinglistview.meeting_type_id}}</p>
+                            <select *ngIf="edit"
+                            #meeting_type_id="ngModel" name="meeting_type_id"  
+                            [(ngModel)]="meetinglistview.meeting_type_id"
+                            >
+                              <option>{{meetinglistview.meeting_type_id}}</option>
+                              <option value="1">Vip Meeting</option>
+                              <option value="2">General Meeting</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-6 col-lg-6 col-d-6">
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Remarks</p>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <p class="text-black" *ngIf="view">{{ meetinglistview.remarks }}</p>
+                            <div *ngIf="edit" >
+                              <input type="text" value="{{ meetinglistview.remarks }}"
+                              #remarks="ngModel" name="remarks"  
+                              [(ngModel)]="meetinglistview.remarks" value="{{ meetinglistview.remarks }}"
+                              > 
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>Date</p>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <p class="text-black" *ngIf="view">{{ meetinglistview.date }}</p>
+                            <input *ngIf="edit" type="date" value="{{ meetinglistview.date }}"
+                            #date="ngModel" name="date"  [(ngModel)]="meetinglistview.date"
+                            />
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-6 col-lg-4 col-md-6">
+                            <p>No Of Persons</p>
+                          </div>
+                          <div class="col-1 col-lg-1 col-md-1">
+                            <p>:</p>
+                          </div>
+                          <div class="col-5 col-lg-5 col-md-5">
+                            <p class="text-black" *ngIf="view">{{ meetinglistview.no_of_persons }}</p>
+                            <input *ngIf="edit" type="text" value="{{ meetinglistview.no_of_persons }}" 
+                            value="{{meetinglistview.no_of_persons}}"
+                            #no_of_persons="ngModel" name="no_of_persons" 
+                            [(ngModel)]="meetinglistview.no_of_persons"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                   </div>
+                   <!--Edit Dynamic Table Start-->
+                   <table class="table table-striped table-bordered" *ngIf="edit">
+                    <thead>
+                        <tr>
+                          <th>Item</th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        <tr *ngFor="let field of edittablearray;let i = index">
+                          <td>
+                            <select [(ngModel)]="field.name"  type="text" name="{{field.name}}"
+                            [ngModelOptions]="{standalone: true}"
+                            >
+                              <option *ngFor="let menulist of menuList">{{ menulist.item_name}}</option>
+                            </select>
+                          </td>
+                          <td>
+                            <input [(ngModel)]="field.number"  type="number" name="{{field.number}}" 
+                            [ngModelOptions]="{standalone: true}"
+                            />
+                          </td>
+                          <td>
+                            <button class="btn btn-default row-delete"  type="button" (click)="editFieldValuedelete(i)">Delete</button>
+                          </td>
+                        </tr>
+                       <!--<tr>
+                          <td>
+                            <input  type="text" id="newAttributeCode" [(ngModel)]="newAttribute.code" name="newAttributeCode" />
+                          </td>
+                          <td>
+                            <input  type="text" id="newAttributeName" [(ngModel)]="newAttribute.name" name="newAttributeName" />
+                          </td>
+                          
+                        </tr> -->
+                        <tr>
+                          <td>
+                          <button class="btn btn-default row-add-btn" type="button" (click)="editFieldValue()">Add</button>
+                        </td>
+                        </tr>
+                    </tbody>
+                </table>
+                  <!--Edit Dynamic Table End-->
+                  <div *ngIf="edit" class="row">
+                    <div class="col-3 col-lg-4 col-md-3"></div>
+                    <div class="col-3 col-lg-4 col-md-3 row">
+                      <button class="save-form-btn" type="submit">Save</button>
+                      <button class="cancel-form-btn" (click)="editClose()">Cancel</button>
+                    </div>
+                    <div class="col-3 col-lg-4 col-md-3"></div>
+                  </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--User View End-->
         </div>
-         <!--New Meeting Request End-->
-      </div>
     </div>
   </div>
 </div>

@@ -642,3 +642,10 @@ ngx-spinner {
   background: #ffffff;
   box-shadow: 2px 5px 11px 6px #c7c7c7;
 }
+.row-add-btn {
+  background: #00a65a !important;
+}
+.row-delete {
+  background: red !important;
+  width: 50%;
+}
