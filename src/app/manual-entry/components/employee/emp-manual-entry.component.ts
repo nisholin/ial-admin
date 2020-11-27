@@ -15,6 +15,7 @@ import { EmployeeManualEntry } from "../../../_models/manual-entry/employee-manu
 import { CanteenTime } from '../../../_models/canteen/canteentime';
 import { Item } from "../../../_models/manual-entry/item";
 import { Category } from "../../../_models/common/category";
+import { merge } from 'jquery';
 
 @Component({
   selector: 'app-emp-manual-entry-component',
@@ -55,6 +56,7 @@ export class EmployeeManualEntryComponent implements OnInit {
   category                : Category  [];
   categoryList            : any;
   itemcount               : any;
+  empmanualentryArr1      : any={};
 
   constructor(
     private employeemanualservice: EmployeeManualEntryService,
@@ -159,15 +161,18 @@ export class EmployeeManualEntryComponent implements OnInit {
       });
   }
   saveEmpManualEntry(saveEmpManualEntry) {
-    console.log(saveEmpManualEntry.value);
-    console.log(this.empItemArr[0].item_id);
-    this.empmanualentryArr.push(this.empItemArr,saveEmpManualEntry.value);
+    //console.log(saveEmpManualEntry.value);
+    //console.log(this.empItemArr);
+    //this.empmanualentryArr =this.empItemArr.concat(saveEmpManualEntry.value);
+    this.empItemArr.push(saveEmpManualEntry.value);
+    this.empmanualentryArr = this.empItemArr;
+    
     console.log("new array",this.empmanualentryArr);
-    this.employeemanualservice.saveEmpEntry(this.empmanualentryArr).subscribe((employeemanualentry:EmployeeManualEntry[]) =>{
+     this.employeemanualservice.saveEmpEntry(this.empmanualentryArr).subscribe((employeemanualentry:EmployeeManualEntry[]) =>{
     },
     error => {
       //alert('Network Error-->'+error);
-    });
+    });  
     this.empmanualentryArr = []; 
   }
   empMenuUpdate(index: number, itemlist: any, isChecked: boolean) {
@@ -210,27 +215,19 @@ export class EmployeeManualEntryComponent implements OnInit {
     alert(id);
     console.log(empManualEditValues.value);
     this.employeemanualservice.updateEmpManualEnty(empManualEditValues.value,id).subscribe((employeemanualentry: EmployeeManualEntry[])=>{
-      this.empmanualentrylist = employeemanualentry;
-      console.log(this.empmanualentrylist);
+      alert("Updated Successfully");
+      //this.empmanualentrylist = employeemanualentry;
+      //console.log(this.empmanualentrylist);
     },
     error => {
       //alert('Network Error-->'+error);
     });
   }
-   saveCount(itemid: any,itemcount: any) {
-   var index ;
-   alert(itemid);
-   alert(itemcount);
-   this.empItemArr.push({item_id: itemid ,item_count: itemcount});
-   console.log(this.empItemArr);
-   /*  for(let i=0;i<this.itemList.length;i++){
-    console.log(this.itemList.item_id);
-    if(this.itemList[i].item_id === itemid){
-      index = i;
-      this.itemList[index].item_count = itemcount;
-      console.log(this.itemList);
-    }
-  }  */
-
+  saveCount(itemid: any,itemcount: any,index: any) {
+    //alert(itemid);
+    alert(itemcount.value);
+    this.empItemArr.push({item_id: itemid,item_count : itemcount.value});
+    console.log(this.empItemArr);
+    //$scope.empItemArr[index].item_count = itemcount;
   } 
 }

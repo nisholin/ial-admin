@@ -99,7 +99,7 @@
              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
              <tr mat-row [ngClass]="table - row" tabindex="1" *matRowDef="let row; columns: displayedColumns"></tr>
              </table>
-             <mat-paginator #sort [pageSize]="5"[hidePageSize]="true"></mat-paginator>
+             <mat-paginator #sort [pageSize]="10"[hidePageSize]="true"></mat-paginator>
            </div>
            </div>
            <!--Table End-->
@@ -120,29 +120,21 @@
                     <hr>
                   </div>
                 <div class="card-body">
-                  <form #addEmpManualEntry="ngForm" (ngSubmit)="saveEmpManualEntry(addEmpManualEntry)"> 
+                  <form #addMeetingDetails="ngForm" (ngSubmit)="saveMeetingRequest(addMeetingDetails)"> 
                     <div class="row"> 
                       <div class="col-1 col-lg-1 col-d-1"></div>
                       <div class="col-4 col-lg-5 col-d-4">
-                        <div class="row">
+                        <!-- <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
                             <p>Code</p>
                           </div>
                           <div class="col-6 col-lg-6 col-md-6">
                             <input type="text" placeholder="&nbsp; Enter Code"
                             #code="ngModel" name="code" 
-                            [(ngModel)]="model.code" [ngModelOptions]="{standalone: true}"
+                            [(ngModel)]="model.code"
                             readonly/>
                           </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                            <p>Employee No</p>
-                          </div>
-                          <div class="col-6 col-lg-6 col-md-6">
-                            <input type="text" />
-                          </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
                             <p>Employee Code</p>
@@ -160,6 +152,8 @@
                           </div>
                           <div class="col-6 col-lg-6 col-md-6">
                             <input type="text"
+                            [(ngModel)]="model.emp_name" 
+                            [ngModelOptions]="{standalone: true}"
                             readonly/>
                           </div>
                         </div>
@@ -168,9 +162,12 @@
                             <p>Department</p>
                           </div>
                           <div class="col-6 col-lg-6 col-md-6">
-                            <select>
+                            <select  #id="ngModel" name="department_id"
+                            [(ngModel)]="model.id" >
                               <option>--Select department--</option>
-                              <option *ngFor="let departmentlist of departmentList">
+                              <option *ngFor="let departmentlist of departmentList"
+                              value="{{departmentlist.id}}"
+                              >
                                 {{ departmentlist.dept_name }}
                               </option>
                             </select>
@@ -181,7 +178,8 @@
                             <p>Meeting Type</p>
                           </div>
                           <div class="col-6 col-lg-6 col-md-6">
-                            <select>
+                            <select  #meeting_type_id="ngModel" name="meeting_type_id"
+                            [(ngModel)]="model.meeting_type_id">
                               <option>--Select--</option>
                               <option>General Meeting</option>
                               <option>Vip Meeting</option>
@@ -196,15 +194,18 @@
                           <p>Date</p>
                         </div>
                         <div class="col-6 col-lg-6 col-md-6">
-                          <input type="date" /> 
+                          <input type="date" #date="ngModel" name="date"
+                          [(ngModel)]="model.date"/> 
                         </div>
                       </div> 
+
                       <div class="row">
                         <div class="col-6 col-lg-4 col-md-6">
                           <p>Number Of Persons</p>
                         </div>
                         <div class="col-6 col-lg-6 col-md-6">
-                          <input type="text" /> 
+                          <input type="text" #no_of_persons="ngModel" name="no_of_persons"
+                          [(ngModel)]="model.no_of_persons"/> 
                         </div>
                       </div>
                       <div class="row">
@@ -212,7 +213,8 @@
                           <p>Remarks</p>
                         </div>
                         <div class="col-6 col-lg-6 col-md-6">
-                          <input type="text" /> 
+                          <input type="text" #remarks="ngModel" name="remarks"
+                          [(ngModel)]="model.remarks"/> 
                         </div>
                       </div>
                       <div class="row">
@@ -220,7 +222,8 @@
                           <p>Meeting Room</p>
                         </div>
                         <div class="col-6 col-lg-6 col-md-6">
-                          <input type="text" /> 
+                          <input type="text" #meeting_room="ngModel" name="meeting_room"
+                          [(ngModel)]="model.meeting_room"/> 
                         </div>
                       </div>
                     </div>
@@ -235,10 +238,10 @@
                       <tbody>
                           <tr *ngFor="let field of tableArray; let i = index">
                             <td>
-                              <select [(ngModel)]="field.name"  type="text" name="{{field.name}}"
+                              <select [(ngModel)]="field.item_id"  type="text" name="{{field.item_id}}"
                               [ngModelOptions]="{standalone: true}"
                               >
-                                <option *ngFor="let menulist of menuList">{{ menulist.item_name}}</option>
+                                <option *ngFor="let menulist of menuList" value="{{menulist.item_id}}">{{ menulist.item_name}}</option>
                               </select>
                             </td>
                             <td>
@@ -301,7 +304,7 @@
                     <hr>
                   </div>
                   <div class="card-body">
-                    <form #empEdit="ngForm" (ngSubmit)="employeeEditSave(empEdit)">
+                    <form #meetingEdit="ngForm" (ngSubmit)="meetingEditSave(meetingEdit)">
                     <div class="row">
                       <div class="col-6 col-lg-6 col-d-6">
                         <div class="row">
@@ -312,7 +315,7 @@
                             <p>:</p>
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">
+                            <p class="text-black" *ngIf="view">    
                               {{ meetinglistview.code }}
                             </p>
                             <input type="text" *ngIf="edit" value="{{ meetinglistview.code }}" 
@@ -336,7 +339,7 @@
                             value="{{ meetinglistview.emp_code }}"/>
                           </div>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
                             <p>Employee Name</p>
                           </div>
@@ -344,12 +347,12 @@
                             <p>:</p>
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
-                            <p class="text-black" *ngIf="view">{{ meetinglistview.emp_code }}</p>
+                            <p class="text-black" *ngIf="view">{{ meetinglistview.emp_name }}</p>
                             <input type="text" *ngIf="edit" 
-                            #emp_name="ngModel" name="emp_name"  [(ngModel)]="meetinglistview.emp_code"
-                            value="{{ meetinglistview.emp_code }}"/>
+                            #emp_name="ngModel" name="emp_name"  [(ngModel)]="meetinglistview.emp_name"
+                            value="{{ meetinglistview.emp_name }}"/>
                           </div>
-                        </div>
+                        </div> -->
 
                         <div class="row">
                           <div class="col-6 col-lg-4 col-md-6">
@@ -361,7 +364,7 @@
                           <div class="col-5 col-lg-5 col-md-5">
                             <p class="text-black" *ngIf="view">{{ meetinglistview.department_id }}</p>
                             <select *ngIf="edit" 
-                            #department="ngModel" name="department"  value="{{ meetinglistview.department_id }}"
+                            #department="ngModel" name="department_id"  value="{{ meetinglistview.department_id }}"
                             [(ngModel)]="meetinglistview.department_id" 
                             >
                               <option *ngFor="let departmentlist of departmentList" value="{{ departmentlist.id }}">
@@ -382,11 +385,10 @@
                             <p class="text-black" *ngIf="view">{{meetinglistview.meeting_type_id}}</p>
                             <select *ngIf="edit"
                             #meeting_type_id="ngModel" name="meeting_type_id"  
-                            [(ngModel)]="meetinglistview.meeting_type_id"
+                            [(ngModel)]="model.meeting_type_id"
                             >
-                              <option>{{meetinglistview.meeting_type_id}}</option>
-                              <option value="1">Vip Meeting</option>
-                              <option value="2">General Meeting</option>
+                              <option>Vip Meeting</option>
+                              <option>General Meeting</option>
                             </select>
                           </div>
                         </div>
@@ -420,7 +422,7 @@
                           <div class="col-5 col-lg-5 col-md-5">
                             <p class="text-black" *ngIf="view">{{ meetinglistview.date }}</p>
                             <input *ngIf="edit" type="date" value="{{ meetinglistview.date }}"
-                            #date="ngModel" name="date"  [(ngModel)]="meetinglistview.date"
+                            #date="ngModel" name="date"  [(ngModel)]="model.date"
                             />
                           </div>
                         </div>

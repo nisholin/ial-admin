@@ -126,7 +126,7 @@
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row [ngClass]="table - row" tabindex="1" *matRowDef="let row; columns: displayedColumns"></tr>
               </table>
-              <mat-paginator #sort [pageSize]="5"[hidePageSize]="true"></mat-paginator>
+              <mat-paginator #sort [pageSize]="10"[hidePageSize]="true"></mat-paginator>
             </div>
             </div>
             <!--Table End-->
@@ -225,14 +225,16 @@
                           <div *ngFor="let itemlist of itemList;let i = index">
                             <div class="row">
                               <div class="col-6 col-lg-6 col-md-6">
-                                <input type="checkbox" value="{{itemlist.item_id}}"
-                                (click)="empMenuUpdate(i,itemlist,$event.target.checked)">&nbsp;&nbsp; 
+                                <input type="checkbox" value="{{itemlist.item_id}}" name="itemlist[]"
+                                id="item_id"
+                                > 
                                 <lable value="{{itemlist.item_id}}" >
                                 {{ itemlist.item_name }}</lable><br/>
                               </div>
                               <div class="col-6 col-lg-6 col-md-6">
-                              <input type="number" (change)="saveCount(itemlist.item_id,itemlist.item_count)"
-                               name="item_count" [(ngModel)]="itemlist.item_count" 
+                              <input type="number" (change)="saveCount(itemlist.item_id,item_count,i)"
+                              #item_count="ngModel" name="item_count" 
+                              [(ngModel)]="itemlist.item_count" 
                               />
                             </div> 
                             </div>
@@ -329,7 +331,6 @@
                           <div class="col-5 col-lg-5 col-md-5">
                             <input type="text" value="{{ empmanualentrylistview.code }}" 
                              #code="ngModel" name="code"  [(ngModel)]="empmanualentrylistview.code"
-                             [ngModelOptions]="{standalone: true}"
                             readonly
                             />
                           </div>

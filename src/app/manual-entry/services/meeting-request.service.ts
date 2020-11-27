@@ -21,4 +21,12 @@ export class MeetingRequestService {
   readItems(): Observable<Menu[]> {
     return this.httpClient.get<Menu[]>(this.baseUrl +'/itemview');
   }
+  //save
+  saveMeetingRequest(meetingReqArr: any) {
+    return this.httpClient.post<MeetingRequest[]>(this.baseUrl+'/save',meetingReqArr);
+  }
+  //update
+  updateMeetingRequst(meetingEdit: any) {
+    return this.httpClient.put<MeetingRequest[]>(this.baseUrl+'/edit',meetingEdit);
+  }
 }

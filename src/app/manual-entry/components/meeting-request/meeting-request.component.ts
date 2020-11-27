@@ -7,10 +7,12 @@ import { MatTableDataSource } from "@angular/material/table";
 //SERVICES
 import { MeetingRequestService } from "../../services/meeting-request.service";
 import { GuestService } from '../../../epmloyee/services/guest.service';
+import { EmployeeManualEntryService } from "../../services/employee-manual-entry.service";
 //_MODELS
 import { MeetingRequest } from "../../../_models/manual-entry/meeting-request";
 import { Department } from '../../../_models/employee/department';
 import { Menu } from "../../../_models/canteen/menu";
+import { EmployeeManualEntry } from "../../../_models/manual-entry/employee-manual-entry";
 
 @Component({
   selector: 'app-meeting-request',
@@ -44,12 +46,16 @@ export class MeetingRequestComponent implements OnInit {
   menu                      : Menu[];
   menuList                  : any;
   private edittablearray    : Array<any> = [];
-  private newAttribute2      : any = {};
+  private newAttribute2     : any = {};
+  empManualList             : any;
+  employeemanualentry       : EmployeeManualEntry[];
+  private meetingReqArr     : Array<any> = [];
 
 
   constructor( 
     private meetingrequestservice: MeetingRequestService,
-    private guestservice: GuestService
+    private guestservice: GuestService,
+    private employeemanualservice: EmployeeManualEntryService,
     ) {
     this.meetingrequestservice.readMeetingRequest().subscribe((meetingrequest: MeetingRequest[])=>{
       this.meetingrequestlist = meetingrequest;
@@ -155,5 +161,36 @@ export class MeetingRequestComponent implements OnInit {
   editFieldValuedelete(index) {
       this.edittablearray.splice(index, 1);
   }
-
+  saveMeetingRequest(addMeetingDetails: any) {
+    this.meetingReqArr = this.tableArray.concat(addMeetingDetails.value);
+    console.log(this.meetingReqArr);
+    this.meetingrequestservice.saveMeetingRequest(this.meetingReqArr).subscribe((meetingrequest:MeetingRequest[]) =>{
+      alert("Saved Successfilly");
+    },
+    error => {
+      //alert('Network Error-->'+error);
+    }); 
+  }
+  getEmpDetails(empcode) {
+    //alert("test"+empcode.value);
+    this.employeemanualservice.getEmpManualEntry(empcode.value).subscribe((employeemanualentry:EmployeeManualEntry[]) =>{
+      this.empManualList        = employeemanualentry;
+      this.model.emp_name       = this.empManualList[0].emp_name;
+      this.model.category_name  = this.empManualList[0].category_name;
+      this.model.category_id    = this.empManualList[0].category_id;
+      //alert(this.empManualList[0].emp_name);
+      },
+      error => {
+        //alert('Network Error-->'+error);
+      });
+  }
+  meetingEditSave(meetingEdit: any) {
+    console.log(meetingEdit.value);
+    this.meetingrequestservice.updateMeetingRequst(meetingEdit.value).subscribe((meetingrequest: MeetingRequest[])=>{
+      alert("Updated Successfully");
+    },
+    error => {
+      //alert('Network Error-->'+error);
+    });
+  }
 }

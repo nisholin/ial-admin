@@ -115,6 +115,7 @@ export class ContractorManualEntryComponent implements OnInit {
   contManualEditSave(contManualEditValues: any,id : any) {
     console.log(contManualEditValues.value);
     this.contmanualentryservice.updateContManualEnty(contManualEditValues.value,id).subscribe((contmanualentry: ContManualEntry[])=>{
+      alert("Updated Successfully");
     },
     error => {
       //alert('Network Error-->'+error);

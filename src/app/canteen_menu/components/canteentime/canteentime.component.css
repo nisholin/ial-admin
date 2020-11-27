@@ -37,3 +37,24 @@ table {
     text-align: center;
     background: transparent;
   }
+  :host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0px;
+  }
+  :host ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+    top: -10px;
+    text-align: start;
+    padding: 0px 25px;
+  }
+  :host ::ng-deep label span {
+    color: black !important;
+  }
+  .mat-form-field {
+    font-size: 14px;
+    width: 90%;
+    height: 40px !important;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 21px;
+    box-shadow: 2px 5px 11px 6px #c7c7c7;
+    font-family: FontAwesome;
+  }
