@@ -147,7 +147,7 @@
                     <hr>
                   </div>
                 <div class="card-body">
-                  <form #addEmpManualEntry="ngForm" (ngSubmit)="saveEmpManualEntry(addEmpManualEntry)"> 
+                  <form #addEmpManualEntry="ngForm"> 
                     <div class="row"> 
                       <div class="col-1 col-lg-1 col-d-1"></div>
                       <div class="col-4 col-lg-5 col-d-4">
@@ -222,23 +222,19 @@
                     <div class="col-4 col-lg-6 col-d-4">
                       <div class="menu-box"><br/>
                         <div class="special-container">
-                          <div *ngFor="let itemlist of itemList;let i = index">
+                          <div *ngFor="let itemlist of itemList;let i=index;">
                             <div class="row">
                               <div class="col-6 col-lg-6 col-md-6">
-                                <input type="checkbox" value="{{itemlist.item_id}}" name="itemlist[]"
-                                id="item_id"
-                                > 
-                                <lable value="{{itemlist.item_id}}" >
-                                {{ itemlist.item_name }}</lable><br/>
-                              </div>
-                              <div class="col-6 col-lg-6 col-md-6">
-                              <input type="number" (change)="saveCount(itemlist.item_id,item_count,i)"
-                              #item_count="ngModel" name="item_count" 
-                              [(ngModel)]="itemlist.item_count" 
-                              />
-                            </div> 
+                                  <label for="categoryname">          
+                                    <input type="checkbox" value="{{itemlist.item_id}}" name="itemlist.item_id[]" />
+                                      {{itemlist.item_name}}
+                                  </label>
                             </div>
-                          </div>
+                            <div class="col-6 col-lg-6 col-md-6">
+                                <input type="number" name="item_count[]"  />
+                              </div> 
+                            </div>
+                          </div>  
                         </div>
                         <br/>
                       </div>
@@ -250,7 +246,7 @@
                       <div class="col-3 col-lg-4 col-md-3 row">
                       </div>
                       <div class="col-3 col-lg-4 col-md-3">
-                        <button class="save-form-btn position-left" type="submit">Submit</button>
+                        <button class="save-form-btn position-left" (click)="saveEmpManualEntry(addEmpManualEntry)">Submit</button>
                       </div>
                     </div>
                   </form>

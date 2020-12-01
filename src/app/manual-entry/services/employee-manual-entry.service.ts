@@ -29,9 +29,9 @@ export class EmployeeManualEntryService {
   }
 
   //save
-  saveEmpEntry(empmanualentryArr) {
+  saveEmpEntry(empItemArr: any) {
     //console.log(empmanualentryArr);
-    return this.httpClient.post<EmployeeManualEntry[]>(this.baseUrl+'/manualentrynew',empmanualentryArr);
+    return this.httpClient.post<any>(this.baseUrl+'/manualentrynew',empItemArr);
   }
 
   //delete

@@ -48,15 +48,22 @@ export class EmployeeManualEntryComponent implements OnInit {
   upload                  : any;
   empManualList           : any={};
   itemList                : any;
-  empItemArr              : Array<any>= [];
   isCheckedArr            : Array<any> =[];
   empmanualentryArr       : Array<any> =[];
   isShowEditDelete        = [];
-  empmanualentrylistview  : any={};
-  category                : Category  [];
+  empmanualentrylistview  : any = {};
+  category                : Category [];
   categoryList            : any;
   itemcount               : any;
-  empmanualentryArr1      : any={};
+  
+  //
+  empItemArr              : any = [];
+  empmanualentryArrs      : any = [];
+  array1                  : any = [];
+  array2                  : any = [];
+  array3                  : any = [];
+  str                     : any = {};
+  str1                    : any = {};
 
   constructor(
     private employeemanualservice: EmployeeManualEntryService,
@@ -105,7 +112,7 @@ export class EmployeeManualEntryComponent implements OnInit {
       this.itemList = item;
       
       for(let i=0;i<this.itemList.length;i++){
-        this.itemList[i].item_count = 0;
+        this.itemList[i].item_count = '';
       }
       //alert(this.canteentimelist.length);
       console.log(this.itemList);
@@ -160,49 +167,36 @@ export class EmployeeManualEntryComponent implements OnInit {
         //alert('Network Error-->'+error);
       });
   }
-  saveEmpManualEntry(saveEmpManualEntry) {
-    //console.log(saveEmpManualEntry.value);
-    //console.log(this.empItemArr);
-    //this.empmanualentryArr =this.empItemArr.concat(saveEmpManualEntry.value);
-    this.empItemArr.push(saveEmpManualEntry.value);
-    this.empmanualentryArr = this.empItemArr;
-    
-    console.log("new array",this.empmanualentryArr);
-     this.employeemanualservice.saveEmpEntry(this.empmanualentryArr).subscribe((employeemanualentry:EmployeeManualEntry[]) =>{
+  saveEmpManualEntry(saveEmpManualEntry: any) {
+    //
+    this.array1 = [];
+    this.array2 = [];
+    this.array3 = [];
+
+    var ele = document.getElementsByTagName('input');
+    for (let i = 0; i < ele.length; i++) {
+      if (ele[i].type == 'number') {
+        if(ele[i].value != ''){
+          this.array1.push(ele[i].value);
+          this.str = this.array1.join(',');          
+        }
+      }
+
+      if (ele[i].type == 'checkbox') {
+        if(ele[i].checked === true){
+          this.array2.push(ele[i].value);
+          this.str1 = this.array2.join(','); 
+        }
+      }
+    }
+
+    this.array3.push({ item_id: this.str1,item_count: this.str },saveEmpManualEntry.value);
+    console.log(this.array3);
+     this.employeemanualservice.saveEmpEntry(this.array3).subscribe(() =>{
     },
     error => {
       //alert('Network Error-->'+error);
     });  
-    this.empmanualentryArr = []; 
-  }
-  empMenuUpdate(index: number, itemlist: any, isChecked: boolean) {
-    //console.log(itemlist);
-    if (isChecked) {
-      itemlist.indexVal = index;
-      console.log(itemlist.item_id);
-      //this.empItemArr.push({item_id: itemlist.item_id});
-      console.log(this.empItemArr);
-
-      this.isCheckedArr.push({ checked: true, indexVal: index });
-      this.isShowEditDelete[index] = false;
-    } else {
-      this.menuremoveItem(this.isCheckedArr, index, "checked");
-      this.menuremoveItem(this.empItemArr, index, "product");
-      alert("Item Removed");
-    }
-  }
-  menuremoveItem(isCheckedArr: any, index: number, type: string) {
-    isCheckedArr.forEach((item, indexCheck) => {
-      if (item.indexVal === index) {
-        isCheckedArr.splice(indexCheck, 1);
-      }
-    });
-
-    if (type === "checked") {
-      this.isCheckedArr = isCheckedArr;
-    } else if (type === "product") {
-      this.empItemArr = isCheckedArr;
-    }
   }
   deleteEntry(id: any){
     this.employeemanualservice.deleteEntry(id).subscribe(() =>{
@@ -223,11 +217,4 @@ export class EmployeeManualEntryComponent implements OnInit {
       //alert('Network Error-->'+error);
     });
   }
-  saveCount(itemid: any,itemcount: any,index: any) {
-    //alert(itemid);
-    alert(itemcount.value);
-    this.empItemArr.push({item_id: itemid,item_count : itemcount.value});
-    console.log(this.empItemArr);
-    //$scope.empItemArr[index].item_count = itemcount;
-  } 
 }

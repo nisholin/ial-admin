@@ -5,5 +5,6 @@ export class EmployeeManualEntry {
     emp_code        : String;
     emp_name        : String;
     item_id         : String;
+    item_count      : Number;
     date            : String;
 }
