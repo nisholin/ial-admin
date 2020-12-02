@@ -649,3 +649,6 @@ ngx-spinner {
   background: red !important;
   width: 50%;
 }
+label {
+  display: initial !important;
+}

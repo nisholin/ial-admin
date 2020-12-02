@@ -193,6 +193,7 @@ export class EmployeeManualEntryComponent implements OnInit {
     this.array3.push({ item_id: this.str1,item_count: this.str },saveEmpManualEntry.value);
     console.log(this.array3);
      this.employeemanualservice.saveEmpEntry(this.array3).subscribe(() =>{
+       alert("Saved Succesfully");
     },
     error => {
       //alert('Network Error-->'+error);
