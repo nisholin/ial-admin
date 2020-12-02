@@ -470,6 +470,7 @@ input [type=select] {
 }
 input [type=checkbox] {
   width: 10% !important;
+  margin: 12px !important;
 }
 input[type=date] {
   width: 100%;

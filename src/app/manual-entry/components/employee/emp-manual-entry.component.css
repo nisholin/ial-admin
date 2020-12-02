@@ -29,3 +29,6 @@
 input[type="file"] {
     display: none;
 }
+input [type=checkbox] {
+  margin: 12px !important;
+}

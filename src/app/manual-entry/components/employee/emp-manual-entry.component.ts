@@ -55,6 +55,7 @@ export class EmployeeManualEntryComponent implements OnInit {
   category                : Category [];
   categoryList            : any;
   itemcount               : any;
+  savedItems              : any;
   
   //
   empItemArr              : any = [];
@@ -64,6 +65,13 @@ export class EmployeeManualEntryComponent implements OnInit {
   array3                  : any = [];
   str                     : any = {};
   str1                    : any = {};
+
+  //
+  array4                  : any = [];
+  array5                  : any = [];
+  array6                  : any = [];
+  str2                    : any = {};
+  str3                    : any = {};
 
   constructor(
     private employeemanualservice: EmployeeManualEntryService,
@@ -91,6 +99,15 @@ export class EmployeeManualEntryComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.array1             = [];
+    this.array2             = [];
+    this.array3             = [];
+    this.array4             = [];
+    this.array5             = [];
+    this.array6             = [];
+
+
+
     this.tablehide          = true;
     this.newuser            = false;
     this.upload             = false;
@@ -126,19 +143,29 @@ export class EmployeeManualEntryComponent implements OnInit {
     this.newuser    = false;
     this.tablehide  = false;
   }
-  empManualEntyrEdit(id: any){
+  empManualEntyrEdit(id: any,itemId: any){
     this.employeemanualservice.readEmpManualEnty().subscribe((employeemanualentry: EmployeeManualEntry[])=>{
       this.empmanualentrylist = employeemanualentry;
       for(let i=0;i<this.empmanualentrylist.length;i++){
         if( id == this.empmanualentrylist[i].id){
           this.empmanualentrylistview = this.empmanualentrylist[i];
-          console.log(this.empmanualentrylistview);
+          //console.log(this.empmanualentrylistview);
         }
       }
     },
     error => {
       //alert('Network Error-->'+error);
+    });
+
+    //Read Saved Items 
+    this.employeemanualservice.readSavedItem(itemId).subscribe((item:Item[])=>{
+      this.savedItems = item;
+      console.log(this.savedItems);
+    },
+    error => {
+      //alert('Network Error-->'+error);
     }); 
+
     this.userView   = true;
     this.tablehide  = false;
     this.newuser    = false;
@@ -207,9 +234,34 @@ export class EmployeeManualEntryComponent implements OnInit {
     });
   }
   empManualEditSave(empManualEditValues: any,id : any) {
-    alert(id);
-    console.log(empManualEditValues.value);
-    this.employeemanualservice.updateEmpManualEnty(empManualEditValues.value,id).subscribe((employeemanualentry: EmployeeManualEntry[])=>{
+    //alert(id);
+    //console.log(empManualEditValues.value);
+
+    this.array4 = [];
+    this.array5 = [];
+    this.array6 = [];
+
+    var ele = document.getElementsByTagName('input');
+    for (let i = 0; i < ele.length; i++) {
+      if (ele[i].type == 'number') {
+        if(ele[i].value != ''){
+          this.array4.push(ele[i].value);
+          this.str2 = this.array4.join(',');          
+        }
+      }
+
+      if (ele[i].type == 'checkbox') {
+        if(ele[i].checked === true){
+          this.array5.push(ele[i].value);
+          this.str3 = this.array5.join(','); 
+        }
+      }
+    }
+	
+	  this.array6.push({ item_id: this.str3,item_count: this.str2 },empManualEditValues.value);
+    console.log(this.array6);
+
+    this.employeemanualservice.updateEmpManualEnty(this.array6,id).subscribe((employeemanualentry: EmployeeManualEntry[])=>{
       alert("Updated Successfully");
       //this.empmanualentrylist = employeemanualentry;
       //console.log(this.empmanualentrylist);

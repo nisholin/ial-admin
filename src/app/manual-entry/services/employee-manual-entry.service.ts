@@ -27,6 +27,10 @@ export class EmployeeManualEntryService {
   readItem(): Observable<Item[]> {
     return this.httpClient.get<Item[]>(this.baseUrl +'/employee/item');
   }
+  readSavedItem(itemId: any): Observable<Item[]> {
+    //alert("test");
+    return this.httpClient.get<Item[]>(this.baseUrl +'/employee/getsaveditem/'+itemId);
+  }
 
   //save
   saveEmpEntry(empItemArr: any) {
@@ -41,7 +45,7 @@ export class EmployeeManualEntryService {
   }
   
   //update
-  updateEmpManualEnty(empManualEditValues: any,id: any) {
-    return this.httpClient.put<EmployeeManualEntry[]>(this.baseUrl+'/employeeedit/'+id,empManualEditValues);
+  updateEmpManualEnty(array6: any,id: any) {
+    return this.httpClient.put<EmployeeManualEntry[]>(this.baseUrl+'/employeeedit/'+id,array6);
   }
 }

@@ -44,6 +44,11 @@ export class ContractorManualEntryComponent implements OnInit {
   category                  : Category  [];
   categoryList              : any;
 
+  //
+  array1                    = [];
+  array2                    = [];
+  array3                    = [];
+
   constructor(
     private contmanualentryservice: ContManualEntryService,
     private commonservice: CommonService,
