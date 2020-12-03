@@ -13,6 +13,7 @@ import { MeetingRequest } from "../../../_models/manual-entry/meeting-request";
 import { Department } from '../../../_models/employee/department';
 import { Menu } from "../../../_models/canteen/menu";
 import { EmployeeManualEntry } from "../../../_models/manual-entry/employee-manual-entry";
+import { Item } from "../../../_models/manual-entry/item";
 
 @Component({
   selector: 'app-meeting-request',
@@ -50,6 +51,8 @@ export class MeetingRequestComponent implements OnInit {
   empManualList             : any;
   employeemanualentry       : EmployeeManualEntry[];
   private meetingReqArr     : Array<any> = [];
+  editMeetingReqArr         : any;
+  savedItems                : any;
 
 
   constructor( 
@@ -126,7 +129,7 @@ export class MeetingRequestComponent implements OnInit {
     this.tablehide    = false;
     this.newMeeting   = false;
   }
-  meetingEditOpen() {
+  meetingEditOpen(itemId: any) {
     this.meetingrequestservice.readItems().subscribe((menu: Menu[])=>{
       this.menuList = menu;
       console.log(this.menuList);
@@ -134,6 +137,16 @@ export class MeetingRequestComponent implements OnInit {
     error => {
       //alert('Network Error-->'+error);
     });
+
+    //Read Saved Items 
+    this.employeemanualservice.readSavedItem(itemId).subscribe((item:Item[])=>{
+      this.savedItems = item;
+      console.log(this.savedItems);
+    },
+    error => {
+      //alert('Network Error-->'+error);
+    }); 
+
     this.edit         = true;
     this.view         = false;
   }
@@ -186,7 +199,9 @@ export class MeetingRequestComponent implements OnInit {
   }
   meetingEditSave(meetingEdit: any) {
     console.log(meetingEdit.value);
-    this.meetingrequestservice.updateMeetingRequst(meetingEdit.value).subscribe((meetingrequest: MeetingRequest[])=>{
+    this.editMeetingReqArr = this.edittablearray.concat(meetingEdit.value);
+    console.log(this.editMeetingReqArr);
+    this.meetingrequestservice.updateMeetingRequst(this.editMeetingReqArr).subscribe((meetingrequest: MeetingRequest[])=>{
       alert("Updated Successfully");
     },
     error => {

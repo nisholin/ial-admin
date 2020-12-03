@@ -311,7 +311,6 @@
                             </p>
                             <input type="text" *ngIf="edit" value="{{ meetinglistview.code }}" 
                              #code="ngModel" name="code"  [(ngModel)]="meetinglistview.code"
-                             [ngModelOptions]="{standalone: true}"
                             readonly>
                           </div>
                         </div>
@@ -444,16 +443,16 @@
                         </tr>
                     </thead> 
                     <tbody>
-                        <tr *ngFor="let field of edittablearray;let i = index">
+                        <tr *ngFor="let editfield of edittablearray;let i = index">
                           <td>
-                            <select [(ngModel)]="field.name"  type="text" name="{{field.name}}"
+                            <select [(ngModel)]="editfield.item_id"  type="text" name="{{editfield.item_id}}"
                             [ngModelOptions]="{standalone: true}"
                             >
-                              <option *ngFor="let menulist of menuList">{{ menulist.item_name}}</option>
+                              <option *ngFor="let menulist of menuList" value="{{ menulist.item_id }}">{{ menulist.item_name}}</option>
                             </select>
                           </td>
                           <td>
-                            <input [(ngModel)]="field.number"  type="number" name="{{field.number}}" 
+                            <input [(ngModel)]="editfield.number"  type="number" name="{{editfield.number}}" 
                             [ngModelOptions]="{standalone: true}"
                             />
                           </td>

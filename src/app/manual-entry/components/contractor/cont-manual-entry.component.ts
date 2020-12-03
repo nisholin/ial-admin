@@ -9,11 +9,13 @@ import { MatTableDataSource } from "@angular/material/table";
 import { ContManualEntryService } from "../../services/cont-manual-entry.service";
 import { CommonService } from '../../../services/common.service';
 import { ReportService } from "../../../reports/services/report.service";
+import { EmployeeManualEntryService } from "../../services/employee-manual-entry.service";
 //_models
 import { EmployeeManualEntry } from "../../../_models/manual-entry/employee-manual-entry";
 import { CanteenTime } from '../../../_models/canteen/canteentime';
 import { ContManualEntry } from "../../../_models/manual-entry/cont-manual-entry";
 import { Category } from "../../../_models/common/category";
+import { Item } from "../../../_models/manual-entry/item";
 
 @Component({
   selector: 'app-cont-manual-entry',
@@ -43,16 +45,20 @@ export class ContractorManualEntryComponent implements OnInit {
   contmanualentrylistview   : any;
   category                  : Category  [];
   categoryList              : any;
+  savedItems                : any;
 
   //
   array1                    = [];
   array2                    = [];
   array3                    = [];
+  str                       : any = {};
+  str1                      : any = {};
 
   constructor(
     private contmanualentryservice: ContManualEntryService,
     private commonservice: CommonService,
-    private reportservice: ReportService
+    private reportservice: ReportService,
+    private employeemanualservice: EmployeeManualEntryService,
   ) 
   { 
     this.contmanualentryservice.readContManualEnty().subscribe((contmanualentry: ContManualEntry[])=>{
@@ -74,6 +80,12 @@ export class ContractorManualEntryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.array1             = [];
+    this.array2             = [];
+    this.array3             = [];
+
+
+
     this.tablehide        = true;
     this.contEditView     = false;
     this.upload           = false;
@@ -114,12 +126,45 @@ export class ContractorManualEntryComponent implements OnInit {
     error => {
       //alert('Network Error-->'+error);
     });
+
+ //Read Saved Items 
+ this.employeemanualservice.readSavedItem(id).subscribe((item:Item[])=>{
+  this.savedItems = item;
+  console.log(this.savedItems);
+},
+error => {
+  //alert('Network Error-->'+error);
+}); 
+
     this.contEditView     = true;
     this.tablehide        = false;
   }
   contManualEditSave(contManualEditValues: any,id : any) {
-    console.log(contManualEditValues.value);
-    this.contmanualentryservice.updateContManualEnty(contManualEditValues.value,id).subscribe((contmanualentry: ContManualEntry[])=>{
+
+     //
+     this.array1 = [];
+     this.array2 = [];
+     this.array3 = [];
+ 
+     var ele = document.getElementsByTagName('input');
+     for (let i = 0; i < ele.length; i++) {
+       if (ele[i].type == 'number') {
+         if(ele[i].value != ''){
+           this.array1.push(ele[i].value);
+           this.str = this.array1.join(',');          
+         }
+       }
+ 
+       if (ele[i].type == 'checkbox') {
+         if(ele[i].checked === true){
+           this.array2.push(ele[i].value);
+           this.str1 = this.array2.join(','); 
+         }
+       }
+     }
+     this.array3.push({ item_id: this.str1,item_count: this.str },contManualEditValues.value);
+    console.log(this.array3);
+    this.contmanualentryservice.updateContManualEnty(this.array3,id).subscribe((contmanualentry: ContManualEntry[])=>{
       alert("Updated Successfully");
     },
     error => {

@@ -407,19 +407,24 @@
                       </div>
 
                       <div class="col-6 col-lg-6 col-d-6">
-                        <div class="row">
-                          <div class="col-6 col-lg-4 col-md-6">
-                          <input type="checkbox"
-                          >&nbsp;&nbsp; 
-                          <lable>Tea</lable><br/>
+                        <div class="menu-box"><br/>
+                          <div class="special-container">
+                            <div *ngFor="let saveditems of savedItems;let i=index;">
+                            <div class="row">
+                              <div class="col-6 col-lg-6 col-md-6">
+                                <label for="categoryname">&nbsp;         
+                                <input type="checkbox" style="margin: 12px;" value="{{saveditems.item_id}}" name="saveditems.item_id[]" />
+                                  {{saveditems.item_name}}
+                                </label>
+                            </div>
+                            <div class="col-6 col-lg-6 col-md-6">
+                              <input type="number" name="item_count[]"  />
+                              </div> 
+                            </div>
+                            </div>  
                           </div>
-                          <div class="col-1 col-lg-1 col-md-1">
-                          <p>:</p>
+                          <br/>
                           </div>
-                          <div class="col-5 col-lg-5 col-md-5">
-                          <input type="number" />
-                          </div>
-                        </div>
                       </div>
                    </div>
                    <div class="row">
