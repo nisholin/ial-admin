@@ -72,9 +72,11 @@ cancel(row: any) {
 	row.editable = false;
 }
 updateCanteenTime(starttime: any,endtime: any,id: any) {
+	console.log(endtime);
 	this.fieldarray.push({id: id,start_time: starttime,end_time: endtime});
-	//console.log(this.fieldarray)
-	this.Canteentimeservice.updateCanteenTime(this.fieldarray).subscribe(()=>{
+	console.log(this.fieldarray)
+	this.Canteentimeservice.updateCanteenTime(id,this.fieldarray).subscribe(()=>{
+		alert("Update Successfully");
 	},
 	error => {
 		//alert('Network Error-->'+error);

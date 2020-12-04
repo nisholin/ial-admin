@@ -32,6 +32,11 @@ import { SummaryReportsComponent } from '../../reports/components/summary-report
 import { CompanyReportsComponent } from '../../reports/components/company-reports/company-reports.component';
 import { CatererReportsComponent } from '../../reports/components/caterer-reports/caterer-reports.component';
 
+//more
+import { BarcodeComponent } from "../../more/components/barcode/barcode.component";
+import { CanteenScreenComponent } from "../../more/components/canteen-screen/canteen-screen.component";
+import { HelpDeskComponent } from "../../more/components/help-desk/help-desk.component";
+
 export const AdminLayoutRoutes: Routes = [
     //canteen
     { path: 'canteentime',               component: CanteenTimeComponent },
@@ -59,7 +64,11 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'trainee',                   component: TraineeComponent },
     { path: 'contractor',                component: ContractorComponent },
     //Manual Entry
-    { path: 'emp-manual-entry',              component: EmployeeManualEntryComponent },
-    { path: 'cont-manual-entry',           component: ContractorManualEntryComponent },
-    { path: 'meeting-request',                    component: MeetingRequestComponent }
+    { path: 'emp-manual-entry',          component: EmployeeManualEntryComponent },
+    { path: 'cont-manual-entry',         component: ContractorManualEntryComponent },
+    { path: 'meeting-request',           component: MeetingRequestComponent },
+    //report
+    { path: 'barcode',                   component: BarcodeComponent },
+    { path: 'canteen-screen',            component: CanteenScreenComponent },
+    { path: 'help-desk',                 component: HelpDeskComponent }
 ];

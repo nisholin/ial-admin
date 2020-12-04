@@ -148,7 +148,28 @@ export const ROUTES: RouteInfo[] = [
       }
   ],
   submenu: true},
+
+  { path: '/', title: 'More',  icon:'text_caps-small', class: '',
+    childern: [
+      {
+        id: "barcode",
+        label: "Barcode",
+        path: "/barcode",
+      },
+      {
+        id: "canteenscreen",
+        label: "Canteen Screen",
+        path: "/canteen-screen",
+      },
+      {
+        id: "helpdesk",
+        label: "Help Desk",
+        path: "/help-desk",
+      },
+  ],
+  submenu: true},
 ];
+
 
 @Component({
   selector: 'app-sidebar',

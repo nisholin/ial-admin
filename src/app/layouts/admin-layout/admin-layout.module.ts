@@ -41,6 +41,11 @@ import { SummaryReportsComponent } from '../../reports/components/summary-report
 import { CompanyReportsComponent } from '../../reports/components/company-reports/company-reports.component';
 import { CatererReportsComponent } from '../../reports/components/caterer-reports/caterer-reports.component';
 
+//more
+import { BarcodeComponent } from "../../more/components/barcode/barcode.component";
+import { CanteenScreenComponent } from "../../more/components/canteen-screen/canteen-screen.component";
+import { HelpDeskComponent } from "../../more/components/help-desk/help-desk.component";
+
 //custom imports
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
@@ -114,6 +119,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
     TraineeComponent,
     ContractorComponent,
     MeetingRequestComponent,
+    //report
+    BarcodeComponent,
+    CanteenScreenComponent,
+    HelpDeskComponent
   ],
   exports: [
     MatFormFieldModule ,

@@ -53,6 +53,7 @@ export class MeetingRequestComponent implements OnInit {
   private meetingReqArr     : Array<any> = [];
   editMeetingReqArr         : any;
   savedItems                : any;
+  savedQuantity             : any;
 
 
   constructor( 
@@ -130,6 +131,7 @@ export class MeetingRequestComponent implements OnInit {
     this.newMeeting   = false;
   }
   meetingEditOpen(itemId: any) {
+    //alert(itemId);
     this.meetingrequestservice.readItems().subscribe((menu: Menu[])=>{
       this.menuList = menu;
       console.log(this.menuList);
@@ -139,9 +141,18 @@ export class MeetingRequestComponent implements OnInit {
     });
 
     //Read Saved Items 
-    this.employeemanualservice.readSavedItem(itemId).subscribe((item:Item[])=>{
+    this.meetingrequestservice.readSavedItem(itemId).subscribe((item:Item[])=>{
       this.savedItems = item;
       console.log(this.savedItems);
+    },
+    error => {
+      //alert('Network Error-->'+error);
+    }); 
+
+    //read itemquantity
+    this.meetingrequestservice.readSavedItemQuantity(itemId).subscribe((item:Item[])=>{
+      this.savedQuantity = item;
+      console.log(this.savedQuantity);
     },
     error => {
       //alert('Network Error-->'+error);
