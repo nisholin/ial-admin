@@ -9,42 +9,42 @@
           <hr>
         </div>
       <div class="card-body">
-        <form #reportForm="ngForm" (ngSubmit)="getReports(reportForm)">
+        <form  #reportForm="ngForm" (ngSubmit)="getReports(reportForm)">
           <div class="row">
             <div class="col-1 col-lg-1 col-md-1"></div>
             <div class="col-2 col-lg-2 col-md-2">
-              <input type="date" #from_date="ngModel" name="from_date" 
-              [(ngModel)]="model.from_date"
+              <input type="date" #from_date="ngModel" name="from_date" [(ngModel)]="model.from_date" 
               />
             </div>
             <div class="col-2 col-lg-2 col-md-2">
-              <input type="date" #to_date="ngModel" name="to_date" 
-              [(ngModel)]="model.to_date"
+              <input type="date" #to_date="ngModel" name="to_date" [(ngModel)]="model.to_date"
               />
             </div>
             <div class="col-2 col-lg-2 col-md-2 m-t-8">
-              <select #category_name="ngModel" name="category_name" 
-              [(ngModel)]="model.category_name">
+              <select id="id" #id="ngModel" name="id" [(ngModel)]="model.id" 
+              [ngModelOptions]="{standalone: true}" required>
                 <option>--Select category--</option>
-                <option *ngFor="let categorylist of categoryList">
-                  {{ categorylist.category_name }} - {{ categorylist.id }}
+                <option *ngFor="let categorylist of categoryList" [value]="categorylist.id">
+                  {{ categorylist.category_name }}
                 </option>
               </select>
             </div>
             <div class="col-2 col-lg-2 col-md-2 m-t-8">
-              <select #company_name="ngModel" name="company_name" 
-              [(ngModel)]="model.company_name">
+              <select id="id" 
+              [disabled]="(model.id=='10') || (model.id=='14') || (model.id=='1') || (model.id=='3') || (model.id=='5') 
+              || (model.id=='12') || (model.id=='13')"  
+              [ngModelOptions]="{standalone: true}" required>
                 <option>--Select company--</option>
-                <option *ngFor="let companylist of companyList">
-                  {{ companylist.company_name }} - {{ companylist.id }}
+                <option *ngFor="let companylist of companyList" [value]="companylist.id">
+                  {{ companylist.company_name }}
                 </option>
               </select>
             </div>
             <div class="col-2 col-lg-2 col-md-2 m-t-8">
-              <select>
+              <select id="id" [disabled]="(model.id=='14')" [ngModelOptions]="{standalone: true}" required>
                 <option>--Select department--</option>
-                <option *ngFor="let departmentlist of departmentList">
-                  {{ departmentlist.dept_name }} - {{ departmentlist.id }}
+                <option *ngFor="let departmentlist of departmentList" [value]="departmentlist.id">
+                  {{ departmentlist.dept_name }}
                 </option>
               </select>
             </div>
@@ -76,6 +76,49 @@
           </div>
           </div>
         </form>
+        <div *ngIf="tableShow" class="scroll"> 
+          <table style="width: 410rem;">
+            <thead>
+              <tr>
+                <td>S.No</td>
+                <td>Code</td>
+                <td>Name</td>
+                <td>Company</td>
+                <td>Department</td>
+                <td colspan="3">Break Fast</td>
+                <td colspan="3">Lunch</td>
+                <td colspan="3">Egg</td>
+                <td colspan="3">Non Veg</td>
+                <td colspan="3">Dinner</td>
+                <td colspan="3">Supper</td>
+                <td colspan="3">Fruits</td>
+                <td colspan="3">Tea</td>
+                <td colspan="3">Coffee/Milk</td>
+                <td colspan="3">Biscuts</td>
+                <td colspan="3">Snacks</td>
+                <td colspan="3">Cool Drinks</td>
+                <td colspan="3">Extra Breakfast</td>
+                <td colspan="3">Butter Milk</td>
+                <td colspan="3">Mutton Biriyani</td>
+                <td colspan="3">Chicken Biriyani</td>
+                <td>Total Amt</td>
+                <td>Total S.P Amt</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td *ngFor="let reportlist of reportList">{{reportlist.qty}}</td>
+                <td *ngFor="let reportlist of reportList">{{reportlist.amt}}</td>
+                <td *ngFor="let reportlist of reportList">{{reportlist.spamt}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
       </div>
     </div>

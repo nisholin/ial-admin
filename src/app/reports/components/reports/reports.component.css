@@ -6,3 +6,14 @@ mat-form-field {
     width: 120px;
     margin: 0px 3px;
 }
+table {
+    width: 100%;
+    border: 1px solid;
+    overflow: scroll;
+}
+table th,td {
+    border: 1px solid;
+}
+.scroll {
+    overflow: scroll;
+}

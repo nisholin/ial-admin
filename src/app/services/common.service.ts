@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, from } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
+//models
 import { CanteenTime } from '../_models/canteen/canteentime';
 import { map } from 'rxjs/operators';
 
@@ -16,13 +17,12 @@ export class CommonService {
   viewSideNaviSource = new BehaviorSubject(this.currentView);
 
   constructor(private httpClient: HttpClient) { }
+  readCanteentime(): Observable<CanteenTime[]>{
+    return this.httpClient.get<CanteenTime[]>(`${this.PHP_API_SERVER}/index.php` )
+  }
   toggleSideNavi(value?) {
     this.currentView = value === false ? value : !this.currentView
     this.viewSideNaviSource.next(this.currentView);
-  }
-   readCanteentime(): Observable<CanteenTime[]>{
-    return this.httpClient.get<CanteenTime[]>(`${this.PHP_API_SERVER}/index.php` )
-    console.log("Datas--->"+CanteenTime)
   } 
   /* readCanteentime(): Observable<CanteenTime[]> {
     return this.httpClient.get<CanteenTime[]>(`${this.baseUrl}` + `/users`)

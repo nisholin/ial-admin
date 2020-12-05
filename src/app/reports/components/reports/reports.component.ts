@@ -8,6 +8,7 @@ import { Department } from '../../../_models/employee/department';
 //services
 import { ReportService } from "../../services/report.service";
 import { GuestService } from '../../../epmloyee/services/guest.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-reports',
@@ -23,6 +24,10 @@ export class ReportsComponent implements OnInit {
   categoryList    : any;
   companyList     : any;
   departmentList  : any;
+  tableShow       : boolean;
+  reportList      : any;
+  powerVal        = "";
+ 
 
   constructor(private reportservice: ReportService,private guestservice: GuestService) { 
     this.reportservice.readCategory().subscribe((category: Category[])=>{
@@ -41,9 +46,16 @@ export class ReportsComponent implements OnInit {
       this.departmentList = department;
       //console.log(this.departmentList);
     }); 
-  }
 
+    //json file get
+   const reportData = require("../../../report.json");
+   this.reportList = reportData;
+   console.log(this.reportList);
+
+  }
+  
   ngOnInit(): void {
+    this.tableShow  = false;
   }
   getReports(reportForm) {
     console.log(reportForm.value);
@@ -52,5 +64,6 @@ export class ReportsComponent implements OnInit {
     error => {
       alert('Network Error-->'+error);
     });
+    this.tableShow  = true;
   }
 }

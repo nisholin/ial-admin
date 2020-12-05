@@ -41,7 +41,7 @@ constructor(
 	private Canteentimeservice: CanteenTimeService,
 	private spinner: NgxSpinnerService
 	) {
-	this.commonservice.readCanteentime().subscribe((canteentime: CanteenTime[])=>{
+	this.Canteentimeservice.readCanteentime().subscribe((canteentime: CanteenTime[])=>{
 		this.canteentime = canteentime;
 		for(let i=0; i<this.canteentime.length;i++){
 		this.canteentime[i].editable = false;
