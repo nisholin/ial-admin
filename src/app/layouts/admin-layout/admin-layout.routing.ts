@@ -7,7 +7,7 @@ import { WastageComponent } from '../../wastage/wastage.component';
 import { CanteenTimeComponent } from '../../canteen_menu/components/canteentime/canteentime.component';
 import { TodaysMenuComponent } from '../../canteen_menu/components/todays-menu/todays-menu.component';
 import { NewMenuComponent } from '../../canteen_menu/components/new-menu/new-menu.component';
-import { AddNewMenuComponent } from '../../canteen_menu/components/add-new-menu/add-new-menu.component';
+import { WeeklyItemConfigComponent } from '../../canteen_menu/components/weekly-Item-config/weekly-Item-config.component';
 import { NewSpecialLunchComponent } from '../../canteen_menu/components/new-special-lunch/new-special-lunch.component';
 import { BiriyaniConfigComponent } from '../../canteen_menu/components/biriyani-config/biriyani-config.component';
 
@@ -44,7 +44,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'speciallunch',              component: SpecialLunchComponent },
     { path: 'menuitem',                  component: NewMenuComponent },
     { path: 'newspecialmenu',            component: NewSpecialLunchComponent },
-    { path: 'weeklyitemconfiguration',   component: AddNewMenuComponent },
+    { path: 'weeklyitemconfiguration',   component: WeeklyItemConfigComponent },
     { path: 'menuquantitymapping',       component: TodaysMenuComponent },
     { path: 'biriyaniconfiguration',       component: BiriyaniConfigComponent },
 

@@ -412,10 +412,10 @@
                             <div *ngFor="let saveditems of savedItems;let i=index;">
                             <div class="row">
                               <div class="col-6 col-lg-6 col-md-6">
-                                <label for="categoryname">&nbsp;         
+                                <span for="categoryname">&nbsp;         
                                 <input type="checkbox" style="margin: 12px;" value="{{saveditems.item_id}}" name="saveditems.item_id[]" />
                                   {{saveditems.item_name}}
-                                </label>
+                                </span>
                             </div>
                             <div class="col-6 col-lg-6 col-md-6">
                               <input type="number" name="item_count[]"  />

@@ -150,6 +150,6 @@ export class NavbarComponent implements OnInit {
               return this.listTitles[item].title;
           }
       }
-      return 'ADMIN';
+      return 'INDIAN ADITIVES LIMITED';
     }
 }

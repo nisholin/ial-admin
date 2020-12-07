@@ -15,6 +15,9 @@ import { Menu } from "../../../_models/canteen/menu";
 import { EmployeeManualEntry } from "../../../_models/manual-entry/employee-manual-entry";
 import { Item } from "../../../_models/manual-entry/item";
 
+//loading
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-meeting-request',
   templateUrl: './meeting-request.component.html',
@@ -60,6 +63,7 @@ export class MeetingRequestComponent implements OnInit {
     private meetingrequestservice: MeetingRequestService,
     private guestservice: GuestService,
     private employeemanualservice: EmployeeManualEntryService,
+    private spinner: NgxSpinnerService
     ) {
     this.meetingrequestservice.readMeetingRequest().subscribe((meetingrequest: MeetingRequest[])=>{
       this.meetingrequestlist = meetingrequest;
@@ -81,6 +85,11 @@ export class MeetingRequestComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
     this.tablehide    = true;
     this.newMeeting   = false;
     this.meetingView  = false;
@@ -190,6 +199,7 @@ export class MeetingRequestComponent implements OnInit {
     console.log(this.meetingReqArr);
     this.meetingrequestservice.saveMeetingRequest(this.meetingReqArr).subscribe((meetingrequest:MeetingRequest[]) =>{
       alert("Saved Successfilly");
+      this.ngOnInit();
     },
     error => {
       //alert('Network Error-->'+error);
@@ -214,6 +224,7 @@ export class MeetingRequestComponent implements OnInit {
     console.log(this.editMeetingReqArr);
     this.meetingrequestservice.updateMeetingRequst(this.editMeetingReqArr).subscribe((meetingrequest: MeetingRequest[])=>{
       alert("Updated Successfully");
+      this.ngOnInit();
     },
     error => {
       //alert('Network Error-->'+error);

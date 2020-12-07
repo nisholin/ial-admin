@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+//custom
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from  '@angular/forms';
+//_models
 import { User } from  '../user';
+//services
 import { AuthService } from  '../auth.service';
 
 @Component({

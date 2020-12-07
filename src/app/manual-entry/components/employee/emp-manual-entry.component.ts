@@ -17,6 +17,9 @@ import { Item } from "../../../_models/manual-entry/item";
 import { Category } from "../../../_models/common/category";
 import { merge } from 'jquery';
 
+//loading
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-emp-manual-entry-component',
   templateUrl: './emp-manual-entry.component.html',
@@ -76,7 +79,8 @@ export class EmployeeManualEntryComponent implements OnInit {
   constructor(
     private employeemanualservice: EmployeeManualEntryService,
     private commonservice: CommonService,
-    private reportservice: ReportService
+    private reportservice: ReportService,
+    private spinner: NgxSpinnerService
   ) 
   {
     this.employeemanualservice.readEmpManualEnty().subscribe((employeemanualentry: EmployeeManualEntry[])=>{
@@ -99,6 +103,11 @@ export class EmployeeManualEntryComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
     this.array1             = [];
     this.array2             = [];
     this.array3             = [];
@@ -139,6 +148,7 @@ export class EmployeeManualEntryComponent implements OnInit {
     });
   }
   newEmpManualUpload() {
+    this.spinner.show();
     this.upload     = true;
     this.newuser    = false;
     this.tablehide  = false;
@@ -221,6 +231,7 @@ export class EmployeeManualEntryComponent implements OnInit {
     console.log(this.array3);
      this.employeemanualservice.saveEmpEntry(this.array3).subscribe(() =>{
        alert("Saved Succesfully");
+       this.ngOnInit();
     },
     error => {
       //alert('Network Error-->'+error);
@@ -228,10 +239,13 @@ export class EmployeeManualEntryComponent implements OnInit {
   }
   deleteEntry(id: any){
     this.employeemanualservice.deleteEntry(id).subscribe(() =>{
+      alert("Deleted Successfully");
+      this.ngOnInit();
     },
     error => {
       //alert('Network Error-->'+error);
     });
+    this.ngOnInit();
   }
   empManualEditSave(empManualEditValues: any,id : any) {
     //alert(id);
@@ -262,6 +276,7 @@ export class EmployeeManualEntryComponent implements OnInit {
     console.log(this.array6);
 
     this.employeemanualservice.updateEmpManualEnty(this.array6,id).subscribe((employeemanualentry: EmployeeManualEntry[])=>{
+      this.ngOnInit();
       alert("Updated Successfully");
       //this.empmanualentrylist = employeemanualentry;
       //console.log(this.empmanualentrylist);

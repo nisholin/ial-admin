@@ -17,6 +17,9 @@ import { ContManualEntry } from "../../../_models/manual-entry/cont-manual-entry
 import { Category } from "../../../_models/common/category";
 import { Item } from "../../../_models/manual-entry/item";
 
+//loading
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-cont-manual-entry',
   templateUrl: './cont-manual-entry.component.html',
@@ -59,6 +62,7 @@ export class ContractorManualEntryComponent implements OnInit {
     private commonservice: CommonService,
     private reportservice: ReportService,
     private employeemanualservice: EmployeeManualEntryService,
+    private spinner: NgxSpinnerService
   ) 
   { 
     this.contmanualentryservice.readContManualEnty().subscribe((contmanualentry: ContManualEntry[])=>{
@@ -80,6 +84,11 @@ export class ContractorManualEntryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
     this.array1             = [];
     this.array2             = [];
     this.array3             = [];
@@ -112,7 +121,7 @@ export class ContractorManualEntryComponent implements OnInit {
     this.tablehide        = false;
   }
   contManualEntyrEdit(id: any) {
-    alert(id);
+    //alert(id);
     this.contmanualentryservice.readContManualEnty().subscribe((contmanualentry: ContManualEntry[])=>{
       this.contmanualentrylist = contmanualentry;
       console.log(this.contmanualentrylist);
@@ -130,7 +139,7 @@ export class ContractorManualEntryComponent implements OnInit {
  //Read Saved Items 
  this.employeemanualservice.readSavedItem(id).subscribe((item:Item[])=>{
   this.savedItems = item;
-  console.log(this.savedItems);
+  //console.log(this.savedItems);
 },
 error => {
   //alert('Network Error-->'+error);
@@ -140,7 +149,6 @@ error => {
     this.tablehide        = false;
   }
   contManualEditSave(contManualEditValues: any,id : any) {
-
      //
      this.array1 = [];
      this.array2 = [];
@@ -166,6 +174,7 @@ error => {
     console.log(this.array3);
     this.contmanualentryservice.updateContManualEnty(this.array3,id).subscribe((contmanualentry: ContManualEntry[])=>{
       alert("Updated Successfully");
+      this.ngOnInit();
     },
     error => {
       //alert('Network Error-->'+error);
@@ -175,6 +184,7 @@ error => {
     console.log(id);
     this.contmanualentryservice.deleteEntry(id).subscribe(() =>{
       alert("Deleted Successfully");
+      this.ngOnInit();
     },
     error => {
       //alert('Network Error-->'+error);

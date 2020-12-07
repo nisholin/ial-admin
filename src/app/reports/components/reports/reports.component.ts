@@ -10,6 +10,9 @@ import { ReportService } from "../../services/report.service";
 import { GuestService } from '../../../epmloyee/services/guest.service';
 import { FormGroup, FormControl } from '@angular/forms';
 
+//loading
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
@@ -29,7 +32,10 @@ export class ReportsComponent implements OnInit {
   powerVal        = "";
  
 
-  constructor(private reportservice: ReportService,private guestservice: GuestService) { 
+  constructor(private reportservice: ReportService,
+    private guestservice: GuestService,
+    private spinner: NgxSpinnerService
+    ) { 
     this.reportservice.readCategory().subscribe((category: Category[])=>{
       this.categoryList = category;
       //console.log(this.categoryList);
@@ -55,9 +61,14 @@ export class ReportsComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
     this.tableShow  = false;
   }
-  getReports(reportForm) {
+  getReports(reportForm: any) {
     console.log(reportForm.value);
     this.reportservice.sendReportDate(reportForm.value).subscribe(()=>{
     },

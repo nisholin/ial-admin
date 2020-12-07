@@ -1,0 +1,25 @@
+.submit-btn {
+    background: green;
+    margin: 17px;
+    border-radius: 9px;
+    width: 7%;
+}
+.edit-btn {
+    background: #17a2b8;
+    margin: 17px;
+    border-radius: 9px;
+    width: 7%;
+}
+.mat-tab-body-content {
+    overflow: hidden;
+}
+.w-100 {
+    width: 100%;
+}
+table th,td,tr {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+}
+tr:nth-child(even) {background: #f1f1f1}
+tr:nth-child(odd) {background: #FFF}

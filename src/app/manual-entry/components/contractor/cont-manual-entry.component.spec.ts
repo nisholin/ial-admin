@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContractorManualEntry } from './cont-manual-entry.component';
+import { ContractorManualEntryComponent } from './cont-manual-entry.component';
 
 describe('AddNewCompanyComponent', () => {
-  let component: ContractorManualEntry;
-  let fixture: ComponentFixture<ContractorManualEntry>;
+  let component: ContractorManualEntryComponent;
+  let fixture: ComponentFixture<ContractorManualEntryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContractorManualEntry ]
+      declarations: [ ContractorManualEntryComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContractorManualEntry);
+    fixture = TestBed.createComponent(ContractorManualEntryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

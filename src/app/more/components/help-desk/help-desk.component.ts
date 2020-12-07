@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+//custom
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-help-desk',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HelpDeskComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+    window.location.href="https://bluebase.freshdesk.com/support/login";
   }
 
 }

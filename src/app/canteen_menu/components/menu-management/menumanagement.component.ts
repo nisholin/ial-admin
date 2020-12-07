@@ -12,6 +12,9 @@ import { CommonService } from'../../../services/common.service';
 import { Menu } from "../../../_models/canteen/menu";
 import { CanteenTime } from '../../../_models/canteen/canteentime';
 
+//loading
+import { NgxSpinnerService } from "ngx-spinner";
+
 @Component({
   selector: 'app-menumanagement',
   templateUrl: './menumanagement.component.html',
@@ -26,7 +29,7 @@ export class MenuManagementComponent implements OnInit {
   dataSource2                 : MatTableDataSource<any>;
   menu                        : Menu[];
   menuList                    : any;
-  menusView                   = false;
+  menusView                   : any;
   employeeMenuList            : any;
   contractorMenuList          : any;
   menuview                    : any;
@@ -48,7 +51,8 @@ export class MenuManagementComponent implements OnInit {
   constructor(
     private menumanagementservice: MenuManagementService,
     config: NgbModalConfig, private modalService: NgbModal,
-    private commonservice: CommonService
+    private commonservice: CommonService,
+    private spinner: NgxSpinnerService
     ) {
     /* this.menumanagementservice.readMenu().subscribe((menu: Menu[])=>{
       this.menuList = Menu;
@@ -81,6 +85,11 @@ export class MenuManagementComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
     this.menusView=false;
     this.fieldarray = [];
   }

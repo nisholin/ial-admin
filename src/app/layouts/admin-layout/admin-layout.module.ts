@@ -15,7 +15,7 @@ import { WastageComponent } from '../../wastage/wastage.component';
 import { CanteenTimeComponent } from '../../canteen_menu/components/canteentime/canteentime.component';
 import { TodaysMenuComponent } from '../../canteen_menu/components/todays-menu/todays-menu.component';
 import { NewMenuComponent } from '../../canteen_menu/components/new-menu/new-menu.component';
-import { AddNewMenuComponent } from '../../canteen_menu/components/add-new-menu/add-new-menu.component';
+import { WeeklyItemConfigComponent } from '../../canteen_menu/components/weekly-Item-config/weekly-Item-config.component';
 import { NewSpecialLunchComponent } from '../../canteen_menu/components/new-special-lunch/new-special-lunch.component';
 import { BiriyaniConfigComponent } from '../../canteen_menu/components/biriyani-config/biriyani-config.component';
 
@@ -62,6 +62,9 @@ import { MatButtonModule} from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxSpinnerModule } from "ngx-spinner";
+import {NgxPrintModule} from 'ngx-print';
+
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -88,7 +91,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxPrintModule,
+    MatTabsModule
   ],
   declarations: [
     //canteen
@@ -109,7 +114,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     SummaryReportsComponent,
     CompanyReportsComponent,
     CatererReportsComponent,
-    AddNewMenuComponent,
+    WeeklyItemConfigComponent,
     NewSpecialLunchComponent,
     EmployeeManualEntryComponent,
     ContractorManualEntryComponent,

@@ -9,19 +9,23 @@
           <hr>
         </div>
       <div class="card-body">
+        <ngx-spinner>
+          <!-- <img src="assets/images/Pulse-1s-200px.gif" class="spinner-img"/> --> 
+       </ngx-spinner>
+
         <form  #reportForm="ngForm" (ngSubmit)="getReports(reportForm)">
           <div class="row">
             <div class="col-1 col-lg-1 col-md-1"></div>
             <div class="col-2 col-lg-2 col-md-2">
-              <input type="date" #from_date="ngModel" name="from_date" [(ngModel)]="model.from_date" 
+              <input type="date" class="date-align" #from_date="ngModel" name="from_date" [(ngModel)]="model.from_date" 
               />
             </div>
             <div class="col-2 col-lg-2 col-md-2">
-              <input type="date" #to_date="ngModel" name="to_date" [(ngModel)]="model.to_date"
+              <input type="date" class="date-align" #to_date="ngModel" name="to_date" [(ngModel)]="model.to_date"
               />
             </div>
             <div class="col-2 col-lg-2 col-md-2 m-t-8">
-              <select id="id" #id="ngModel" name="id" [(ngModel)]="model.id" 
+              <select id="id" #category_id="ngModel" name="id" [(ngModel)]="model.id" 
               [ngModelOptions]="{standalone: true}" required>
                 <option>--Select category--</option>
                 <option *ngFor="let categorylist of categoryList" [value]="categorylist.id">
@@ -30,7 +34,7 @@
               </select>
             </div>
             <div class="col-2 col-lg-2 col-md-2 m-t-8">
-              <select id="id" 
+              <select id="id" #company_id="ngModel" name="company_id" [(ngModel)]="model.company_id"
               [disabled]="(model.id=='10') || (model.id=='14') || (model.id=='1') || (model.id=='3') || (model.id=='5') 
               || (model.id=='12') || (model.id=='13')"  
               [ngModelOptions]="{standalone: true}" required>
@@ -41,7 +45,8 @@
               </select>
             </div>
             <div class="col-2 col-lg-2 col-md-2 m-t-8">
-              <select id="id" [disabled]="(model.id=='14')" [ngModelOptions]="{standalone: true}" required>
+              <select id="id" #dept_id="ngModel" name="dept_id" [(ngModel)]="model.dept_id"
+              [disabled]="(model.id=='14')" [ngModelOptions]="{standalone: true}" required>
                 <option>--Select department--</option>
                 <option *ngFor="let departmentlist of departmentList" [value]="departmentlist.id">
                   {{ departmentlist.dept_name }}
@@ -51,29 +56,32 @@
           </div>
           <br/>
           <div class="row">
-          <div class="col-3 col-lg-2 col-md-3"></div> 
-            <div class="col-3 col-lg-10 col-md-3 ">
+            <div class="col-3 col-lg-4 col-md-3"></div> 
+            <div class="col-3 col-lg-4 col-md-3 ">
               <span class="row">
                 <p>
-                  <button class="background" type="submit">Employee</button>
+                  <!-- <button class="background" type="submit">Employee</button> -->
                 </p>
                 <p>
+                  <!-- <button class="background">Export to Excel</button> -->
+                </p>
+                <p>
+                  <!-- <button class="background">Spl-Lunch</button> -->
+                  <button class="background" type="submit">Go</button>
+                </p>
+                <p>
+                  <!-- <button class="background">Guest</button> -->
                   <button class="background">Export to Excel</button>
                 </p>
                 <p>
-                  <button class="background">Spl-Lunch</button>
+                  <!-- <button class="background">Service Provider</button> -->
                 </p>
                 <p>
-                  <button class="background">Guest</button>
+                  <!-- <button class="background">Wastage</button> -->
                 </p>
-                <p>
-                  <button class="background">Service Provider</button>
-                </p>
-                <p>
-                  <button class="background">Wastage</button>
-                </p>
-            </span>
-          </div>
+              </span>
+            </div>
+            <div class="col-3 col-lg-4 col-md-3"></div> 
           </div>
         </form>
         <div *ngIf="tableShow" class="scroll"> 

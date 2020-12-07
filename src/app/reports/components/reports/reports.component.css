@@ -17,3 +17,7 @@ table th,td {
 .scroll {
     overflow: scroll;
 }
+.date-align {
+    margin-top: 8px;
+    height: 32px;
+}

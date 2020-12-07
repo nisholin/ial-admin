@@ -46,7 +46,7 @@ export class MenuManagementService {
     console.log(this.parameters3)
     return this.httpClient.put<Menu[]>(this.PHP_API_SERVER + '/employeeedit',this.parameters3,prodArr);
   }   */
-  updateEmpMenu(empArr,menu: any){
+  updateEmpMenu(empArr: any,menu: any){
     console.log(empArr);
     console.log(menu);
     return this.httpClient.put<Menu[]>(this.PHP_API_SERVER + '/employeeupdate.php',menu,empArr);

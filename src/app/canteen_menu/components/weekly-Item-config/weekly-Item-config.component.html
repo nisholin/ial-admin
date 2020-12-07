@@ -1,0 +1,95 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title t-a-c form-heading" *ngIf="tabShow">Upload Weekly Menu</h5>
+          <h5 class="title t-a-c form-heading" *ngIf="weeklymenuedit">Edit Weekly Menu</h5>
+          <hr>
+        </div>
+      <div class="card-body">
+        <ngx-spinner>
+          <!-- <img src="assets/images/Pulse-1s-200px.gif" class="spinner-img"/> --> 
+       </ngx-spinner>
+        <mat-tab-group *ngIf="tabShow">
+          <mat-tab label="1'st Week">
+            <form>
+              <br/> 
+              <input type="file" />
+              <div class="row w-100">
+                  <button class="submit-btn">Submit</button>
+                  <button class="edit-btn" (click)="itemEdit(1)">Edit</button>
+              </div>
+            </form>
+          </mat-tab>
+
+          <mat-tab label="2nd Week"> 
+            <form>
+              <br/> 
+              <input type="file" />
+              <div class="row w-100">
+                  <button class="submit-btn">Submit</button>
+                  <button class="edit-btn" (click)="itemEdit(2)">Edit</button>
+              </div>
+            </form>
+          </mat-tab>
+
+          <mat-tab label="3rd Week"> 
+            <form>
+              <br/> 
+              <input type="file" />
+              <div class="row w-100">
+                  <button class="submit-btn">Submit</button>
+                  <button class="edit-btn" (click)="itemEdit(3)">Edit</button>
+              </div>
+            </form>
+          </mat-tab>
+
+          <mat-tab label="4th Week"> 
+            <form>
+              <br/> 
+              <input type="file" />
+              <div class="row w-100">
+                  <button class="submit-btn">Submit</button>
+                  <button class="edit-btn" (click)="itemEdit(4)">Edit</button>
+              </div>
+            </form>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <div *ngIf="weeklymenuedit">
+        <table>
+          <thead>
+            <tr>
+              <td>S.No</td>
+              <td>Timing</td>
+              <td>Monday</td>
+              <td>Tuesday</td>
+              <td>Wednesday</td>
+              <td>Thursday</td>
+              <td>Friday</td>
+              <td>Saturday</td>
+              <td>Sunday</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1.</td>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

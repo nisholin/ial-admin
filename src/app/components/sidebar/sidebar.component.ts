@@ -70,7 +70,7 @@ export const ROUTES: RouteInfo[] = [
       label: "Menu Item Mapping",
       path: "/menuitemmapping",
     },
-    {
+    /* {
       id: "speciallunch",
       label: "Special lunch",
       path: "/speciallunch",
@@ -80,22 +80,22 @@ export const ROUTES: RouteInfo[] = [
       id: "menuitem",
       label: "Menu Ttem",
       path: "/menuitem",
-    },
+    }, 
     {
       id: "newspecialmenu",
       label: "New Special Menu",
       path: "/newspecialmenu",
-    },
+    },*/
     {
       id: "weeklyitemconfiguration",
-      label: "Item Configuration",
+      label: "Weekly Item Confi",
       path: "/weeklyitemconfiguration",
     },
-    {
+    /* {
       id: "menuquantitymapping",
       label: "Menu Mapping",
       path: "/menuquantitymapping",
-    },
+    }, */
     {
       id: "biriyaniconfiguration",
       label: "Biriyani Config",

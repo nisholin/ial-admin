@@ -67,12 +67,12 @@ export class EmpRegistrationComponent implements OnInit {
 }
   ngOnInit() {
     /** spinner starts on init */
-    
     this.tableShow();
-    this.newuser=false;
-    this.userView=false;
-    this.edit=false;
-    this.view=false;
+    this.tablehide  = true;
+    this.newuser    = false;
+    this.userView   = false;
+    this.edit       = false;
+    this.view       = false;
   }
   tableShow() {
     this.spinner.show();
@@ -90,8 +90,12 @@ export class EmpRegistrationComponent implements OnInit {
       error => {
         alert('Network Error-->'+error);
         this.spinner.hide();
-      }
-    ); 
+      }); 
+    this.tablehide  = true;
+    this.newuser    = false;
+    this.userView   = false;
+    this.edit       = false;
+    this.view       = false;
   }
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -140,17 +144,20 @@ export class EmpRegistrationComponent implements OnInit {
     // console.log(angForm.value.emp_name)
      console.log(angForm.value.a_rfid_card);
     this.employeeservice.saveUser(angForm.value).subscribe(()=>{
+      this.ngOnInit();
     },
     error => {
      // alert('Network Error-->'+error);
     }); 
     //this.router.navigate(['/emp_registration']);
-    this.tablehide=true;
+    this.tablehide  = true;
+    this.newuser    = false;
   } 
   employeeEditSave (empedit) {
     console.log(empedit.value);
     console.log(empedit.value.emp_code);
     this.employeeservice.updateEmployee(empedit.value.emp_code,empedit.value).subscribe(()=>{
+      this.ngOnInit();
   },
   error => {
     alert('Network Error-->'+error);

@@ -77,6 +77,7 @@ updateCanteenTime(starttime: any,endtime: any,id: any) {
 	console.log(this.fieldarray)
 	this.Canteentimeservice.updateCanteenTime(id,this.fieldarray).subscribe(()=>{
 		alert("Update Successfully");
+		this.ngOnInit();
 	},
 	error => {
 		//alert('Network Error-->'+error);

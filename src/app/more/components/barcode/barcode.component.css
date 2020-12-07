@@ -1,0 +1,16 @@
+.bar-img {
+    /* width: 90%; */
+    border-radius: 0px;
+    margin-bottom: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+}
+.w-18 {
+    text-align: center;
+}
+.h3 {
+    margin-bottom: -13px;
+    color: blue;
+}

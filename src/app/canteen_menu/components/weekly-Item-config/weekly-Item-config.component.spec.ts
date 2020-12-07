@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddNewMenuComponent } from './add-new-menu.component';
+import { WeeklyItemConfigComponent } from './weekly-Item-config.component';
 
 describe('AddNewMenuComponent', () => {
-  let component: AddNewMenuComponent;
-  let fixture: ComponentFixture<AddNewMenuComponent>;
+  let component: WeeklyItemConfigComponent;
+  let fixture: ComponentFixture<WeeklyItemConfigComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddNewMenuComponent ]
+      declarations: [ WeeklyItemConfigComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddNewMenuComponent);
+    fixture = TestBed.createComponent(WeeklyItemConfigComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
