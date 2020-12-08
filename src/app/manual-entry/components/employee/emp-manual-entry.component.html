@@ -278,7 +278,7 @@
                       <div class="canteen-box">
                         <form>
                           <div class="canteentime-container p-t-20 p-b-20 m-l-auto m-r-auto">                      
-                            <label>
+                            <label class="label">
                               <i class="fa fa-upload" aria-hidden="true"></i>
                               Choose File
                               <input type="file" size="60" >
@@ -412,7 +412,7 @@
                           </div>
                           <div class="col-5 col-lg-5 col-md-5">
                             <input type="text" value="{{ empmanualentrylistview.emp_name }}"
-                            #emp_name="ngModel" emp_name="code"  
+                            #emp_name="ngModel" name="emp_name"  
                             [(ngModel)]="empmanualentrylistview.emp_name"
                             [ngModelOptions]="{standalone: true}"
                             readonly/>

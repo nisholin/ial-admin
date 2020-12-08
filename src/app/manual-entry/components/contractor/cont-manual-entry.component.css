@@ -21,10 +21,12 @@
   }
   label{
     padding: 10px;
-    background: #d02918; 
+    background: #d02918;
     display: table;
     color: #fff;
     width: 65%;
+    margin: 25px auto 0;
+    text-align: center;
   } 
   input[type="file"] {
       display: none;

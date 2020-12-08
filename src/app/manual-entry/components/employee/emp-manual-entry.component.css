@@ -19,16 +19,18 @@
   box-shadow: 2px 5px 11px 6px #c7c7c7;
   font-family: FontAwesome;
 }
-/* label{
+.label{
   padding: 10px;
   background: #d02918; 
   display: table;
   color: #fff;
   width: 65%;
-} */
+} 
 input[type="file"] {
     display: none;
 }
-input [type=checkbox] {
-  margin: 12px !important;
+label {
+  margin: 0 !important;
+  text-align: start !important;
+  color: black !important;
 }

@@ -5,8 +5,10 @@ import { CommonService } from'../../../services/common.service';
 import { WeeklyItemConfigService } from "../../services/weekly-item-config.service";
 //_models
 import { CanteenTime } from '../../../_models/canteen/canteentime';
+import { WeeklyMenu } from "../../../_models/canteen/weeklymenu";
 //loading
 import { NgxSpinnerService } from "ngx-spinner";
+import { FormGroup } from '@angular/forms';
 //custom
 
 @Component({
@@ -20,7 +22,8 @@ export class WeeklyItemConfigComponent implements OnInit {
   canteentime		  : CanteenTime[];
   weeklymenuedit  : boolean;
   tabShow         : boolean;
-  weeklyItemList  : any;
+  weeklymenu      : WeeklyMenu[]
+  weeklyItemList  : any = {};
 
   constructor(
     private commonservice     : CommonService,
@@ -41,18 +44,27 @@ export class WeeklyItemConfigComponent implements OnInit {
     this.tabShow        = true;
     this.weeklymenuedit = false;
   }
-  saveNewMenu(addnewmenu) {
+  saveNewMenu(addnewmenu: any) {
     alert("Works Fine");
   }
   itemEdit(id: any) {
-    alert(id);
-    this.weeklyitemconfig.readWeeklyItemDetails(id).subscribe((data)=>{
-      this.weeklyItemList = data;
-      console.log(this.weeklyItemList);
+    //alert(id);
+    this.weeklyitemconfig.readWeeklyItemDetails(id).subscribe((weeklymenu:WeeklyMenu[])=>{
+      this.weeklymenu = weeklymenu;
+      console.log(this.weeklymenu);
     },error => {
       //alert('Network Error-->'+error);
     });
     this.weeklymenuedit = true;
     this.tabShow        = false;
+   }
+   weeklyMenuEditSave() {
+    //console.log(weeklyMenuEdit.value);
+    /* this.weeklyitemconfig.saveweeklyMenuEditSave(weeklyMenuEdit.value).subscribe(()=>{
+      this.ngOnInit();
+    },
+    error => {
+     // alert('Network Error-->'+error);
+    }); */
    }
 }

@@ -142,7 +142,7 @@ export class EmpRegistrationComponent implements OnInit {
   }
    saveNewUser(angForm){
     // console.log(angForm.value.emp_name)
-     console.log(angForm.value.a_rfid_card);
+    console.log(angForm.value.a_rfid_card);
     this.employeeservice.saveUser(angForm.value).subscribe(()=>{
       this.ngOnInit();
     },

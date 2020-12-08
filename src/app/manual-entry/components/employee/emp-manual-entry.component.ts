@@ -149,6 +149,10 @@ export class EmployeeManualEntryComponent implements OnInit {
   }
   newEmpManualUpload() {
     this.spinner.show();
+    setTimeout(() => {
+      /** spinner ends after 5 seconds */
+      this.spinner.hide();
+    }, 1000);
     this.upload     = true;
     this.newuser    = false;
     this.tablehide  = false;
