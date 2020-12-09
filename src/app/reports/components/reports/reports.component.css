@@ -7,13 +7,15 @@ mat-form-field {
     margin: 0px 3px;
 }
 table {
+    border-collapse: collapse;
     width: 100%;
-    border: 1px solid;
-    overflow: scroll;
-}
-table th,td {
-    border: 1px solid;
-}
+  }
+  
+  th, td {
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {background-color: #f2f2f2;}
 .scroll {
     overflow: scroll;
 }

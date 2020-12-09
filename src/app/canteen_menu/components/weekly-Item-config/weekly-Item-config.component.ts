@@ -67,4 +67,14 @@ export class WeeklyItemConfigComponent implements OnInit {
      // alert('Network Error-->'+error);
     }); */
    }
+   excelSave(id: any,saveFile: any) {
+     alert(id);
+     console.log(saveFile.value);
+     this.weeklyitemconfig.saveExcelFile(id,saveFile.value).subscribe(()=>{
+      this.ngOnInit();
+    },
+    error => {
+     // alert('Network Error-->'+error);
+    });
+   }
 }

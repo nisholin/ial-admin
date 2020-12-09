@@ -14,49 +14,43 @@
           <!-- <img src="assets/images/Pulse-1s-200px.gif" class="spinner-img"/> --> 
        </ngx-spinner>
         <mat-tab-group *ngIf="tabShow">
+          <form #saveFile="ngForm">
           <mat-tab label="1'st Week">
-            <form>
               <br/> 
-              <input type="file" />
+              <input type="file" #first_file="ngModel" name="first_file" [(ngModel)]="model.first_file"/>
               <div class="row w-100">
-                  <button class="submit-btn">Submit</button>
+                  <button class="submit-btn" (click)="excelSave(1,saveFile)">Submit</button>
                   <button class="edit-btn" (click)="itemEdit(1)">Edit</button>
               </div>
-            </form>
           </mat-tab>
 
           <mat-tab label="2nd Week"> 
-            <form>
               <br/> 
-              <input type="file" />
+              <input type="file" #second_file="ngModel" name="second_file" [(ngModel)]="model.second_file"/>
               <div class="row w-100">
-                  <button class="submit-btn">Submit</button>
+                  <button class="submit-btn" (click)="excelSave(2,saveFile)">Submit</button>
                   <button class="edit-btn" (click)="itemEdit(2)">Edit</button>
               </div>
-            </form>
           </mat-tab>
 
           <mat-tab label="3rd Week"> 
-            <form>
               <br/> 
-              <input type="file" />
+              <input type="file" #third_file="ngModel" name="third_file" [(ngModel)]="model.third_file"/>
               <div class="row w-100">
-                  <button class="submit-btn">Submit</button>
+                  <button class="submit-btn" (click)="excelSave(3,saveFile)">Submit</button>
                   <button class="edit-btn" (click)="itemEdit(3)">Edit</button>
               </div>
-            </form>
           </mat-tab>
 
           <mat-tab label="4th Week"> 
-            <form>
               <br/> 
-              <input type="file" />
+              <input type="file" #fourth_file="ngModel" name="fourth_file" [(ngModel)]="model.fourth_file"/>
               <div class="row w-100">
-                  <button class="submit-btn">Submit</button>
+                  <button class="submit-btn" (click)="excelSave(4,saveFile)">Submit</button>
                   <button class="edit-btn" (click)="itemEdit(4)">Edit</button>
               </div>
-            </form>
           </mat-tab>
+        </form>
         </mat-tab-group>
       </div>
       <div *ngIf="weeklymenuedit">
@@ -82,12 +76,12 @@
               </td>
               <td><input type="text" value="{{ weeklyitemlist.time }}" readonly></td>
               <td>
-                <input type="text" value="{{ weeklyitemlist.monday }}"
+                <input type="text"   value="{{ weeklyitemlist.monday }}"
                 name="monday"  id="monday"
                 >
               </td>
               <td>
-                <input type="text" value="{{ weeklyitemlist.tuesday }}"
+                <input type="text"   value="{{ weeklyitemlist.tuesday }}"
                 >
               </td>
               <td><input type="text" value="{{ weeklyitemlist.wednesday }}"

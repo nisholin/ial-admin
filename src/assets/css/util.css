@@ -2238,10 +2238,12 @@
 .text-up {text-transform: uppercase;}
 
 /* ------------------------------------ */
-.text-center {text-align: center;}
-.text-left {text-align: left;}
-.text-right {text-align: right;}
-.text-middle {vertical-align: middle;}
+.text-start     {text-align: start;}
+.text-center 	{text-align: center;}
+.text-left 		{text-align: left;}
+.text-right 	{text-align: right;}
+.text-middle 	{vertical-align: middle;}
+.text-end 		{text-align: end;}
 
 /* ------------------------------------ */
 .lh-1-0 {line-height: 1.0;}
@@ -2987,7 +2989,16 @@
 	right: 0px;
 	bottom: 0px;
 }
+/*Font Weight */
+.f-w-b 		{font-weight: bold;}
+.f-w-500	{font-weight: 500;}
 
+/* Font Size */
+.f-s-20 {font-size: 20px;}
+.f-s-15 {font-size: 20px;}
+
+/* Color */
+.c-black 	{color: black;}
 
 
 

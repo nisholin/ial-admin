@@ -19,6 +19,9 @@ export class WeeklyItemConfigService {
     return this.httpClient.get<WeeklyMenu[]>(this.baseUrl + '/view/'+id)
   }
   //save
+  saveExcelFile(id: any,saveFile: any) {
+    return this.httpClient.post<any>(this.baseUrl +'/excelsave/'+id,saveFile);
+  }
   saveweeklyMenuEditSave(weeklyMenuEdit: any) {
     console.log(weeklyMenuEdit.id);
     var id = weeklyMenuEdit.id;
