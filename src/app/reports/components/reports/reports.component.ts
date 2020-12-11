@@ -73,11 +73,11 @@ export class ReportsComponent implements OnInit {
     }, 1000);
     this.tableShow    = false;
     this.summarytable = false;
-    this.model        = {};
     this.reportsArr   = [];
   }
   getReports(reportForm: any,id: any,company_id: any,dept_id: any) {
-    console.log(reportForm.value);
+    this.spinner.show();
+    //console.log(reportForm.value);
     //console.log("id===>"+id);
     //console.log("company_id==>"+company_id);
     //console.log("dept_id==>"+dept_id);
@@ -86,15 +86,11 @@ export class ReportsComponent implements OnInit {
     //this.spinner.show();
     this.reportservice.sendReportDate(this.reportsArr).subscribe((reports: Reports[])=>{
       this.reporDatatList = reports;
-      console.log(this.reporDatatList);
-      var length = this.reporDatatList.length;
-      //this.ngOnInit();
-      /* alert(length);
-      for(let i=0;i<length;i++){
-
-      } */
+      //console.log(this.reporDatatList);
+      //var length = this.reporDatatList.length;
       setTimeout(() => {
         /** spinner ends after 5 seconds */
+        document.forms["id_form"].reset();
         this.spinner.hide();
       }, 1000);
       //this.reportsArr   = [];
@@ -119,6 +115,8 @@ export class ReportsComponent implements OnInit {
           table {
             border-collapse: collapse;
             width: 100%;
+            margin-bottom: 15px;
+            border: 1px solid;
           }
           
           th, td {

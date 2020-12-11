@@ -13,7 +13,7 @@
           <!-- <img src="assets/images/Pulse-1s-200px.gif" class="spinner-img"/> --> 
        </ngx-spinner>
 
-        <form  #reportForm="ngForm" (ngSubmit)="getReports(reportForm,model.id,model.company_id,model.dept_id)">
+        <form  #reportForm="ngForm" id="id_form" (ngSubmit)="getReports(reportForm,model.id,model.company_id,model.dept_id)">
           <div class="row">
             <div class="col-1 col-lg-1 col-md-1"></div>
             <div class="col-2 col-lg-2 col-md-2">
@@ -131,9 +131,9 @@
         <div *ngIf="summarytable">
           <div class="row">
             <div class="col-10 col-lg-10 col-md-10">
-              <h3>
+              <!-- <h3>
                 Summary Reports From {{model.from_date}} To : {{model.from_date}}
-              </h3>
+              </h3> -->
             </div>
             <div class="col-2 col-lg-2 col-md-2">
               <span *ngIf="summarytable" (click)="print()">
