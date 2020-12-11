@@ -2989,6 +2989,13 @@
 	right: 0px;
 	bottom: 0px;
 }
+/* width */
+.w-50 {
+	width: 50%;
+}
+.w-80 {
+	width: 80% !important;
+}
 /*Font Weight */
 .f-w-b 		{font-weight: bold;}
 .f-w-500	{font-weight: 500;}

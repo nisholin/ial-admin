@@ -56,35 +56,10 @@
             </div>
           </div>
           <br/>
-          <div class="row">
-            <div class="col-3 col-lg-4 col-md-3"></div> 
-            <div class="col-3 col-lg-4 col-md-3 ">
-              <span class="row">
-                <p>
-                  <!-- <button class="background" type="submit">Employee</button> -->
-                </p>
-                <p>
-                  <!-- <button class="background">Export to Excel</button> -->
-                </p>
-                <p>
-                  <!-- <button class="background">Spl-Lunch</button> -->
-                  <button class="background" type="submit">Go</button>
-                </p>
-                <p>
-                  <!-- <button class="background">Guest</button> -->
-                  <button class="background">Export to Excel</button>
-                </p>
-                <p>
-                  <!-- <button class="background">Service Provider</button> -->
-                </p>
-                <p>
-                  <!-- <button class="background">Wastage</button> -->
-                </p>
-              </span>
-            </div>
-            <div class="col-3 col-lg-4 col-md-3"></div> 
-          </div>
+          <button class="background m-l-r-auto" type="submit">Go</button>
         </form>
+        <br>
+        <hr>
         <div *ngIf="tableShow" class="scroll"> 
           <table style="width: 410rem;">
             <thead>
@@ -130,14 +105,14 @@
         </div>
         <div *ngIf="summarytable">
           <div class="row">
-            <div class="col-10 col-lg-10 col-md-10">
+            <div class="col-10 col-lg-11 col-md-10">
               <!-- <h3>
                 Summary Reports From {{model.from_date}} To : {{model.from_date}}
               </h3> -->
             </div>
-            <div class="col-2 col-lg-2 col-md-2">
-              <span *ngIf="summarytable" (click)="print()">
-                <i class="fa fa-print icon-black" aria-hidden="true"></i>
+            <div class="col-1 col-lg-1 col-md-1">
+              <span *ngIf="summarytable" (click)="exportAsXLSX()">
+                <img src="assets/images/icons/excel.png" class="w-80 c-p"/>
               </span>
             </div>
           </div>

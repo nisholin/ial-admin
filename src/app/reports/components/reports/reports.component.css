@@ -2,9 +2,8 @@ mat-form-field {
     margin-right: 12px;
 }
 .background {
-    background-color: #0a3beffc;
+    background-image: linear-gradient(to bottom right, #0098e4, #003ba0);
     width: 120px;
-    margin: 0px 3px;
 }
 table {
     border-collapse: collapse;
@@ -14,7 +13,9 @@ table {
   th, td {
     padding: 8px;
   }
-  
+  thead{
+    background: #e8e6e6;
+  }
   tr:nth-child(even) {background-color: #f2f2f2;}
 .scroll {
     overflow: scroll;

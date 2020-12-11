@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 
 //_models
 import { Category } from "../../../_models/common/category";
 import { Company } from "../../../_models/common/company";
 import { Department } from '../../../_models/employee/department';
 import { Reports } from  '../../../_models/report/reports';
-
 //services
 import { ReportService } from "../../services/report.service";
 import { GuestService } from '../../../epmloyee/services/guest.service';
-import { FormGroup, FormControl } from '@angular/forms';
-
+import { ExcelService } from '../../../services/excel.service';
 //loading
 import { NgxSpinnerService } from "ngx-spinner";
 
@@ -35,11 +34,13 @@ export class ReportsComponent implements OnInit {
   reporDatatList  : any;
   summarytable    : boolean;
   reportsArr      : Array<any>= [];
+  total           : any = {};
  
 
   constructor(private reportservice: ReportService,
     private guestservice: GuestService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private excelService:ExcelService
     ) { 
     this.reportservice.readCategory().subscribe((category: Category[])=>{
       this.categoryList = category;
@@ -87,48 +88,33 @@ export class ReportsComponent implements OnInit {
     this.reportservice.sendReportDate(this.reportsArr).subscribe((reports: Reports[])=>{
       this.reporDatatList = reports;
       //console.log(this.reporDatatList);
-      //var length = this.reporDatatList.length;
+      var length = this.reporDatatList.length;
+      for(let i=0;i<length;i++) {
+        this.model = this.reporDatatList[i].total;
+        console.log(this.model);
+        this.total += this.model;
+        console.log("total"+this.total);
+      }
+      
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         document.forms["id_form"].reset();
         this.spinner.hide();
       }, 1000);
-      //this.reportsArr   = [];
+      this.reportsArr   = [];
     },
     error => {
+      setTimeout(() => {
+        /** spinner ends after 5 seconds */
+        document.forms["id_form"].reset();
+        this.spinner.hide();
+      }, 1000);
       alert('Network Error-->'+error);
     });
     //this.tableShow  = true;
     this.summarytable = true;
   }
-  print() {
-    let printContents, popupWin;
-    printContents = document.getElementById('component1').innerHTML;
-    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
-    popupWin.document.open();
-    popupWin.document.write(`
-      <html>
-        <head>
-          <title>IAL</title>
-          <style>
-          //........Customized style.......
-          table {
-            border-collapse: collapse;
-            width: 100%;
-            margin-bottom: 15px;
-            border: 1px solid;
-          }
-          
-          th, td {
-            padding: 8px;
-          }
-          
-          tr:nth-child(even) {background-color: #f2f2f2;}
-          </style>
-        </head>
-        <body onload="window.print();window.close()">${printContents}</body>
-      </html>`
-    );
-    popupWin.document.close();
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.reporDatatList,'report-list');
   }
 }

@@ -65,6 +65,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import {NgxPrintModule} from 'ngx-print';
 
 import {MatTabsModule} from '@angular/material/tabs';
+import { ExcelService } from '../../services/excel.service';
 
 
 @NgModule({
@@ -134,7 +135,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatPaginatorModule,
     MatSidenavModule,
     MatListModule
-  ]
+  ],
+  providers: [ExcelService]
 })
 
 export class AdminLayoutModule {}
