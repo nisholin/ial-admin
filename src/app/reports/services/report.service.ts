@@ -26,8 +26,8 @@ export class ReportService {
   readCompany(): Observable<Company[]>{
 		return this.httpClient.get<Company[]>(`${this.PHP_API_SERVER1}/index.php`);
   }
-  sendReportDate(reportForm: any) {
-    console.log(reportForm)
-    return this.httpClient.post<Reports[]>(this.baseUrl2+ '/summaryview',reportForm);
+  sendReportDate(reportsArr: any) {
+    console.log(reportsArr)
+    return this.httpClient.post<Reports[]>(this.baseUrl2+ '/summaryview',reportsArr);
   }
 }

@@ -13,7 +13,7 @@
           <!-- <img src="assets/images/Pulse-1s-200px.gif" class="spinner-img"/> --> 
        </ngx-spinner>
 
-        <form  #reportForm="ngForm" (ngSubmit)="getReports(reportForm)">
+        <form  #reportForm="ngForm" (ngSubmit)="getReports(reportForm,model.id,model.company_id,model.dept_id)">
           <div class="row">
             <div class="col-1 col-lg-1 col-md-1"></div>
             <div class="col-2 col-lg-2 col-md-2">

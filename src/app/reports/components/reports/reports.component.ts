@@ -34,6 +34,7 @@ export class ReportsComponent implements OnInit {
   reports         : Reports[];
   reporDatatList  : any;
   summarytable    : boolean;
+  reportsArr      : Array<any>= [];
  
 
   constructor(private reportservice: ReportService,
@@ -72,22 +73,31 @@ export class ReportsComponent implements OnInit {
     }, 1000);
     this.tableShow    = false;
     this.summarytable = false;
+    this.model        = {};
+    this.reportsArr   = [];
   }
-  getReports(reportForm: any) {
+  getReports(reportForm: any,id: any,company_id: any,dept_id: any) {
     console.log(reportForm.value);
-    this.spinner.show();
-    this.reportservice.sendReportDate(reportForm.value).subscribe((reports: Reports[])=>{
+    //console.log("id===>"+id);
+    //console.log("company_id==>"+company_id);
+    //console.log("dept_id==>"+dept_id);
+    this.reportsArr.push({"from_date": reportForm.value.from_date,"to_date": reportForm.value.to_date,"id": id,"company_id": company_id,"dept_id": dept_id});
+    console.log(this.reportsArr);
+    //this.spinner.show();
+    this.reportservice.sendReportDate(this.reportsArr).subscribe((reports: Reports[])=>{
       this.reporDatatList = reports;
       console.log(this.reporDatatList);
       var length = this.reporDatatList.length;
-      alert(length);
+      //this.ngOnInit();
+      /* alert(length);
       for(let i=0;i<length;i++){
 
-      }
+      } */
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         this.spinner.hide();
       }, 1000);
+      //this.reportsArr   = [];
     },
     error => {
       alert('Network Error-->'+error);
