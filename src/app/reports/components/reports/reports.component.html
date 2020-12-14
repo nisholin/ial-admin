@@ -59,8 +59,8 @@
           <button class="background m-l-r-auto" type="submit">Go</button>
         </form>
         <br>
-        <hr>
-        <div *ngIf="tableShow" class="scroll"> 
+        <div *ngIf="tableShow" class="scroll">
+          <hr> 
           <table style="width: 410rem;">
             <thead>
               <tr>
@@ -104,6 +104,7 @@
           </table>
         </div>
         <div *ngIf="summarytable">
+          <hr>
           <div class="row">
             <div class="col-10 col-lg-11 col-md-10">
               <!-- <h3>
@@ -142,19 +143,19 @@
               </tr>
               <tr>
                 <td colspan="5" class="text-end f-w-500 c-black f-s-20">Total(Before Taxes)</td>
-                <td class="text-end f-s-20 c-black">Rs.16471881.36</td>
+                <td class="text-end f-s-20 c-black">{{this.sum}}</td>
               </tr>
               <tr>
-                <td colspan="5" class="text-start f-w-500 c-black">CGST 9.00%</td>
-                <td class="text-end c-black f-w-500">Rs.1482469.32</td>
+                <td colspan="5" class="text-start f-w-500 c-black">CGST %</td>
+                <td class="text-end c-black f-w-500">{{this.gst}}</td>
               </tr>
               <tr>
-                <td colspan="5" class="text-start f-w-500 c-black">CGST 9.00%</td>
-                <td class="text-end c-black f-w-500">Rs.1482469.32</td>
+                <td colspan="5" class="text-start f-w-500 c-black">SGST %</td>
+                <td class="text-end c-black f-w-500">{{this.gst}}</td>
               </tr>
               <tr>
                 <td colspan="5" class="text-end f-w-500 c-black f-s-20">Total (After Taxes)</td>
-                <td class="text-end f-s-20 c-black">Rs.19436820.00</td>
+                <td class="text-end f-s-20 c-black">{{this.totalAmt}}</td>
               </tr>
             </tbody>
           </table>

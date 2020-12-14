@@ -20,22 +20,25 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class ReportsComponent implements OnInit {
 
-  model           : any = {};
-  department      : Department[];
-  category        : Category[];
-  company         : Company[];
-  categoryList    : any;
-  companyList     : any;
-  departmentList  : any;
-  tableShow       : boolean;
-  reportList      : any;
-  powerVal        = "";
-  reports         : Reports[];
-  reporDatatList  : any;
-  summarytable    : boolean;
-  reportsArr      : Array<any>= [];
-  total           : any = {};
- 
+  model             : any = {};
+  department        : Department[];
+  category          : Category[];
+  company           : Company[];
+  categoryList      : any;
+  companyList       : any;
+  departmentList    : any;
+  tableShow         : boolean;
+  reportList        : any;
+  powerVal          = "";
+  reports           : Reports[];
+  reporDatatList    : any;
+  summarytable      : boolean;
+  reportsArr        : Array<any>= [];
+  total             : any = {};
+  private sum       = 0;
+  private gst       = 0;
+  private totalAmt  = 0;
+  excelArr          : Array<any>= [];
 
   constructor(private reportservice: ReportService,
     private guestservice: GuestService,
@@ -90,12 +93,20 @@ export class ReportsComponent implements OnInit {
       //console.log(this.reporDatatList);
       var length = this.reporDatatList.length;
       for(let i=0;i<length;i++) {
-        this.model = this.reporDatatList[i].total;
-        console.log(this.model);
-        this.total += this.model;
-        console.log("total"+this.total);
+        this.sum += this.reporDatatList[i].total;
+        //console.log("sum"+this.sum);
+        this.gst  = this.sum * 9/100;
+        //console.log(this.gst);  
+        //this.total += this.model;
+        //console.log("total"+this.total);
       }
-      
+      this.totalAmt = this.sum - this.gst;
+      for(let i=0;i<this.reporDatatList.length;i++){
+        this.excelArr.push({"item_id": this.reporDatatList[i].item_id});
+      }
+      this.excelArr.push({"item_id": this.reporDatatList.item_id,"Total": this.sum,
+                        "GST": this.gst,"Total(AfterTax)": this.totalAmt});
+      console.log(this.excelArr);
       setTimeout(() => {
         /** spinner ends after 5 seconds */
         document.forms["id_form"].reset();
@@ -115,6 +126,6 @@ export class ReportsComponent implements OnInit {
     this.summarytable = true;
   }
   exportAsXLSX():void {
-    this.excelService.exportAsExcelFile(this.reporDatatList,'report-list');
+    this.excelService.exportAsExcelFile(this.excelArr,'report-list');
   }
 }
